@@ -2,11 +2,11 @@ package com.marvel.marvel.main.model
 
 
 import com.marvel.marvel.main.model.pojos.Comics
+import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
-import rx.Observable
 
-interface Api {
+interface NetworkService {
 
     val comics: Observable<Comics>
 
