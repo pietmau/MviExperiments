@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.spotify.mobius:mobius-rx2:1.2.0@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.spotify.mobius/mobius-rx2/1.2.0/bc2a5a60dd6a869b8ea0818b06e2b7e86ac8138a/mobius-rx2-1.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.spotify.mobius/mobius-rx2/1.2.0/e97e8d7e47aa3bd475275becfa2a1d3cd5b308a4/mobius-rx2-1.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
