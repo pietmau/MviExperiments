@@ -15,5 +15,3 @@ G
 mvicoreapp/build.gradle,1/f/1f06e07ffbb80ab9b38ea20820aa7cb56e2e1a97
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
-l
-<mvicoreapp/src/main/java/com/pppp/mvicoreapp/MainActivity.kt,5/1/511475c6d400112c97e80eda97156f2c3e716e30
