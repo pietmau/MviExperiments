@@ -1,5 +1,6 @@
-package com.pppp.mvicoreapp.main
+package com.pppp.mvicoreapp.main.view
 
+import com.pppp.mvicoreapp.main.MainFeature
 import com.pppp.mvicoreapp.main.MainFeature.MainState.*
 
 object ViewModelTrasformer : (MainFeature.MainState) -> MainViewModel {

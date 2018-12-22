@@ -1,12 +1,12 @@
-package com.pppp.mvicoreapp.binders
+package com.pppp.mvicoreapp.main.binders
 
 import androidx.appcompat.app.AppCompatActivity
 import com.badoo.mvicore.android.lifecycle.CreateDestroyBinderLifecycle
 import com.badoo.mvicore.binder.Binder
 import com.badoo.mvicore.binder.using
 import com.pppp.mvicoreapp.main.MainFeature
-import com.pppp.mvicoreapp.main.MainViewModel
-import com.pppp.mvicoreapp.main.ViewModelTrasformer
+import com.pppp.mvicoreapp.main.view.MainViewModel
+import com.pppp.mvicoreapp.main.view.ViewModelTrasformer
 import io.reactivex.functions.Consumer
 
 class MviBindingImpl(

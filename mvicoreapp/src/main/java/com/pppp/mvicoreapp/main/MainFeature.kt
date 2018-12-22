@@ -37,7 +37,7 @@ class MainFeature : ActorReducerFeature<MainWish, MainEffect, MainState, News>(
         data class FinishedWithError(val error: Throwable) : MainEffect()
     }
 
-    class MainActor(private val service: NetworkService) :
+    class MainActor(private val service: NetworkService) : //TODO use func composition to use a function instead
         Actor<MainState, MainWish, MainEffect> {
         override fun invoke(
             mainState: MainState,

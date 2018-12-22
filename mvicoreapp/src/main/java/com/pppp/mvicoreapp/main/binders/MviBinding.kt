@@ -1,6 +1,6 @@
-package com.pppp.mvicoreapp.binders
+package com.pppp.mvicoreapp.main.binders
 
-import com.pppp.mvicoreapp.main.MainViewModel
+import com.pppp.mvicoreapp.main.view.MainViewModel
 import io.reactivex.functions.Consumer
 
 interface MviBinding {

@@ -1,4 +1,4 @@
-package com.pppp.mvicoreapp.main
+package com.pppp.mvicoreapp.main.view
 
 import com.marvel.marvel.main.model.pojos.Result
 

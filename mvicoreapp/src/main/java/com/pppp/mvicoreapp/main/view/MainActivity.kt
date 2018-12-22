@@ -1,13 +1,13 @@
-package com.pppp.mvicoreapp.main
+package com.pppp.mvicoreapp.main.view
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.pppp.mvicoreapp.R
-import com.pppp.mvicoreapp.binders.MviBinding
-import com.pppp.mvicoreapp.di.Injector
-import com.pppp.mvicoreapp.main.MainViewModel.GetingComics
-import com.pppp.mvicoreapp.main.MainViewModel.Starting
+import com.pppp.mvicoreapp.main.binders.MviBinding
+import com.pppp.mvicoreapp.main.di.Injector
+import com.pppp.mvicoreapp.main.view.MainViewModel.GetingComics
+import com.pppp.mvicoreapp.main.view.MainViewModel.Starting
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
