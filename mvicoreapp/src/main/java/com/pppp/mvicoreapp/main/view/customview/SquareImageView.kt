@@ -1,4 +1,4 @@
-package com.marvel.marvel.customview
+package com.pppp.mvicoreapp.main.view.customview
 
 
 import android.content.Context

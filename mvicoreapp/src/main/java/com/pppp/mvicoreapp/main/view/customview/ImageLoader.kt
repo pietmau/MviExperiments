@@ -1,24 +1,11 @@
-package com.marvel.marvel.application
+package com.pppp.mvicoreapp.main.view.customview
 
 import android.widget.ImageView
 
 interface ImageLoader {
-    fun loadImage(view: ImageView, url: String?, callback: Callback?)
+    fun loadImage(view: ImageView, url: String?, success: Success? = {}, failure: Failure? = {})
     fun cancelTask(image: ImageView)
-
-    interface Callback {
-        fun onSuccess()
-
-        fun onError(e: Exception?)
-    }
-
-    open class SimpleCallback : Callback {
-        override fun onSuccess() {
-
-        }
-
-        override fun onError(e: Exception?) {
-
-        }
-    }
 }
+typealias Success = () -> Unit
+
+typealias Failure = (Exception?) -> Unit

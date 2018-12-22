@@ -1,22 +1,9 @@
-package com.marvel.marvel.viewmodel
+package com.pppp.mvicoreapp.main.view.viewmodel
 
-import android.os.Parcelable
-
-@Deprecated("We are not using data binding anymore, this is not longer needed")
-interface ComicsViewModel : Parcelable {
-    val authors: String?
-
-    val pageCount: Int?
-
-    val price: String?
-
-    val description: String?
-
-    val numberOfPagesAsString: String?
-
-    val priceAsString: String?
-
-    val title: String?
-
-    val imageUrl: String?
+sealed class ComicsViewModel {
+    object Starting : ComicsViewModel()
+    object GettingComics : ComicsViewModel()
+    data class SuccessGettingComics(val results: List<ComicsBookViewModel>) : ComicsViewModel()
+    data class Failure(val message: String?) : ComicsViewModel()
+    data class ShowDetail(val comicsBook: ComicsBookViewModel) : ComicsViewModel()
 }

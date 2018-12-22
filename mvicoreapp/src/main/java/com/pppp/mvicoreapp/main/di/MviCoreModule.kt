@@ -3,10 +3,13 @@ package com.pppp.mvicoreapp.main.di
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.pppp.mvicoreapp.main.binders.MviBinding
-import com.pppp.mvicoreapp.main.binders.MviBindingImpl
 import com.pppp.mvicoreapp.main.MainFeature
-import com.pppp.mvicoreapp.main.view.ViewModelTrasformer
+import com.pppp.mvicoreapp.main.MviBinding
+import com.pppp.mvicoreapp.main.MviBindingImpl
+import com.pppp.mvicoreapp.main.view.uieventssource.UiEventTransformer
+import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
+import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapperImp
+import com.pppp.mvicoreapp.main.view.viewmodel.ViewModelTransformer
 import dagger.Module
 import dagger.Provides
 
@@ -14,17 +17,26 @@ import dagger.Provides
 class MviCoreModule(private val appCompatActivity: AppCompatActivity) {
 
     @Provides
-    fun provideBindings(feature: MainFeature): MviBinding =
-        MviBindingImpl(appCompatActivity, feature,
-            ViewModelTrasformer
-        )
+    fun provideBindings(
+        feature: MainFeature,
+        mapper: ComicsBookMapper
+    ): MviBinding = MviBindingImpl(
+        appCompatActivity,
+        feature,
+        ViewModelTransformer(mapper),
+        UiEventTransformer()
+    )
+
+    @Provides
+    fun provideComicsBookMapper(): ComicsBookMapper =
+        ComicsBookMapperImp(appCompatActivity.applicationContext)
 
     @Provides
     fun provideFeature(): MainFeature =
         ViewModelProviders.of(appCompatActivity).get(MviViewModel::class.java).mainFeature
 
 
-    class MviViewModel : ViewModel() {
+    private class MviViewModel : ViewModel() {
         val mainFeature: MainFeature by lazy { MainFeature() }
     }
 }

@@ -1,9 +1,9 @@
 package com.pppp.mvicoreapp.main.di
 
-import com.marvel.marvel.customview.MarvelRecyclerView
+import com.pppp.mvicoreapp.main.view.customview.MarvelRecyclerView
 import dagger.Component
 
-@Component(modules = arrayOf(AppModule::class))
+@Component(modules = [AppModule::class])
 interface AppComponent {
 
     fun with(mviCoreModule: MviCoreModule): MviCoreComponent

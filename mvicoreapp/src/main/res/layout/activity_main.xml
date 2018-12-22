@@ -24,10 +24,10 @@
             android:layout_width="@dimen/progress_size"
             android:layout_height="@dimen/progress_size"/>
 
-        <com.marvel.marvel.customview.MarvelRecyclerView
+        <com.pppp.mvicoreapp.main.view.customview.MarvelRecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </com.marvel.marvel.customview.MarvelRecyclerView>
+        </com.pppp.mvicoreapp.main.view.customview.MarvelRecyclerView>
     </RelativeLayout>
 </RelativeLayout>
