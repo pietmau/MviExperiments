@@ -1,8 +1,8 @@
 package com.pppp.mvicoreapp.main.view.viewmodel
 
 import com.pppp.mvicoreapp.main.MainFeature
-import com.pppp.mvicoreapp.main.MainFeature.State.*
 import com.pppp.mvicoreapp.main.MainFeature.State
+import com.pppp.mvicoreapp.main.MainFeature.State.*
 
 class ViewModelTransformer(private val mapper: ComicsBookMapper) :
         (MainFeature.State) -> ComicsViewModel {
@@ -16,7 +16,6 @@ class ViewModelTransformer(private val mapper: ComicsBookMapper) :
             GettingComics -> ComicsViewModel.GettingComics
             is SuccessGettingComics -> ComicsViewModel.SuccessGettingComics(transformComics(state))
             is FailureGettingComics -> ComicsViewModel.Failure(state.error.localizedMessage)
-            is ShowDetail -> ComicsViewModel.ShowDetail(state.comicsBook)
         }
     }
 }

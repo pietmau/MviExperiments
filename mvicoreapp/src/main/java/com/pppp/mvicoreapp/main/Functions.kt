@@ -1,8 +1,9 @@
 package com.pppp.mvicoreapp.main
 
-import com.pppp.mvicoreapp.main.MainFeature.Effect
-import com.pppp.mvicoreapp.main.MainFeature.Effect.*
-import com.pppp.mvicoreapp.main.MainFeature.State
+import com.pppp.mvicoreapp.main.MainFeature.*
+import com.pppp.mvicoreapp.main.MainFeature.Effect.ComicsRetrieved
+import com.pppp.mvicoreapp.main.MainFeature.Effect.StartedGettingComics
+import com.pppp.mvicoreapp.main.MainFeature.News.ShowDetail
 import com.pppp.mvicoreapp.main.MainFeature.State.GettingComics
 import com.pppp.mvicoreapp.main.MainFeature.State.SuccessGettingComics
 import com.pppp.mvicoreapp.main.MainFeature.Wish.GetComics
@@ -15,10 +16,14 @@ fun reduce(
     when (effect) {
         StartedGettingComics -> GettingComics
         is ComicsRetrieved -> SuccessGettingComics(effect.results)
-        is ShowDetail -> State.ShowDetail(effect.comicsBook)
         else -> state
     }
 
 fun bootstrap(): Observable<MainFeature.Wish> = Observable.just(GetComics)
 
+fun publishNews(action: Wish, effect: Effect, state: State): News? =
+    when (effect) {
+        is Effect.ShowDetail -> ShowDetail(effect.comicsBook)
+        else -> null
+    }
 

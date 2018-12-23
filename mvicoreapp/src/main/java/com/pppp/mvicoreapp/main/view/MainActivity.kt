@@ -7,6 +7,7 @@ import android.view.View
 import com.jakewharton.rxrelay2.PublishRelay
 import com.pppp.mvicoreapp.R
 import com.pppp.mvicoreapp.detail.DetailActivity
+import com.pppp.mvicoreapp.main.MainFeature
 import com.pppp.mvicoreapp.main.MviBinding
 import com.pppp.mvicoreapp.main.di.Injector
 import com.pppp.mvicoreapp.main.view.uieventssource.UiEventTransformer.UiEvent
@@ -27,7 +28,11 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Injector.inject(this)
-        mviBinding.bind(this, uiEvents)
+        mviBinding.bind(this, uiEvents, Consumer<MainFeature.News> { news ->
+            when (news) {
+                is MainFeature.News.ShowDetail -> startDetailActivity(news)
+            }
+        })
     }
 
     override fun accept(comicsViewModel: ComicsViewModel) {
@@ -35,7 +40,6 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
             Starting -> return
             GettingComics -> onGettingComics()
             is SuccessGettingComics -> onComicsAvailable(comicsViewModel)
-            is ShowDetail-> startDetailActivity(comicsViewModel)
         }
     }
 
@@ -51,7 +55,7 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
         progress.visibility = View.VISIBLE
     }
 
-    fun startDetailActivity(comicsViewModel: ShowDetail) {
+    fun startDetailActivity(comicsViewModel: MainFeature.News.ShowDetail) {
         val intent = Intent(this@MainActivity, DetailActivity::class.java)
         intent.putExtra(DetailActivity.COMICS_EXTRA, comicsViewModel)
         startActivity(intent)

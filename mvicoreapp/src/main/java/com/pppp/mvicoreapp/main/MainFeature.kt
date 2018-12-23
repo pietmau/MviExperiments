@@ -1,16 +1,19 @@
 package com.pppp.mvicoreapp.main
 
+import android.os.Parcelable
 import com.badoo.mvicore.feature.ActorReducerFeature
 import com.marvel.marvel.main.model.NetworkServiceRetrofit
 import com.marvel.marvel.main.model.pojos.Result
 import com.pppp.mvicoreapp.main.MainFeature.*
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
+import kotlinx.android.parcel.Parcelize
 
-class MainFeature : ActorReducerFeature<Wish, Effect, State, Nothing>(
+class MainFeature : ActorReducerFeature<Wish, Effect, State, News>(
     initialState = State.Starting,
     bootstrapper = ::bootstrap,
     actor = MainActor(NetworkServiceRetrofit()),
-    reducer = ::reduce
+    reducer = ::reduce,
+    newsPublisher = ::publishNews
 ) {
 
     sealed class State {
@@ -18,7 +21,6 @@ class MainFeature : ActorReducerFeature<Wish, Effect, State, Nothing>(
         object GettingComics : State()
         data class SuccessGettingComics(val results: List<Result>?) : State()
         data class FailureGettingComics(val error: Throwable) : State()
-        data class ShowDetail(val comicsBook: ComicsBookViewModel):State()
     }
 
     sealed class Wish {
@@ -33,4 +35,17 @@ class MainFeature : ActorReducerFeature<Wish, Effect, State, Nothing>(
         data class ShowDetail(val comicsBook: ComicsBookViewModel) : Effect()
     }
 
+    sealed class News {
+        @Parcelize
+        data class ShowDetail(val comicsBook: ComicsBookViewModel) : News(), Parcelable {
+            val numberOfPagesAsString = comicsBook.numberOfPagesAsString
+            val price = comicsBook.price
+            val title = comicsBook.title
+            val description = comicsBook.description
+            val authors = comicsBook.authors
+            val imageUrl = comicsBook.imageUrl
+        }
+    }
+
+    sealed class Action
 }

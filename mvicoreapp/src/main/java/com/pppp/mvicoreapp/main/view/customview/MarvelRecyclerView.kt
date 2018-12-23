@@ -60,7 +60,7 @@ class MarvelRecyclerView @JvmOverloads constructor(
     companion object {
         private const val MANY_ROWS = 5
         private const val FEW_ROWS = 3
-        private const val DELAY_IN_MILLS = 200
+        private const val DELAY_IN_MILLS = 500
     }
 }
 

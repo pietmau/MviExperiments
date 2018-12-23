@@ -25,9 +25,11 @@ class MviBindingImpl(
 
     override fun bind(
         consumer: Consumer<ComicsViewModel>,
-        uiEvents: PublishRelay<UiEventTransformer.UiEvent>
+        uiEvents: PublishRelay<UiEventTransformer.UiEvent>,
+        consum: Consumer<MainFeature.News>
     ) {
         binder.bind(feature to consumer using viewModelTransformer)
         binder.bind(uiEvents to feature using uiEventTransformer)
+        binder.bind(feature.news to consum)
     }
 }
