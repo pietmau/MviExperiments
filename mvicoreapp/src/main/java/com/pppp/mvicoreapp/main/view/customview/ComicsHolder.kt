@@ -1,7 +1,7 @@
 package com.pppp.mvicoreapp.main.view.customview
 
+import android.support.v7.widget.RecyclerView
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import kotlinx.android.synthetic.main.comics_item.view.*
 

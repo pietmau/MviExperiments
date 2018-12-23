@@ -1,10 +1,12 @@
 package com.pppp.mvicoreapp.main.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.rxrelay2.PublishRelay
 import com.pppp.mvicoreapp.R
+import com.pppp.mvicoreapp.detail.DetailActivity
 import com.pppp.mvicoreapp.main.MviBinding
 import com.pppp.mvicoreapp.main.di.Injector
 import com.pppp.mvicoreapp.main.view.uieventssource.UiEventTransformer.UiEvent
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
             Starting -> return
             GettingComics -> onGettingComics()
             is SuccessGettingComics -> onComicsAvailable(comicsViewModel)
+            is ShowDetail-> startDetailActivity(comicsViewModel)
         }
     }
 
@@ -46,6 +49,12 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
 
     private fun onGettingComics() {
         progress.visibility = View.VISIBLE
+    }
+
+    fun startDetailActivity(comicsViewModel: ShowDetail) {
+        val intent = Intent(this@MainActivity, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.COMICS_EXTRA, comicsViewModel)
+        startActivity(intent)
     }
 
 }

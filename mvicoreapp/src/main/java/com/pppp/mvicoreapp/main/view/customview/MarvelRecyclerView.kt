@@ -3,12 +3,12 @@ package com.pppp.mvicoreapp.main.view.customview
 
 import android.content.Context
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.ImageView
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import com.pppp.mvicoreapp.main.di.Injector
+import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import javax.inject.Inject
 import kotlin.properties.Delegates.observable
 import kotlin.reflect.KProperty

@@ -3,6 +3,7 @@ package com.pppp.mvicoreapp.main.view.viewmodel
 
 import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
 // TODO remove
 data class ComicsBookViewModel(

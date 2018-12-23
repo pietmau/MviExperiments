@@ -1,8 +1,8 @@
 package com.pppp.mvicoreapp.main.di
 
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProviders
+import android.support.v7.app.AppCompatActivity
 import com.pppp.mvicoreapp.main.MainFeature
 import com.pppp.mvicoreapp.main.MviBinding
 import com.pppp.mvicoreapp.main.MviBindingImpl

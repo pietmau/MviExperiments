@@ -2,4 +2,5 @@
     <string name="app_name">MVICoreApp</string>
     <string name="price">Price:&#160;</string>
     <string name="pagescount">"&#160;pages"</string>
+    <string name="transition">image_transition</string>
 </resources>

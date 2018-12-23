@@ -15,8 +15,6 @@ G
 mvicoreapp/build.gradle,1/f/1f06e07ffbb80ab9b38ea20820aa7cb56e2e1a97
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
-w
-Gmvicoreapp/src/main/java/com/pppp/mvicoreapp/main/binders/MviBinding.kt,8/d/8d12f7ddbbcea78daf86f91a401bbb6ea979705d
 v
 Fnetwork/src/main/java/com/pppp/network/model/NetworkServiceRetrofit.kt,5/8/5811509effee3350bb3942fc8588fc4707f55849
 l
@@ -49,14 +47,8 @@ Qmvicoreapp/src/main/java/com/pppp/mvicoreapp/main/view/customview/SquareLayout.
 Tmvicoreapp/src/main/java/com/pppp/mvicoreapp/main/view/viewmodel/ComicsBookMapper.kt,1/f/1f5ec015b7a0bec29e89624b233488bc3a70a3ee
 ‡
 Wmvicoreapp/src/main/java/com/pppp/mvicoreapp/main/view/viewmodel/ComicsBookViewModel.kt,5/a/5a9a69e4b6a25ed0d0d004966d57997d7fce16b5
-y
-Imvicoreapp/src/main/java/com/pppp/mvicoreapp/main/view/ComicsViewModel.kt,c/7/c7d0deae8bf9a93ebf78000a5fc6da1a94b08a53
 v
 Fmvicoreapp/src/main/java/com/pppp/mvicoreapp/main/view/MainActivity.kt,d/8/d8cc54cc9e06699e3af72af803c399cfae67c75f
-{
-Kmvicoreapp/src/main/java/com/pppp/mvicoreapp/main/binders/MviBindingImpl.kt,3/3/33db551a0cfecc5d3c0df87ed8bba925330f06bf
-~
-Nmvicoreapp/src/main/java/com/pppp/mvicoreapp/main/view/ViewModelTransformer.kt,9/0/902dc62793aa6c29b85c4a6023d976632db952fe
 n
 >mvicoreapp/src/main/java/com/pppp/mvicoreapp/main/Functions.kt,4/9/49428b41a3a9d9dc4579e11e87ec1dcfb84c1d76
 n
@@ -67,3 +59,17 @@ c
 3mvicoreapp/src/main/java/com/pppp/mvicoreapp/App.kt,c/4/c4fa1779f74622382af8c872828e57873386edf2
 X
 (gradle/wrapper/gradle-wrapper.properties,f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
+o
+?mvicoreapp/src/main/java/com/pppp/mvicoreapp/main/MviBinding.kt,d/0/d0a639150c83a0408309ea845c624a65620e6c12
+s
+Cmvicoreapp/src/main/java/com/pppp/mvicoreapp/main/MviBindingImpl.kt,4/1/41151feaf60fb562d091634ea067e9fe57236f27
+‹
+[mvicoreapp/src/main/java/com/pppp/mvicoreapp/main/view/uieventssource/UiEventTransformer.kt,3/6/363a669e187f509c358b79c3b1293f67f6914975
+ˆ
+Xmvicoreapp/src/main/java/com/pppp/mvicoreapp/main/view/viewmodel/ViewModelTransformer.kt,f/c/fccea3dca806536e503efa78ff81e341099822d7
+ƒ
+Smvicoreapp/src/main/java/com/pppp/mvicoreapp/main/view/viewmodel/ComicsViewModel.kt,5/4/54a369e4b2cbd540169496c4d7cc230bb75ea29b
+W
+'mvicoreapp/src/main/AndroidManifest.xml,1/7/17e48c0bb59485431b2c7abe3e1265879ce62beb
+u
+Emvicoreapp/src/main/java/com/pppp/mvicoreapp/detail/DetailActivity.kt,7/e/7e7870881641f66615eee006e1b09d6b6f392394

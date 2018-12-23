@@ -1,6 +1,6 @@
 package com.pppp.mvicoreapp.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.support.v7.app.AppCompatActivity
 import com.badoo.mvicore.android.lifecycle.CreateDestroyBinderLifecycle
 import com.badoo.mvicore.binder.Binder
 import com.badoo.mvicore.binder.using

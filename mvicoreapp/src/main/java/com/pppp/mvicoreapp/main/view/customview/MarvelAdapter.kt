@@ -1,9 +1,9 @@
 package com.pppp.mvicoreapp.main.view.customview
 
+import android.support.v7.util.DiffUtil
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.pppp.mvicoreapp.R
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 
