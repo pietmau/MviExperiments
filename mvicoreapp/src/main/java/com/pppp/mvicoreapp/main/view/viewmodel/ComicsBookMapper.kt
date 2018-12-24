@@ -2,13 +2,14 @@ package com.pppp.mvicoreapp.main.view.viewmodel
 
 import android.content.Context
 import com.pppp.mvicoreapp.R
-import com.pppp.network.model.pojos.NetworkResult
+import com.pppp.network.model.poko.NetworkResult
 
 interface ComicsBookMapper {
     fun map(item: NetworkResult): ComicsBookViewModel
 }
 
-class ComicsBookMapperImp(private val context: Context) : ComicsBookMapper {//TODO migrate to function
+class ComicsBookMapperImp(private val context: Context) :
+    ComicsBookMapper {//TODO migrate to function
 
     override fun map(item: NetworkResult): ComicsBookViewModel {
         val title = item.title ?: ""

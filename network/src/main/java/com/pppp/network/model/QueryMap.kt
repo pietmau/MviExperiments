@@ -15,7 +15,7 @@ internal class QueryMap : LinkedHashMap<String, String>() {
         private const val DATE_DESCRIPTOR_VALUE = "thisMonth"
         private val TAG = QueryMap::class.simpleName
         private const val LIMIT_KEY = "limit"
-        private const val LIMIT = "100"
+        private const val LIMIT = "50"
         private const val TIMESTAMP_KEY = "ts"
         private const val API_KEY = "apikey"
         private const val HASH_KEY = "hash"

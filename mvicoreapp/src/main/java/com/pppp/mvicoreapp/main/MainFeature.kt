@@ -5,7 +5,7 @@ import com.badoo.mvicore.element.Actor
 import com.badoo.mvicore.feature.ActorReducerFeature
 import com.pppp.mvicoreapp.main.MainFeature.*
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
-import com.pppp.network.model.pojos.NetworkResult
+import com.pppp.network.model.poko.NetworkResult
 import kotlinx.android.parcel.Parcelize
 
 class MainFeature(val actor: Actor<State, Wish, Effect>) :
