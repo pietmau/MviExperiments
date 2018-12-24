@@ -18,7 +18,6 @@ import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-// TODO make graph picture
 class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
     @Inject
     lateinit var mviBinding: MviBinding

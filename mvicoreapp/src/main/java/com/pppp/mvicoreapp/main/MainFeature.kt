@@ -17,17 +17,10 @@ class MainFeature(val actor: Actor<State, Wish, Effect>) :
         newsPublisher = ::publishNews
     ) {
 
-    sealed class State : Parcelable {
-        @Parcelize
+    sealed class State {
         object Starting : State()
-
-        @Parcelize
         object GettingComics : State()
-
-        @Parcelize
         data class SuccessGettingComics(val results: List<NetworkResult>?) : State()
-
-        @Parcelize
         data class FailureGettingComics(val error: Throwable) : State()
     }
 
