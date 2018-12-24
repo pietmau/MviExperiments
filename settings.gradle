@@ -1,1 +1,1 @@
-include ':mobiusapp', ':network', ':mvicoreapp'
+include ':network', ':mvicoreapp'

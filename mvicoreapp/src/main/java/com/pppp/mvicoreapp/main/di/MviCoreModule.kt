@@ -36,7 +36,7 @@ class MviCoreModule(private val appCompatActivity: AppCompatActivity) {
         ViewModelProviders.of(appCompatActivity).get(MviViewModel::class.java).mainFeature
 
 
-    private class MviViewModel : ViewModel() {
+    class MviViewModel : ViewModel() {
         val mainFeature: MainFeature by lazy { MainFeature() }
     }
 }

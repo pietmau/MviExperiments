@@ -15,14 +15,11 @@ import javax.inject.Inject
 class DetailActivity : AppCompatActivity() {
     @Inject
     lateinit var loader: ImageLoader
-    //private var transitionListener: SimpleTransitionListener? = null
-    //private var isConfigChange: Boolean = false
     private var callback: (() -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_activity)
-        supportPostponeEnterTransition()
         Injector.inject(this)
     }
 
@@ -34,15 +31,10 @@ class DetailActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         loader.cancelTask(image)
-//        callback = null
-//        if (isLollipopOrAbove)
-//            @SuppressLint("NewApi") {
-//                window.removeListener(transitionListener)
-//            }
     }
 
     private fun loadImageAndColors() {
-        intent?.getParcelableExtra<MainFeature.News.ShowDetail>(COMICS_EXTRA)?.let {
+        intent.getParcelableExtra<MainFeature.News.ShowDetail>(COMICS_EXTRA)?.let {
             setImageAndColors(it)
             setTexts(it)
         }
@@ -58,28 +50,12 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setImageAndColors(model: MainFeature.News.ShowDetail) {
         callback = {
-            supportStartPostponedEnterTransition()
             val loadedImage = (image.drawable as? BitmapDrawable)?.bitmap
-            waitForAnimationAndSetColors(loadedImage)
+            setColors(loadedImage)
         }
         loader.loadImage(image, model.imageUrl, callback)
     }
 
-
-    private fun waitForAnimationAndSetColors(loadedImage: Bitmap?) {
-        setColors(loadedImage)
-        /*if (isLollipopOrAbove && !isConfigChange)
-            @SuppressLint("NewApi") {
-                transitionListener = object : SimpleTransitionListener() {
-                    override fun onTransitionEnd(transition: Transition?) {
-                        setColors(loadedImage)
-                    }
-                }
-                window.addListener(transitionListener)
-            } else {
-
-        }*/
-    }
 
     private fun setColors(loadedImage: Bitmap?) {
         loadedImage ?: return
