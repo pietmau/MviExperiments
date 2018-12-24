@@ -1,9 +1,12 @@
 package com.pppp.network.model.pojos
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.marvel.marvel.main.model.pojos.*
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class NetworkResult(
     @SerializedName("id")
     @Expose(serialize = false, deserialize = false)
@@ -15,7 +18,7 @@ data class NetworkResult(
 
     @SerializedName("title")
     @Expose
-    override var title: String? = null,
+    var title: String? = null,
 
     @SerializedName("issueNumber")
     @Expose(serialize = false, deserialize = false)
@@ -27,7 +30,7 @@ data class NetworkResult(
 
     @SerializedName("description")
     @Expose
-    override var description: String? = null,
+    var description: String? = null,
 
     @SerializedName("modified")
     @Expose(serialize = false, deserialize = false)
@@ -59,7 +62,7 @@ data class NetworkResult(
 
     @SerializedName("pageCount")
     @Expose
-    override var pageCount: Int = 0,
+    var pageCount: Int = 0,
 
     @SerializedName("textObjects")
     @Expose(serialize = false, deserialize = false)
@@ -81,43 +84,43 @@ data class NetworkResult(
     @Expose(serialize = false, deserialize = false)
     var variants: List<Variant>? = null,
 
-    @SerializedName("collections")
-    @Expose(serialize = false, deserialize = false)
-    var collections: List<Any>? = null,
+//    @SerializedName("collections")
+//    @Expose(serialize = false, deserialize = false)
+//    var collections: List<Any>? = null,
 
-    @SerializedName("collectedIssues")
-    @Expose(serialize = false, deserialize = false)
-    var collectedIssues: List<Any>? = null,
+//    @SerializedName("collectedIssues")
+//    @Expose(serialize = false, deserialize = false)
+//    var collectedIssues: List<Any>? = null,
 
-    @SerializedName("dates")
-    @Expose(serialize = false, deserialize = false)
-    var dates: List<Date>? = null,
+//    @SerializedName("dates")
+//    @Expose(serialize = false, deserialize = false)
+//    var dates: List<Date>? = null,
 
     @SerializedName("prices")
     @Expose
-    override var prices: List<NetworkPrice>? = null,
+    var prices: List<NetworkPrice>? = null,
 
     @SerializedName("thumbnail")
     @Expose
-    override var thumbnail: NetworkThumbnail? = null,
+    var thumbnail: NetworkThumbnail? = null,
 
-    @SerializedName("images")
-    @Expose(serialize = false, deserialize = false)
-    var images: List<Image>? = null,
+//    @SerializedName("images")
+//    @Expose(serialize = false, deserialize = false)
+//    var images: List<Image>? = null,
 
     @SerializedName("creators")
     @Expose
-    override var creators: NetworkCreators? = null,
+    var creators: NetworkCreators? = null
 
-    @SerializedName("characters")
+    /*@SerializedName("characters")
     @Expose(serialize = false, deserialize = false)
-    var characters: Characters? = null,
+    var characters: Characters? = null,*/
 
-    @SerializedName("stories")
+    /*@SerializedName("stories")
     @Expose(serialize = false, deserialize = false)
-    var stories: Stories? = null,
+    var stories: Stories? = null,*/
 
-    @SerializedName("events")
+    /*@SerializedName("events")
     @Expose(serialize = false, deserialize = false)
-    var events: Events? = null
-) : com.pppp.foo.Result<NetworkPrice, NetworkThumbnail, NetworkCreators>
+    var events: Events? = null*/
+) : Parcelable

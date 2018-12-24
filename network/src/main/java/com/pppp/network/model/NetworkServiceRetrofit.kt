@@ -14,15 +14,18 @@ class NetworkServiceRetrofit() : NetworkService {
         private const val MAIN_URL = "https://gateway.marvel.com:443/"
         private const val TIMEOUT_IN_SECONDS = 60L
     }
+
     private val networkService: NetworkService
 
     override val comics: Observable<Comics>
         get() = getComics(QueryMap())
 
     init {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val interceptor =
+            HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+        //val cache = Cache(context.cacheDir, 1024 * 1024)
         val client = OkHttpClient.Builder()
+          //  .cache(cache)
             .connectTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
             .addInterceptor(interceptor)

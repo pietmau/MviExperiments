@@ -1,10 +1,12 @@
 package com.pppp.foo
 
-interface Result<P : Price, T : Thumbnail, C : Creators<*>> {
+import android.os.Parcelable
+
+interface Result:Parcelable {
     var title: String?
     var description: String?
     var pageCount: Int
-    var prices: List<P>?
-    var thumbnail: T?
-    var creators: C?
+    var prices: List<Price>?
+    var thumbnail: Thumbnail?
+    var creators: Creators<Item>?
 }

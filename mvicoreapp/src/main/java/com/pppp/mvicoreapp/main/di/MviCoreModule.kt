@@ -3,6 +3,9 @@ package com.pppp.mvicoreapp.main.di
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
+import com.marvel.marvel.main.model.NetworkService
+import com.marvel.marvel.main.model.NetworkServiceRetrofit
+import com.pppp.mvicoreapp.main.MainActor
 import com.pppp.mvicoreapp.main.MainFeature
 import com.pppp.mvicoreapp.main.MviBinding
 import com.pppp.mvicoreapp.main.MviBindingImpl
@@ -17,24 +20,28 @@ import dagger.Provides
 class MviCoreModule(private val appCompatActivity: AppCompatActivity) {
 
     @Provides
-    fun provideBindings(
-        feature: MainFeature,
-        mapper: ComicsBookMapper
-    ): MviBinding = MviBindingImpl(
-        appCompatActivity,
-        feature,
-        ViewModelTransformer(mapper),
-        UiEventTransformer()
-    )
+    fun provideBindings(feature: MainFeature, mapper: ComicsBookMapper): MviBinding =
+        MviBindingImpl(
+            appCompatActivity,
+            feature,
+            ViewModelTransformer(mapper),
+            UiEventTransformer()
+        )
 
     @Provides
     fun provideComicsBookMapper(): ComicsBookMapper =
         ComicsBookMapperImp(appCompatActivity.applicationContext)
 
     @Provides
+    fun provideActor(repository: NetworkService) = MainActor(repository)
+
+    @Provides
+    fun provideActorNetworkService(): NetworkService =
+        NetworkServiceRetrofit()
+
+    @Provides
     fun provideFeature(): MainFeature =
         ViewModelProviders.of(appCompatActivity).get(MviViewModel::class.java).mainFeature
-
 
     class MviViewModel : ViewModel() {
         val mainFeature: MainFeature by lazy { MainFeature() }

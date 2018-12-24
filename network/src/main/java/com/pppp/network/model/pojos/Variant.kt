@@ -1,8 +1,11 @@
 package com.marvel.marvel.main.model.pojos
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Variant(
     @SerializedName("resourceURI")
     @Expose
@@ -10,4 +13,4 @@ data class Variant(
     @SerializedName("name")
     @Expose
     var name: String? = null
-)
+) : Parcelable

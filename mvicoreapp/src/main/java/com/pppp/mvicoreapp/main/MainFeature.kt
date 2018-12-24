@@ -3,12 +3,13 @@ package com.pppp.mvicoreapp.main
 import android.os.Parcelable
 import com.badoo.mvicore.feature.ActorReducerFeature
 import com.marvel.marvel.main.model.NetworkServiceRetrofit
-import com.pppp.network.model.pojos.NetworkResult
 import com.pppp.mvicoreapp.main.MainFeature.*
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
+import com.pppp.network.model.pojos.NetworkResult
 import kotlinx.android.parcel.Parcelize
 
-class MainFeature : ActorReducerFeature<Wish, Effect, State, News>(
+class MainFeature(
+) : ActorReducerFeature<Wish, Effect, State, News>(
     initialState = State.Starting,
     bootstrapper = ::bootstrap,
     actor = MainActor(NetworkServiceRetrofit()),
@@ -16,10 +17,17 @@ class MainFeature : ActorReducerFeature<Wish, Effect, State, News>(
     newsPublisher = ::publishNews
 ) {
 
-    sealed class State {
+    sealed class State : Parcelable {
+        @Parcelize
         object Starting : State()
+
+        @Parcelize
         object GettingComics : State()
+
+        @Parcelize
         data class SuccessGettingComics(val results: List<NetworkResult>?) : State()
+
+        @Parcelize
         data class FailureGettingComics(val error: Throwable) : State()
     }
 
