@@ -3,11 +3,11 @@ package com.marvel.marvel.main.model.pojos
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Price(
+data class NetworkPrice(
     @SerializedName("type")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var type: String? = null,
     @SerializedName("price")
     @Expose
-    var price: String? = null
-)
+    override var price: String? = null
+) : com.pppp.foo.Price

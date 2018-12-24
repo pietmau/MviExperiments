@@ -2,6 +2,7 @@ package com.marvel.marvel.main.model.pojos
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.pppp.network.model.pojos.NetworkResult
 
 data class Data(
     @SerializedName("offset")
@@ -17,5 +18,5 @@ data class Data(
     @Expose
     var count: Long = 0,
     @SerializedName("results")
-    @Expose var results: List<Result>? = null
+    @Expose var results: List<NetworkResult>? = null
 )

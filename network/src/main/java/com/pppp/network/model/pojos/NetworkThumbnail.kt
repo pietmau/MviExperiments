@@ -3,11 +3,11 @@ package com.marvel.marvel.main.model.pojos
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Thumbnail(
+data class NetworkThumbnail(
     @SerializedName("path")
     @Expose
-    var path: String? = null,
+    override var path: String? = null,
     @SerializedName("extension")
     @Expose
-    var extension: String? = null
-)
+    override var extension: String? = null
+) : com.pppp.foo.Thumbnail

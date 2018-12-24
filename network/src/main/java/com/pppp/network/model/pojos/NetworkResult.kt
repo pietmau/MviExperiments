@@ -1,94 +1,123 @@
-package com.marvel.marvel.main.model.pojos
+package com.pppp.network.model.pojos
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.marvel.marvel.main.model.pojos.*
 
-data class Result(
+data class NetworkResult(
     @SerializedName("id")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var id: Long = 0,
+
     @SerializedName("digitalId")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var digitalId: Long = 0,
+
     @SerializedName("title")
     @Expose
-    var title: String? = null,
+    override var title: String? = null,
+
     @SerializedName("issueNumber")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var issueNumber: Double = 0.toDouble(),
+
     @SerializedName("variantDescription")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var variantDescription: String? = null,
+
     @SerializedName("description")
     @Expose
-    var description: String? = null,
+    override var description: String? = null,
+
     @SerializedName("modified")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var modified: String? = null,
+
     @SerializedName("isbn")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var isbn: String? = null,
+
     @SerializedName("upc")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var upc: String? = null,
+
     @SerializedName("diamondCode")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var diamondCode: String? = null,
+
     @SerializedName("ean")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var ean: String? = null,
+
     @SerializedName("issn")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var issn: String? = null,
+
     @SerializedName("format")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var format: String? = null,
+
     @SerializedName("pageCount")
     @Expose
-    var pageCount: Int = 0,
+    override var pageCount: Int = 0,
+
     @SerializedName("textObjects")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var textObjects: List<TextObject>? = null,
+
     @SerializedName("resourceURI")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var resourceURI: String? = null,
+
     @SerializedName("urls")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var urls: List<Url>? = null,
+
     @SerializedName("series")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var series: Series? = null,
+
     @SerializedName("variants")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var variants: List<Variant>? = null,
+
     @SerializedName("collections")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var collections: List<Any>? = null,
+
     @SerializedName("collectedIssues")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var collectedIssues: List<Any>? = null,
+
     @SerializedName("dates")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var dates: List<Date>? = null,
+
     @SerializedName("prices")
     @Expose
-    var prices: List<Price>? = null,
+    override var prices: List<NetworkPrice>? = null,
+
     @SerializedName("thumbnail")
     @Expose
-    var thumbnail: Thumbnail? = null,
+    override var thumbnail: NetworkThumbnail? = null,
+
     @SerializedName("images")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var images: List<Image>? = null,
+
     @SerializedName("creators")
     @Expose
-    var creators: Creators? = null,
+    override var creators: NetworkCreators? = null,
+
     @SerializedName("characters")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var characters: Characters? = null,
+
     @SerializedName("stories")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var stories: Stories? = null,
+
     @SerializedName("events")
-    @Expose
+    @Expose(serialize = false, deserialize = false)
     var events: Events? = null
-)
+) : com.pppp.foo.Result<NetworkPrice, NetworkThumbnail, NetworkCreators>
