@@ -1,6 +1,7 @@
 package com.pppp.mvicoreapp.main.di
 
 import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import com.marvel.marvel.main.model.NetworkService
@@ -37,13 +38,23 @@ class MviCoreModule(private val appCompatActivity: AppCompatActivity) {
 
     @Provides
     fun provideActorNetworkService(): NetworkService =
-        NetworkServiceRetrofit()
+        NetworkServiceRetrofit(appCompatActivity.cacheDir)
 
     @Provides
-    fun provideFeature(): MainFeature =
-        ViewModelProviders.of(appCompatActivity).get(MviViewModel::class.java).mainFeature
+    fun provideFeature(factory: ViewModelProvider.Factory): MainFeature =
+        ViewModelProviders.of(appCompatActivity, factory).get(MviViewModel::class.java).mainFeature
 
-    class MviViewModel : ViewModel() {
-        val mainFeature: MainFeature by lazy { MainFeature() }
+    @Provides
+    fun provideFactory(actor: MainActor): ViewModelProvider.Factory = Factory(actor)
+
+    class MviViewModel(mainActor: MainActor) : ViewModel() {
+        val mainFeature: MainFeature by lazy { MainFeature(mainActor) }
+    }
+
+    class Factory(private val mainActor: MainActor) : ViewModelProvider.Factory {
+
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return MviViewModel(mainActor) as T
+        }
     }
 }
