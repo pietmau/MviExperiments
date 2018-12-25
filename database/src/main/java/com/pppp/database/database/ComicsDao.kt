@@ -9,26 +9,30 @@ import com.pppp.entities.Item
 import com.pppp.entities.Price
 import com.pppp.entities.Result
 
+//TODO use translator
 @Dao
 abstract class ComicsDao {
 
     @Query("SELECT * from dbresult JOIN dbthumbnail ON (dbresult.id=dbthumbnail.thumb_id)")
-    abstract fun getUsersWithRepos(): List<DbResultWithPrices>
+    abstract fun getAllComics(): List<DbResultWithPrices>
+
+    @Query("SELECT * from dbresult WHERE id=:id")
+    abstract fun getComicById(id: Int?): DbResultWithPrices?
 
     fun insert(results: List<Result>) {
         results.forEach { insert(it) }
     }
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertResult(result: DbResult)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertThumbnail(thumbnail: DbThumbnail?)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insert(it: DbPrice)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertItem(it: DbItem)
 
     private fun insert(result: Result) {
@@ -58,4 +62,5 @@ abstract class ComicsDao {
 
     private fun getResult(result: Result): DbResult =
         DbResult(result.id, result.title, result.description, result.pageCount)
+
 }

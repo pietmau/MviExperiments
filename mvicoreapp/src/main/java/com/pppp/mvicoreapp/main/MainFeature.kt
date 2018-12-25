@@ -3,9 +3,9 @@ package com.pppp.mvicoreapp.main
 import android.os.Parcelable
 import com.badoo.mvicore.element.Actor
 import com.badoo.mvicore.feature.ActorReducerFeature
+import com.pppp.entities.Result
 import com.pppp.mvicoreapp.main.MainFeature.*
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
-import com.pppp.network.model.poko.NetworkResult
 import kotlinx.android.parcel.Parcelize
 
 class MainFeature(val actor: Actor<State, Wish, Effect>) :
@@ -20,7 +20,7 @@ class MainFeature(val actor: Actor<State, Wish, Effect>) :
     sealed class State {
         object Starting : State()
         object GettingComics : State()
-        data class SuccessGettingComics(val results: List<NetworkResult>?) : State()
+        data class SuccessGettingComics(val results: List<Result>?) : State()
         data class FailureGettingComics(val error: Throwable) : State()
     }
 
@@ -31,7 +31,7 @@ class MainFeature(val actor: Actor<State, Wish, Effect>) :
 
     sealed class Effect {
         object StartedGettingComics : Effect()
-        data class ComicsRetrieved(val results: List<NetworkResult>) : Effect()
+        data class ComicsRetrieved(val results: List<Result>) : Effect()
         data class FailureRetrievingComics(val error: Throwable) : Effect()
         data class ShowDetail(val comicsBook: ComicsBookViewModel) : Effect()
     }

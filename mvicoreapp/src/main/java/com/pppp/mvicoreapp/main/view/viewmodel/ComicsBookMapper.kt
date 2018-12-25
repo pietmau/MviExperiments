@@ -1,17 +1,17 @@
 package com.pppp.mvicoreapp.main.view.viewmodel
 
 import android.content.Context
+import com.pppp.entities.Result
 import com.pppp.mvicoreapp.R
-import com.pppp.network.model.poko.NetworkResult
 
 interface ComicsBookMapper {
-    fun map(item: NetworkResult): ComicsBookViewModel
+    fun map(item: Result): ComicsBookViewModel
 }
 
 class ComicsBookMapperImp(private val context: Context) :
     ComicsBookMapper {//TODO migrate to function
 
-    override fun map(item: NetworkResult): ComicsBookViewModel {
+    override fun map(item: Result): ComicsBookViewModel {
         val title = item.title ?: ""
         val imageUrl = parseImageUrl(item)
         val description = item.description ?: ""
@@ -33,21 +33,21 @@ class ComicsBookMapperImp(private val context: Context) :
         )
     }
 
-    private fun getAuthors(item: NetworkResult): String {
+    private fun getAuthors(item: Result): String {
         val authorList = parseAuthors(item)
         val stringBuilder = StringBuilder()
         authorList.forEach { stringBuilder.append(it).append("\n") }
         return stringBuilder.toString()
     }
 
-    private fun parseAuthors(result: NetworkResult) =
+    private fun parseAuthors(result: Result) =
         result.creators?.items?.mapNotNull { it.name } ?: emptyList()
 
-    private fun parseImageUrl(item: NetworkResult): String {
+    private fun parseImageUrl(item: Result): String {
         val thumbnail = item.thumbnail
         thumbnail ?: return ""
         return thumbnail.path + "." + thumbnail.extension
     }
 
-    private fun parsePrice(item: NetworkResult) = item.prices?.firstOrNull()?.price ?: "0.0"
+    private fun parsePrice(item: Result) = item.prices?.firstOrNull()?.price ?: "0.0"
 }

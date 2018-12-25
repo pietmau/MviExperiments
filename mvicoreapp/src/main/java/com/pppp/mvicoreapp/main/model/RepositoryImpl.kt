@@ -1,23 +1,33 @@
 package com.pppp.mvicoreapp.main.model
 
-import com.marvel.marvel.main.model.ComicsApiClient
-import com.marvel.marvel.main.model.pojos.Comics
-import com.pppp.database.database.ComicsDatabase
+import com.pppp.database.ComicsDatabase
 import com.pppp.entities.Result
-import io.reactivex.Observable
+import com.pppp.network.model.ComicsApiClient
+import com.pppp.network.model.networkchecker.NetworkChecker
+import io.reactivex.Single
 
-class RepositoryImpl(private val db: ComicsDatabase, private val api: ComicsApiClient) :
+class RepositoryImpl(
+    private val db: ComicsDatabase,
+    private val api: ComicsApiClient,
+    private val networkChecker: NetworkChecker
+) :
     Repository {
 
-    override val comics: Observable<Comics>
-        get() {
-            val comics1 = api.comics.doOnNext { comics ->
-                val resuts = comics.data?.results?.map { it as Result }//TODO fix
-                db.dao().insert(resuts!!)
-                val z = db.dao().getUsersWithRepos()
-                var i =0
-                i++
+    override val comics: Single<List<Result>> = getComicsInternal()
+
+    private fun getComicsInternal(): Single<List<Result>> {
+        val flatMap = Single.just(0).toObservable()
+            .flatMap {
+                if (networkChecker.networkIsAvailable()) {
+                    api.comics.map { it.data?.results }
+                        .map { it ?: emptyList() }
+                        .doOnNext {
+                                comics -> db.saveComics(comics) }
+                        .flatMapIterable { it }
+                } else {
+                    db.getAllComics()
+                }
             }
-            return comics1
-        }
+        return flatMap.toList()
+    }
 }

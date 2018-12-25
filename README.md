@@ -9,4 +9,8 @@ TODO: use Retrofit interceptor
 
 TODO: use plain SQL
 
+TODO: check caching
+
+TODO dire che funziona offline
+
 ![Diagram](MVI.png)

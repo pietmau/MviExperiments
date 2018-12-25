@@ -17,12 +17,12 @@ import com.pppp.database.poko.DbThumbnail
         DbThumbnail::class
     ), version = 1
 )
-abstract class ComicsDatabase : RoomDatabase() {
+abstract class RoomDb : RoomDatabase() {
     abstract fun dao(): ComicsDao
 
     companion object {
-        fun db(context: Context): ComicsDatabase =
-            Room.databaseBuilder(context, ComicsDatabase::class.java, "comics")
+        fun db(context: Context): RoomDb =
+            Room.databaseBuilder(context, RoomDb::class.java, "comics")
                 .build()
     }
 }

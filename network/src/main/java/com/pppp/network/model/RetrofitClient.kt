@@ -1,6 +1,7 @@
 package com.marvel.marvel.main.model
 
 import com.marvel.marvel.main.model.pojos.Comics
+import com.pppp.network.model.ComicsApiClient
 import io.reactivex.Observable
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -24,7 +25,7 @@ class RetrofitClient(val cacheDir: File) : ComicsApiClient {
 
     init {
         val interceptor =
-            HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+            HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.HEADERS }
         val cache = Cache(cacheDir, 1024 * 1024)
         val client = OkHttpClient.Builder()
             .cache(cache)

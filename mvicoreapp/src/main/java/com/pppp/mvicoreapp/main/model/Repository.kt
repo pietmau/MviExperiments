@@ -1,8 +1,9 @@
 package com.pppp.mvicoreapp.main.model
 
-import com.marvel.marvel.main.model.pojos.Comics
+import com.pppp.entities.Result
 import io.reactivex.Observable
+import io.reactivex.Single
 
 interface Repository {
-    val comics: Observable<Comics>
+    val comics: Single<List<Result>>
 }

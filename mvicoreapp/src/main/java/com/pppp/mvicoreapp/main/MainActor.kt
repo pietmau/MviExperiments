@@ -1,7 +1,6 @@
 package com.pppp.mvicoreapp.main
 
 import com.badoo.mvicore.element.Actor
-import com.marvel.marvel.main.model.pojos.Comics
 import com.pppp.mvicoreapp.main.MainFeature.*
 import com.pppp.mvicoreapp.main.MainFeature.Effect.*
 import com.pppp.mvicoreapp.main.MainFeature.Wish.GetComics
@@ -25,10 +24,9 @@ class MainActor(private val repository: Repository) : Actor<State, Wish, Effect>
         Observable.just(Effect.ShowDetail(comicsBook))
 
     private fun onGetComicsRequested(): Observable<Effect> {
-        fun getResultsList(it: Comics) = (it.data?.results ?: emptyList())
 
-        return repository.comics
-            .map { ComicsRetrieved(getResultsList(it)) as Effect }
+        return repository.comics.toObservable()
+            .map { ComicsRetrieved(it) as Effect }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .startWith(StartedGettingComics)
