@@ -9,10 +9,13 @@ data class DbResultWithPrices(
     @Embedded
     val dbResult: DbResult,
     @Embedded
-    override val thumbnail: DbThumbnail?,
-    @Embedded
-    override val creators: DbCreators?
+    override val thumbnail: DbThumbnail?
 ) : Result {
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "result_id"
+    )
+    var items: List<DbItem> = emptyList()
     @Ignore
     override val id = dbResult.id
     @Ignore
@@ -26,4 +29,6 @@ data class DbResultWithPrices(
         entityColumn = "comicId"
     )
     override var prices: List<DbPrice>? = null
+    @Ignore
+    override val creators: DbCreators = DbCreators(items)
 }
