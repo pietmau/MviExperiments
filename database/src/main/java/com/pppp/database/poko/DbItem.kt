@@ -8,6 +8,7 @@ import com.pppp.entities.Item
 data class DbItem(
     @PrimaryKey
     val id: Int?,
+    val result_id: Int?,
     override val name: String?
 ) : Item
 

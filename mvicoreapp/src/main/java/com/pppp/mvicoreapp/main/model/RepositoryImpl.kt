@@ -5,8 +5,8 @@ import com.marvel.marvel.main.model.pojos.Comics
 import com.pppp.database.database.ComicsDatabase
 import io.reactivex.Observable
 
-class RepositoryImpl(private val db: ComicsDatabase, private val api: ComicsApiClient) : Repository {
+class RepositoryImpl(private val db: ComicsDatabase, private val api: ComicsApiClient) :
+    Repository {
 
-    override val comics: Observable<Comics>
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
+    override val comics: Observable<Comics> = TODO()
 }
