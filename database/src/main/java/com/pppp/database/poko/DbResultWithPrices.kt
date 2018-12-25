@@ -16,6 +16,9 @@ data class DbResultWithPrices(
         entityColumn = "result_id"
     )
     var items: List<DbItem> = emptyList()
+        set(value) {
+            creators = DbCreators(value)
+        }
     @Ignore
     override val id = dbResult.id
     @Ignore
@@ -28,7 +31,7 @@ data class DbResultWithPrices(
         parentColumn = "id",
         entityColumn = "comicId"
     )
-    override var prices: List<DbPrice>? = null
+    override var prices: List<DbPrice>? = emptyList()
     @Ignore
-    override val creators: DbCreators = DbCreators(items)
+    override lateinit var creators: DbCreators
 }

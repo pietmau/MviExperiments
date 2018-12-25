@@ -3,8 +3,10 @@ TODO: resize images
 
 TODO: cache images images
 
-whi chacking is not working?
+TODO why chacking is not working?
 
 TODO: use Retrofit interceptor
+
+TODO: use plain SQL
 
 ![Diagram](MVI.png)
