@@ -4,12 +4,15 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
-import com.marvel.marvel.main.model.NetworkService
-import com.marvel.marvel.main.model.NetworkServiceRetrofit
+import com.marvel.marvel.main.model.ComicsApiClient
+import com.marvel.marvel.main.model.RetrofitClient
+import com.pppp.database.database.ComicsDatabase
 import com.pppp.mvicoreapp.main.MainActor
 import com.pppp.mvicoreapp.main.MainFeature
 import com.pppp.mvicoreapp.main.MviBinding
 import com.pppp.mvicoreapp.main.MviBindingImpl
+import com.pppp.mvicoreapp.main.model.Repository
+import com.pppp.mvicoreapp.main.model.RepositoryImpl
 import com.pppp.mvicoreapp.main.view.uieventssource.UiEventTransformer
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapperImp
@@ -18,12 +21,12 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class MviCoreModule(private val appCompatActivity: AppCompatActivity) {
+class MviCoreModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideBindings(feature: MainFeature, mapper: ComicsBookMapper): MviBinding =
         MviBindingImpl(
-            appCompatActivity,
+            activity,
             feature,
             ViewModelTransformer(mapper),
             UiEventTransformer()
@@ -31,18 +34,24 @@ class MviCoreModule(private val appCompatActivity: AppCompatActivity) {
 
     @Provides
     fun provideComicsBookMapper(): ComicsBookMapper =
-        ComicsBookMapperImp(appCompatActivity.applicationContext)
+        ComicsBookMapperImp(activity.applicationContext)
 
     @Provides
-    fun provideActor(repository: NetworkService) = MainActor(repository)
+    fun provideActor(repository: Repository) = MainActor(repository)
 
     @Provides
-    fun provideActorNetworkService(): NetworkService =
-        NetworkServiceRetrofit(appCompatActivity.cacheDir)
+    fun provideRepository(db: ComicsDatabase, client: ComicsApiClient): Repository =
+        RepositoryImpl(db, client)
+
+    @Provides
+    fun provideApi(): ComicsApiClient = RetrofitClient(activity.cacheDir)
+
+    @Provides
+    fun provideDatabase(): ComicsDatabase = ComicsDatabase.db(activity.applicationContext)
 
     @Provides
     fun provideFeature(factory: ViewModelProvider.Factory): MainFeature =
-        ViewModelProviders.of(appCompatActivity, factory).get(MviViewModel::class.java).mainFeature
+        ViewModelProviders.of(activity, factory).get(MviViewModel::class.java).mainFeature
 
     @Provides
     fun provideFactory(actor: MainActor): ViewModelProvider.Factory = Factory(actor)

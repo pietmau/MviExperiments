@@ -11,16 +11,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-class NetworkServiceRetrofit(val cacheDir: File) : NetworkService {
+class RetrofitClient(val cacheDir: File) : ComicsApiClient {
     companion object {
         private const val MAIN_URL = "https://gateway.marvel.com:443/"
         private const val TIMEOUT_IN_SECONDS = 60L
     }
 
-    private val networkService: NetworkService
+    private val api: Api
 
     override val comics: Observable<Comics>
-        get() = getComics(QueryMap())
+        get() = api.getComics(QueryMap())
 
     init {
         val interceptor =
@@ -37,8 +37,6 @@ class NetworkServiceRetrofit(val cacheDir: File) : NetworkService {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build()
-        networkService = retrofit.create(NetworkService::class.java)
+        api = retrofit.create(Api::class.java)
     }
-
-    override fun getComics(query: Map<String, String>) = networkService.getComics(query)
 }

@@ -7,5 +7,5 @@ import com.pppp.entities.Price
 data class NetworkPrice(
     @SerializedName("price")
     @Expose
-    override var price: String? = null
+    override val price: String? = null
 ) : Price

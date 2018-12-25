@@ -6,9 +6,7 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
-interface NetworkService {
-
-    val comics: Observable<Comics>
+interface Api {
 
     @GET("v1/public/comics")
     fun getComics(@QueryMap query: Map<String, String>): Observable<Comics>

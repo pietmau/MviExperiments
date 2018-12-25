@@ -7,5 +7,5 @@ import com.pppp.entities.Item
 data class NetworkItem(
     @SerializedName("name")
     @Expose
-    override var name: String? = null
+    override val name: String? = null
     ) : Item

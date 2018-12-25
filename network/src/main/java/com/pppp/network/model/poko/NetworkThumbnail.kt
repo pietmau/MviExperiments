@@ -8,8 +8,8 @@ import com.pppp.entities.Thumbnail
 data class NetworkThumbnail(
     @SerializedName("path")
     @Expose
-    override var path: String? = null,
+    override val path: String? = null,
     @SerializedName("extension")
     @Expose
-    override var extension: String? = null
+    override val extension: String? = null
 ) : Thumbnail

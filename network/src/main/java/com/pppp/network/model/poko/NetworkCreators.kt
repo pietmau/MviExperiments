@@ -7,5 +7,5 @@ import com.pppp.entities.Creators
 data class NetworkCreators(
     @SerializedName("items")
     @Expose
-    override var items: List<NetworkItem>? = null
+    override val items: List<NetworkItem>? = null
 ) : Creators

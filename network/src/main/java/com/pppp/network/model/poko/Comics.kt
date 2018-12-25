@@ -6,5 +6,5 @@ import com.google.gson.annotations.SerializedName
 data class Comics(
     @SerializedName("data")
     @Expose
-    var data: Data? = null
+    val data: Data? = null
 )

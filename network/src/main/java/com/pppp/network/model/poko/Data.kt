@@ -6,5 +6,5 @@ import com.pppp.network.model.poko.NetworkResult
 
 data class Data(
     @SerializedName("results")
-    @Expose var results: List<NetworkResult>? = null
+    @Expose val results: List<NetworkResult>? = null
 )

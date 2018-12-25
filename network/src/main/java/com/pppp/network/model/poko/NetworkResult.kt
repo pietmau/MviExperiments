@@ -7,29 +7,29 @@ import com.marvel.marvel.main.model.pojos.NetworkThumbnail
 import com.pppp.entities.Result
 
 data class NetworkResult(
-    override var id: Int? = null,
+    override val id: Int? = null,
 
     @SerializedName("title")
     @Expose
-    override var title: String? = null,
+    override val title: String? = null,
 
     @SerializedName("description")
     @Expose
-    override var description: String? = null,
+    override val description: String? = null,
 
     @SerializedName("pageCount")
     @Expose
-    override var pageCount: Int = 0,
+    override val pageCount: Int = 0,
 
     @SerializedName("prices")
     @Expose
-    override var prices: List<NetworkPrice>? = null,
+    override val prices: List<NetworkPrice>? = null,
 
     @SerializedName("thumbnail")
     @Expose
-    override var thumbnail: NetworkThumbnail? = null,
+    override val thumbnail: NetworkThumbnail? = null,
 
     @SerializedName("creators")
     @Expose
-    override var creators: NetworkCreators? = null
+    override val creators: NetworkCreators? = null
 ) : Result
