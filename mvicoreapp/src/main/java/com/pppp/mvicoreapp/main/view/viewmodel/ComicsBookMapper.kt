@@ -5,13 +5,13 @@ import com.pppp.entities.Result
 import com.pppp.mvicoreapp.R
 
 interface ComicsBookMapper {
-    fun map(item: Result): ComicsBookViewModel
+    fun map(item: Result): ComicsBookViewModelImpl
 }
 
 class ComicsBookMapperImp(private val context: Context) :
     ComicsBookMapper {//TODO migrate to function
 
-    override fun map(item: Result): ComicsBookViewModel {
+    override fun map(item: Result): ComicsBookViewModelImpl {
         val id = item.id?.toString() ?: ""
         val title = item.title ?: ""
         val imageUrl = parseImageUrl(item)
@@ -22,7 +22,7 @@ class ComicsBookMapperImp(private val context: Context) :
         val priceAsString = context.resources?.getString(R.string.price) + price
         val numberOfPagesAsString = pageCount.toString() + context.getString(R.string.pagescount)
 
-        return ComicsBookViewModel(
+        return ComicsBookViewModelImpl(
             id,
             title,
             imageUrl,

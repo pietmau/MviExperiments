@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
+import com.jakewharton.rxrelay2.PublishRelay
 import com.pppp.mvicoreapp.main.MainActor
 import com.pppp.mvicoreapp.main.MainFeature
 import com.pppp.mvicoreapp.main.MviBinding
@@ -11,7 +12,6 @@ import com.pppp.mvicoreapp.main.MviBindingImpl
 import com.pppp.mvicoreapp.main.model.Repository
 import com.pppp.mvicoreapp.main.view.uieventssource.UiEventTransformer
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
-import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapperImp
 import com.pppp.mvicoreapp.main.view.viewmodel.ViewModelTransformer
 import dagger.Module
 import dagger.Provides
@@ -29,8 +29,8 @@ class MainModule(private val activity: AppCompatActivity) {
         )
 
     @Provides
-    fun provideComicsBookMapper(): ComicsBookMapper =
-        ComicsBookMapperImp(activity.applicationContext)
+    fun provideRelay(): PublishRelay<UiEventTransformer.UiEvent> = PublishRelay.create()
+
 
     @Provides
     fun provideActor(repository: Repository) = MainActor(repository)

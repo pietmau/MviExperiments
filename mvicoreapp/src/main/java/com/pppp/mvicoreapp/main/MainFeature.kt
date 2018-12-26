@@ -37,6 +37,7 @@ class MainFeature(val actor: Actor<State, Wish, Effect>) :
 
     sealed class News {
         @Parcelize
-        data class ShowDetail(val id: String) : News(), Parcelable
+        data class ShowDetail(val id: Int) : News(), Parcelable
+        data class Error(val msg: String?) : News()
     }
 }

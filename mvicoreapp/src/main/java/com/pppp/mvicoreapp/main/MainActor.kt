@@ -10,7 +10,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-//TODO use func composition instead
 class MainActor(private val repository: Repository) : Actor<State, Wish, Effect> {
 
     override fun invoke(state: State, wish: Wish): Observable<Effect> =
@@ -22,13 +21,12 @@ class MainActor(private val repository: Repository) : Actor<State, Wish, Effect>
     private fun onDetailRequested(id: String): Observable<Effect> =
         Observable.just(Effect.ShowDetail(id))
 
-    private fun onGetComicsRequested(): Observable<Effect> {
+    private fun onGetComicsRequested() = repository.getComics()
+        .toObservable()
+        .map { ComicsRetrieved(it) as Effect }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .startWith(StartedGettingComics)
+        .onErrorReturn { FailureRetrievingComics(it) }
 
-        return repository.comics.toObservable()
-            .map { ComicsRetrieved(it) as Effect }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .startWith(StartedGettingComics)
-            .onErrorReturn { FailureRetrievingComics(it) }
-    }
 }

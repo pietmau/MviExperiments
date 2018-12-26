@@ -19,7 +19,8 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
     @Inject
     lateinit var mviBinding: MviBinding
-    private val uiEvents: PublishRelay<UiEvent> = PublishRelay.create()
+    @Inject
+    lateinit var uiEvents: PublishRelay<UiEvent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

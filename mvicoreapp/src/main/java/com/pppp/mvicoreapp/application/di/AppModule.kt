@@ -8,6 +8,8 @@ import com.pppp.mvicoreapp.main.model.Repository
 import com.pppp.mvicoreapp.main.model.RepositoryImpl
 import com.pppp.mvicoreapp.main.view.customview.ImageLoader
 import com.pppp.mvicoreapp.main.view.customview.PicassoImageLoader
+import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
+import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapperImp
 import com.pppp.network.model.ComicsApiClient
 import com.pppp.network.model.networkchecker.NetworkChecker
 import dagger.Module
@@ -17,6 +19,10 @@ import dagger.Provides
 class AppModule(private val application: Application) {
 
     @Provides
+    fun provideComicsBookMapper(): ComicsBookMapper =
+        ComicsBookMapperImp(application.applicationContext)
+
+    @Provides
     fun provideImageLoader(): ImageLoader = PicassoImageLoader
 
     @Provides
@@ -24,7 +30,6 @@ class AppModule(private val application: Application) {
 
     @Provides
     fun provideDatabase(): ComicsDatabase = ComicsDatabaseImpl(application)
-
 
     @Provides
     fun provideRepository(

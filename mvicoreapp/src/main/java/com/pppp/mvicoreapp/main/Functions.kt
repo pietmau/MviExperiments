@@ -8,6 +8,7 @@ import com.pppp.mvicoreapp.main.MainFeature.State.GettingComics
 import com.pppp.mvicoreapp.main.MainFeature.State.SuccessGettingComics
 import com.pppp.mvicoreapp.main.MainFeature.Wish.GetComics
 import io.reactivex.Observable
+import java.lang.NumberFormatException
 
 fun reduce(
     state: State,
@@ -23,7 +24,11 @@ fun bootstrap(): Observable<MainFeature.Wish> = Observable.just(GetComics)
 
 fun publishNews(action: Wish, effect: Effect, state: State): News? =
     when (effect) {
-        is Effect.ShowDetail -> ShowDetail(effect.id)
+        is Effect.ShowDetail -> try {
+            ShowDetail(effect.id.toInt())
+        } catch (ex: NumberFormatException) {
+            News.Error(ex.localizedMessage)
+        }
         else -> null
     }
 

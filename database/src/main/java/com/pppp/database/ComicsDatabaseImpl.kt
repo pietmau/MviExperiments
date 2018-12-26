@@ -10,11 +10,7 @@ import io.reactivex.Single
 
 /** Room with RxJava requires AndroidX */
 class ComicsDatabaseImpl(context: Context) : ComicsDatabase {
-    private val dao: ComicsDao
-
-    init {
-        dao = RoomDb.db(context).dao()
-    }
+    private val dao: ComicsDao = RoomDb.db(context).dao()
 
     /** Fire and forget. */
     override fun saveComics(comics: List<Result>) { //TODO move stuffa bit here

@@ -13,16 +13,13 @@ class RepositoryImpl(
 ) :
     Repository {
 
-    override val comics: Single<List<Result>> = getComicsInternal()
-
-    private fun getComicsInternal(): Single<List<Result>> {
+    override fun getComics(): Single<List<Result>> {
         val flatMap = Single.just(0).toObservable()
             .flatMap {
                 if (networkChecker.networkIsAvailable()) {
                     api.comics.map { it.data?.results }
                         .map { it ?: emptyList() }
-                        .doOnNext {
-                                comics -> db.saveComics(comics) }
+                        .doOnNext { comics -> db.saveComics(comics) }
                         .flatMapIterable { it }
                 } else {
                     db.getAllComics()
@@ -30,4 +27,7 @@ class RepositoryImpl(
             }
         return flatMap.toList()
     }
+
+    override fun getComicById(id: Int): Single<Result> = db.getComicById(id)
+
 }

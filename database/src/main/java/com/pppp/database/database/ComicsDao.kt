@@ -16,7 +16,7 @@ abstract class ComicsDao {
     @Query("SELECT * from dbresult JOIN dbthumbnail ON (dbresult.id=dbthumbnail.thumb_id)")
     abstract fun getAllComics(): List<DbResultWithPrices>
 
-    @Query("SELECT * from dbresult WHERE id=:id")
+    @Query("SELECT * from dbresult JOIN dbthumbnail ON (dbresult.id=dbthumbnail.thumb_id) WHERE id=:id")
     abstract fun getComicById(id: Int?): DbResultWithPrices?
 
     fun insert(results: List<Result>) {

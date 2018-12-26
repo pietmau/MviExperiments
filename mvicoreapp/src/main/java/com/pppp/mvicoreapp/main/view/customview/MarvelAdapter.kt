@@ -5,12 +5,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.pppp.mvicoreapp.R
-import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
+import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModelImpl
 
 
 internal class MarvelAdapter(private val loader: ImageLoader) :
     RecyclerView.Adapter<ComicsHolder>() {
-    private val comicBooks: MutableList<ComicsBookViewModel> = mutableListOf()
+    private val comicBooks: MutableList<ComicsBookViewModelImpl> = mutableListOf()
     var onItemClick: OnItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComicsHolder {
@@ -28,15 +28,15 @@ internal class MarvelAdapter(private val loader: ImageLoader) :
         holder.unbind()
     }
 
-    fun setItems(newResults: List<ComicsBookViewModel>) {
+    fun setItems(newResults: List<ComicsBookViewModelImpl>) {
         DiffUtil.calculateDiff(MarvelDiffCallback(comicBooks, newResults)).dispatchUpdatesTo(this)
         comicBooks.clear()
         comicBooks.addAll(newResults)
     }
 
     private class MarvelDiffCallback(
-        private val old: List<ComicsBookViewModel>,
-        private val new: List<ComicsBookViewModel>
+        private val old: List<ComicsBookViewModelImpl>,
+        private val new: List<ComicsBookViewModelImpl>
     ) : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
