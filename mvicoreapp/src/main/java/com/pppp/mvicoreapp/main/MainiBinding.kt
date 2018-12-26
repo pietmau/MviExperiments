@@ -10,6 +10,15 @@ import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
 import com.pppp.mvicoreapp.main.view.viewmodel.ViewModelTransformer
 import io.reactivex.functions.Consumer
 
+interface MviBinding {
+
+    fun bind(
+        viewmodels: Consumer<ComicsViewModel>,
+        uiEvents: PublishRelay<UiEventTransformer.UiEvent>,
+        news: Consumer<MainFeature.News>
+    )
+}
+
 class MviBindingImpl(
     appCompatActivity: AppCompatActivity,
     private val feature: MainFeature,
@@ -24,12 +33,12 @@ class MviBindingImpl(
     }
 
     override fun bind(
-        consumer: Consumer<ComicsViewModel>,
+        viewModels: Consumer<ComicsViewModel>,
         uiEvents: PublishRelay<UiEventTransformer.UiEvent>,
-        consum: Consumer<MainFeature.News>
+        news: Consumer<MainFeature.News>
     ) {
-        binder.bind(feature to consumer using viewModelTransformer)
+        binder.bind(feature to viewModels using viewModelTransformer)
         binder.bind(uiEvents to feature using uiEventTransformer)
-        binder.bind(feature.news to consum)
+        binder.bind(feature.news to news)
     }
 }

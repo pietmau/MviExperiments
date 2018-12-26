@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.graphics.Palette
 import com.pppp.mvicoreapp.R
 import com.pppp.mvicoreapp.main.MainFeature
-import com.pppp.mvicoreapp.main.di.Injector
+import com.pppp.mvicoreapp.application.Injector
 import com.pppp.mvicoreapp.main.view.customview.ImageLoader
 import kotlinx.android.synthetic.main.detail_activity.*
 import javax.inject.Inject

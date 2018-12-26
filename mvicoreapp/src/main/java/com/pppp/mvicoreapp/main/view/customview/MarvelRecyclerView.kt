@@ -7,7 +7,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.ImageView
-import com.pppp.mvicoreapp.main.di.Injector
+import com.pppp.mvicoreapp.application.Injector
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import javax.inject.Inject
 import kotlin.properties.Delegates.observable

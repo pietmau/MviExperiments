@@ -1,8 +1,8 @@
-package com.pppp.mvicoreapp
+package com.pppp.mvicoreapp.application
 
 import android.app.Application
-import com.pppp.mvicoreapp.main.di.AppComponent
-import com.pppp.mvicoreapp.main.di.DaggerAppComponent
+import com.pppp.mvicoreapp.application.di.AppComponent
+import com.pppp.mvicoreapp.application.di.DaggerAppComponent
 import com.squareup.leakcanary.LeakCanary
 
 class App : Application() {

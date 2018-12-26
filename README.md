@@ -13,4 +13,6 @@ TODO: check caching
 
 TODO dire che funziona offline
 
+TODO use time capsule
+
 ![Diagram](MVI.png)
