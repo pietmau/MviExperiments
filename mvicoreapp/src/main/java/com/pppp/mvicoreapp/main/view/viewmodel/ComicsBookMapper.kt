@@ -12,6 +12,7 @@ class ComicsBookMapperImp(private val context: Context) :
     ComicsBookMapper {//TODO migrate to function
 
     override fun map(item: Result): ComicsBookViewModel {
+        val id = item.id?.toString() ?: ""
         val title = item.title ?: ""
         val imageUrl = parseImageUrl(item)
         val description = item.description ?: ""
@@ -22,6 +23,7 @@ class ComicsBookMapperImp(private val context: Context) :
         val numberOfPagesAsString = pageCount.toString() + context.getString(R.string.pagescount)
 
         return ComicsBookViewModel(
+            id,
             title,
             imageUrl,
             description,

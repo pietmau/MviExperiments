@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
     private fun onComicsAvailable(viewModel: SuccessGettingComics) {
         progress.visibility = View.GONE
         recycler.onItemClick = { comicsBook, image ->
-            uiEvents.accept(ComicBookSelected(comicsBook))
+            uiEvents.accept(ComicBookSelected(comicsBook.id))
         }
         recycler.onComicsAvailable(viewModel.results)
     }

@@ -23,7 +23,7 @@ fun bootstrap(): Observable<MainFeature.Wish> = Observable.just(GetComics)
 
 fun publishNews(action: Wish, effect: Effect, state: State): News? =
     when (effect) {
-        is Effect.ShowDetail -> ShowDetail(effect.comicsBook)
+        is Effect.ShowDetail -> ShowDetail(effect.id)
         else -> null
     }
 

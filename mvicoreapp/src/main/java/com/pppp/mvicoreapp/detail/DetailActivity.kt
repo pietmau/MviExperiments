@@ -41,11 +41,11 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setTexts(model: MainFeature.News.ShowDetail) {
-        number_of_pages.text = model.numberOfPagesAsString
-        price.text = model.price
-        title_tv.text = model.title
-        description.text = model.description
-        authors.text = model.authors
+//        number_of_pages.text = model.numberOfPagesAsString
+//        price.text = model.price
+//        title_tv.text = model.title
+//        description.text = model.description
+//        authors.text = model.authors
     }
 
     private fun setImageAndColors(model: MainFeature.News.ShowDetail) {
@@ -53,7 +53,7 @@ class DetailActivity : AppCompatActivity() {
             val loadedImage = (image.drawable as? BitmapDrawable)?.bitmap
             setColors(loadedImage)
         }
-        loader.loadImage(image, model.imageUrl, callback)
+      //  loader.loadImage(image, model.imageUrl, callback)
     }
 
 
