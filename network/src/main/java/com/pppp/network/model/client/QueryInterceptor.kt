@@ -6,7 +6,7 @@ import okhttp3.Response
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
-class QueryInterceptor(private val PUBLIC_KEY: String, private val PRIVATE_KEY: String) :
+internal class QueryInterceptor(private val PUBLIC_KEY: String, private val PRIVATE_KEY: String) :
     Interceptor {
     private val TAG = QueryInterceptor::class.simpleName
 

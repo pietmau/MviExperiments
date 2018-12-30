@@ -1,11 +1,10 @@
-package com.marvel.marvel.main.model
+package com.pppp.network.model.client
 
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import com.marvel.marvel.main.model.Api
 import com.pppp.entities.ComicsBook
 import com.pppp.network.model.ComicsClient
-import com.pppp.network.model.client.MarvelDeserializer
-import com.pppp.network.model.client.QueryInterceptor
 import io.reactivex.Observable
 import okhttp3.Cache
 import okhttp3.OkHttpClient

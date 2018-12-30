@@ -5,7 +5,7 @@ import com.pppp.entities.ComicsBook
 import io.reactivex.Observable
 import retrofit2.http.GET
 
-interface Api {
+internal interface Api {
 
     @GET("v1/public/comics")
     fun getComics(): Observable<List<ComicsBook>>

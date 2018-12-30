@@ -1,9 +1,9 @@
 package com.pppp.mvicoreapp.setup
 
 import android.app.Application
-import com.marvel.marvel.main.model.RetrofitClient
+import com.pppp.network.model.client.RetrofitClient
 import com.pppp.database.ComicsDatabase
-import com.pppp.database.ComicsDatabaseImpl
+import com.pppp.database.room.RoomDatabase
 import com.pppp.mvicoreapp.main.MainFeature
 import com.pppp.mvicoreapp.main.model.Repository
 import com.pppp.mvicoreapp.main.model.RepositoryImpl
@@ -39,7 +39,7 @@ class TestAppModule(
     fun provideApi(): ComicsClient = RetrofitClient(application.cacheDir)
 
     @Provides
-    fun provideDatabase(): ComicsDatabase = ComicsDatabaseImpl(application)
+    fun provideDatabase(): ComicsDatabase = RoomDatabase(application)
 
     @Provides
     fun provideRepository(

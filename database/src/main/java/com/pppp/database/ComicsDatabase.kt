@@ -8,7 +8,7 @@ interface ComicsDatabase {
 
     fun saveComics(comics: List<ComicsBook>)
 
-    fun getComicById(id: Int?): Single<ComicsBook>
+    fun getComicById(id: Int): Single<ComicsBook>
 
     fun getAllComics(): Observable<ComicsBook>
 }

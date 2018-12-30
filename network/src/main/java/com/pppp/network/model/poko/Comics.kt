@@ -1,10 +1,9 @@
-package com.marvel.marvel.main.model.pojos
+package com.pppp.network.model.poko
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.pppp.network.model.poko.Data
 
-data class Comics(
+internal data class Comics(
     @SerializedName("data")
     @Expose
     val data: Data? = null

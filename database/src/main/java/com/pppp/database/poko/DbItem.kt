@@ -1,14 +1,22 @@
 package com.pppp.database.poko
 
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.PrimaryKey
 import com.pppp.entities.Item
 
-@Entity
-data class DbItem(
+@Entity(
+    foreignKeys = [ForeignKey(
+        entity = DbComicsBook::class,
+        parentColumns = ["id"],
+        childColumns = ["comic_id"],
+        onDelete = ForeignKey.CASCADE
+    )]
+)
+internal data class DbItem(
     @PrimaryKey
     val id: Int?,
-    val result_id: Int?,
-    override val name: String?
+    override val name: String?,
+    val comic_id: Int?
 ) : Item
 

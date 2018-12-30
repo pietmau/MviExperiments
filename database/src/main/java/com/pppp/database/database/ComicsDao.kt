@@ -5,62 +5,92 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.pppp.database.poko.*
-import com.pppp.entities.Item
-import com.pppp.entities.Price
 import com.pppp.entities.ComicsBook
+import com.pppp.entities.Creators
+import com.pppp.entities.Price
+import com.pppp.entities.Thumbnail
 
-//TODO use translator
 @Dao
-abstract class ComicsDao {
+internal abstract class ComicsDao {
 
-    @Query("SELECT * from dbresult JOIN dbthumbnail ON (dbresult.id=dbthumbnail.thumb_id)")
-    abstract fun getAllComics(): List<DbComicsBookWithPrices>
+    @Query("SELECT * from dbcomicsbook WHERE id=:id")
+    protected abstract fun getBookByIdInternal(id: Int): DbComicsBook?
 
-    @Query("SELECT * from dbresult JOIN dbthumbnail ON (dbresult.id=dbthumbnail.thumb_id) WHERE id=:id")
-    abstract fun getComicById(id: Int?): DbComicsBookWithPrices?
+    fun getBookById(id: Int): ComicsBook? =
+        getBookByIdInternal(id)?.apply {
+            prices = getPrices(id) ?: emptyList()
+            creators = getCreators(id)
+            thumbnail = getThumbByIdInternal(id)
+        }
 
-    fun insert(comicsBooks: List<ComicsBook>) {
-        comicsBooks.forEach { insert(it) }
+    @Query("SELECT * from dbthumbnail WHERE comic_id=:id")
+    abstract fun getThumbByIdInternal(id: Int): DbThumbnail?
+
+    @Query("SELECT * from dbprice WHERE comic_id=:id")
+    abstract fun getPrices(id: Int): List<DbPrice>?
+
+    private fun getCreators(id: Int) = DbCreators(getItems(id))
+
+    @Query("SELECT * from dbitem WHERE comic_id=:id")
+    abstract fun getItems(id: Int): List<DbItem>
+
+    @Query("SELECT * from dbcomicsbook")
+    abstract fun getAllBooksInternal(): List<DbComicsBook>
+
+    fun getAllBooks(): List<ComicsBook> =
+        getAllBooksInternal().filterNotNull().map { book ->
+            book.apply {
+                prices = getPrices(this.id) ?: emptyList()
+                creators = getCreators(this.id)
+                thumbnail = getThumbByIdInternal(this.id)
+            }
+        }
+
+    fun insertAll(books: List<ComicsBook>) {
+        books.forEach { insertBookInternal(it) }
+    }
+
+    private fun insertBookInternal(comicsBook: ComicsBook) {
+        val success = insertBook(
+            DbComicsBook(
+                comicsBook.id,
+                comicsBook.title,
+                comicsBook.description,
+                comicsBook.pageCount
+            )
+        )
+        if (success != -1L) {
+            insertThumbInternal(comicsBook.thumbnail, comicsBook.id)
+            insertCreatorsInternal(comicsBook.creators, comicsBook.id)
+            insertPricesInternal(comicsBook.prices, comicsBook.id)
+        }
     }
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract fun insertResult(result: DbResult)
+    abstract fun insertBook(book: DbComicsBook): Long?
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract fun insertThumbnail(thumbnail: DbThumbnail?)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract fun insert(it: DbPrice)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract fun insertItem(it: DbItem)
-
-    private fun insert(comicsBook: ComicsBook) {
-        val dbResultWithPrices = DbComicsBookWithPrices(getResult(comicsBook), getThumb(comicsBook))
-        insertResult(dbResultWithPrices.dbResult);
-        insertThumbnail(dbResultWithPrices.thumbnail);
-        insertPrices(getPrices(comicsBook.prices, comicsBook.id))
-        insertItems(getItems(comicsBook.creators?.items, comicsBook.id))
+    private fun insertThumbInternal(thumbnail: Thumbnail?, id: Int) {
+        val thumb = DbThumbnail(null, thumbnail?.path, thumbnail?.extension, id)
+        insertThumb(thumb)
     }
 
-    private fun insertPrices(prices: List<DbPrice>?) {
-        prices?.forEach { insert(it) }
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract fun insertThumb(thumb: DbThumbnail)
+
+    private fun insertCreatorsInternal(creators: Creators?, comicId: Int) {
+        creators?.items?.forEach { insertItem(DbItem(null, it.name, comicId)) }
     }
 
-    private fun insertItems(items: List<DbItem>?) {
-        items?.forEach { insertItem(it) }
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract fun insertItem(dbItem: DbItem)
+
+    private fun insertPricesInternal(prices: List<Price>?, comicId: Int) {
+        prices?.forEach { price ->
+            insertPrice(DbPrice(null, price.price, comicId))
+        }
     }
 
-    private fun getItems(items: List<Item>?, id: Int?) =
-        items?.map { DbItem(null, id, it.name) }
-
-    private fun getPrices(prices: List<Price>?, id: Int?) =
-        prices?.map { DbPrice(null, it.price, id) }
-
-    private fun getThumb(comicsBook: ComicsBook): DbThumbnail =
-        DbThumbnail(comicsBook.id, comicsBook.thumbnail?.path, comicsBook.thumbnail?.extension)
-
-    private fun getResult(comicsBook: ComicsBook): DbResult =
-        DbResult(comicsBook.id, comicsBook.title, comicsBook.description, comicsBook.pageCount)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract fun insertPrice(dbPrice: DbPrice)
 
 }

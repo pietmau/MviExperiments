@@ -1,7 +1,7 @@
 package com.pppp.entities
 
 interface ComicsBook {
-    val id: Int?
+    val id: Int
     val title: String?
     val description: String?
     val pageCount: Int

@@ -1,11 +1,10 @@
-package com.marvel.marvel.main.model.pojos
+package com.pppp.network.model.poko
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.pppp.entities.Thumbnail
 
-
-data class NetworkThumbnail(
+internal data class NetworkThumbnail(
     @SerializedName("path")
     @Expose
     override val path: String? = null,
