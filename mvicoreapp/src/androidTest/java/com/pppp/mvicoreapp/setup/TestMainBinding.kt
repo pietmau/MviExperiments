@@ -1,4 +1,4 @@
-package com.pppp.mvicoreapp
+package com.pppp.mvicoreapp.setup
 
 import com.badoo.mvicore.binder.Binder
 import com.jakewharton.rxrelay2.PublishRelay

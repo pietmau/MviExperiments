@@ -9,6 +9,8 @@ import com.pppp.mvicoreapp.main.model.Repository
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 import dagger.Module
 import dagger.Provides
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 @Module
 class DetailModule(private val activity: AppCompatActivity, private val comicBookId: Int) {
@@ -19,7 +21,10 @@ class DetailModule(private val activity: AppCompatActivity, private val comicBoo
         mapper: ComicsBookMapper
     ): DetailBinding = DetailBindingImpl(
         activity,
-        DetailFeature(ActorImpl(repository), Boot(comicBookId)),
+        DetailFeature(
+            DetailActor(repository, Schedulers.io(), AndroidSchedulers.mainThread()),
+            Boot(comicBookId)
+        ),
         DetailViewModelTransformerImpl(mapper),
         ::transformUiEvent
     )

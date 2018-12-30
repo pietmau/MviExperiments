@@ -7,7 +7,6 @@ import androidx.test.espresso.idling.CountingIdlingResource
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
-import com.pppp.mvicoreapp.MainThreadViewModelsSource
 import com.pppp.mvicoreapp.R
 import com.pppp.mvicoreapp.application.App
 import com.pppp.mvicoreapp.main.MainActivity
@@ -81,5 +80,4 @@ open class UiTest {
         const val TITLE = "this_is_a_title"
         const val URL = "this_is_a_url"
     }
-
 }

@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import com.jakewharton.rxrelay2.PublishRelay
-import com.pppp.mvicoreapp.TestMainBinding
 import com.pppp.mvicoreapp.main.MainActor
 import com.pppp.mvicoreapp.main.MainBinding
 import com.pppp.mvicoreapp.main.MainFeature

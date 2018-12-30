@@ -6,4 +6,3 @@ import dagger.Subcomponent
 
 @Subcomponent(modules = [TestMainModule::class, ActivityModule::class])
 abstract class TestMainComponent : MainComponent
-

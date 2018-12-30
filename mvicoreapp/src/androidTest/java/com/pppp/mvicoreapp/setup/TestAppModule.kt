@@ -4,9 +4,6 @@ import android.app.Application
 import com.marvel.marvel.main.model.RetrofitClient
 import com.pppp.database.ComicsDatabase
 import com.pppp.database.ComicsDatabaseImpl
-import com.pppp.mvicoreapp.MainThreadViewModelsSource
-import com.pppp.mvicoreapp.NewsSource
-import com.pppp.mvicoreapp.UiEventsConsumer
 import com.pppp.mvicoreapp.main.MainFeature
 import com.pppp.mvicoreapp.main.model.Repository
 import com.pppp.mvicoreapp.main.model.RepositoryImpl
