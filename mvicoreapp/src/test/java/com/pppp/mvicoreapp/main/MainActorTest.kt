@@ -65,7 +65,7 @@ class MainActorTest {
     @Test
     fun when_ShowDetail_then_emitsShowDetail() {
         // WHEN
-        val observable = actor.invoke(starting, ShowDetail(ID))
+        val observable = actor.invoke(starting, ShowDetail(ID,))
         // THEN
         observable.test().assertValueAt(0) { effect ->
             (effect as MainFeature.Effect.ShowDetail).id.equals(ID, true)

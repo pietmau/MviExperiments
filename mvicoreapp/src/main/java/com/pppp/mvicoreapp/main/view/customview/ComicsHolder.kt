@@ -13,7 +13,7 @@ class ComicsHolder(
     fun bind(model: ComicsBookViewModel, onItemClick: OnItemClick?) {
         imageLoader.loadImage(itemView.image, model.imageUrl, {
             itemView.setOnClickListener {
-                onItemClick?.invoke(model, itemView.image)
+                onItemClick?.invoke(model, this.adapterPosition)
             }
         })
         itemView.item_title.text = model.title

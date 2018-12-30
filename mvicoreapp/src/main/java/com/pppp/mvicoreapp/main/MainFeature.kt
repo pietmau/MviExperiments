@@ -24,7 +24,7 @@ class MainFeature(val actor: Actor<State, Wish, Effect>) :
     }
 
     sealed class Wish {
-        data class ShowDetail(val id: String) : Wish()//TODO should be a Int
+        data class ShowDetail(val id: String, val position: Int) : Wish()//TODO should be a Int
         object GetComics : Wish()
     }
 
@@ -32,12 +32,12 @@ class MainFeature(val actor: Actor<State, Wish, Effect>) :
         object StartedGettingComics : Effect()
         data class ComicsRetrieved(val comicsBooks: List<ComicsBook>) : Effect()
         data class FailureRetrievingComics(val error: Throwable) : Effect()
-        data class ShowDetail(val id: String) : Effect()
+        data class ShowDetail(val id: String, val position: Int) : Effect()
     }
 
     sealed class News {
         @Parcelize
-        data class ShowDetail(val id: Int) : News(), Parcelable
+        data class ShowDetail(val id: Int, val position: Int) : News(), Parcelable
         data class Error(val msg: String?) : News()
     }
 }

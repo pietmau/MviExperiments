@@ -6,11 +6,11 @@ import com.pppp.mvicoreapp.main.view.uieventssource.UiEventTransformer.UiEvent.C
 
 class UiEventTransformer : (UiEvent) -> Wish? {
     override fun invoke(event: UiEvent): Wish? = when (event) {
-        is ComicBookSelected -> Wish.ShowDetail(event.bookId)
+        is ComicBookSelected -> Wish.ShowDetail(event.bookId, event.position)
         else -> throw UnsupportedOperationException("Unknown wish")
     }
 
     sealed class UiEvent {
-        data class ComicBookSelected(val bookId: String) : UiEvent()
+        data class ComicBookSelected(val bookId: String, val position: Int) : UiEvent()
     }
 }

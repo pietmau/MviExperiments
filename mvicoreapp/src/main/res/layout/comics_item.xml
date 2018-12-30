@@ -12,6 +12,7 @@
 
     <com.pppp.mvicoreapp.main.view.customview.SquareImageView
         android:id="@+id/image"
+        android:transitionName="@string/transition"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"

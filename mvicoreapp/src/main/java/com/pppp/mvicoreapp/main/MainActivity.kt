@@ -1,5 +1,6 @@
 package com.pppp.mvicoreapp.main
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -46,8 +47,8 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
 
     private fun renderComicsAvailable(viewModel: SuccessGettingComics) {
         progress.visibility = View.GONE
-        recycler.onItemClick = { comicsBook, image ->
-            uiEvents.accept(ComicBookSelected(comicsBook.id))
+        recycler.onItemClick = { comicsBook, position ->
+            uiEvents.accept(ComicBookSelected(comicsBook.id, position))
         }
         recycler.onComicsAvailable(viewModel.results)
     }
@@ -64,8 +65,12 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
 
     fun startDetailActivity(comicsViewModel: MainFeature.News.ShowDetail) {
         val intent = Intent(this@MainActivity, DetailActivity::class.java)
-        intent.putExtra(DetailActivity.COMICS_EXTRA, comicsViewModel)
-        startActivity(intent)
+        intent.putExtra(DetailActivity.COMICS_ID_EXTRA, comicsViewModel.id)
+        val imageView = recycler.getImageViewAtPostiion(comicsViewModel.position)
+        val options = ActivityOptions.makeSceneTransitionAnimation(
+            this, imageView, getString(R.string.transition)
+        )
+        startActivity(intent, options.toBundle())
     }
 
 }

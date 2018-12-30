@@ -10,7 +10,6 @@ import com.pppp.mvicoreapp.R
 import com.pppp.mvicoreapp.application.Injector
 import com.pppp.mvicoreapp.detail.view.DetailUiEvent
 import com.pppp.mvicoreapp.detail.view.DetailViewModel
-import com.pppp.mvicoreapp.main.MainFeature
 import com.pppp.mvicoreapp.main.view.customview.ImageLoader
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.detail_activity.*
@@ -31,7 +30,8 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_activity)
-        Injector.inject(this, intent.getParcelableExtra<MainFeature.News.ShowDetail>(COMICS_EXTRA).id)
+        supportPostponeEnterTransition()
+        Injector.inject(this, intent.getIntExtra(COMICS_ID_EXTRA, -1))
         binding.bind(viewModels, detailUiEvents)
     }
 
@@ -50,6 +50,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setImageAndColors(url: String) {
         callback = {
+            supportStartPostponedEnterTransition()
             val loadedImage = (image.drawable as? BitmapDrawable)?.bitmap
             setColors(loadedImage)
         }
@@ -72,6 +73,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val COMICS_EXTRA = "comix_extra"
+        const val COMICS_ID_EXTRA = "comix_extra"
     }
 }

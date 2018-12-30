@@ -19,11 +19,11 @@ class MainActor(
     override fun invoke(state: State, wish: Wish): Observable<Effect> =
         when (wish) {
             GetComics -> onGetComicsRequested()
-            is ShowDetail -> onDetailRequested(wish.id)
+            is ShowDetail -> onDetailRequested(wish.id, wish.position)
         }
 
-    private fun onDetailRequested(id: String): Observable<Effect> =
-        Observable.just(Effect.ShowDetail(id))
+    private fun onDetailRequested(id: String, position: Int): Observable<Effect> =
+        Observable.just(Effect.ShowDetail(id, position))
 
     private fun onGetComicsRequested() = repository.getComics()
         .toObservable()

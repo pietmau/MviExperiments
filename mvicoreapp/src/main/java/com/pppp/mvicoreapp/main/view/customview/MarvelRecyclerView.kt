@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.ImageView
+import com.pppp.mvicoreapp.R
 import com.pppp.mvicoreapp.application.Injector
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import javax.inject.Inject
@@ -27,8 +28,8 @@ class MarvelRecyclerView @JvmOverloads constructor(
 
     var onItemClick: OnItemClick? by observable(null)
     { _: KProperty<*>, _: OnItemClick?, newValue: OnItemClick? ->
-        marvelAdapter.onItemClick = { comicsBook, image ->
-            onItemClicked(newValue, comicsBook, image)
+        marvelAdapter.onItemClick = { comicsBook, position ->
+            onItemClicked(newValue, comicsBook, position)
         }
     }
 
@@ -48,7 +49,7 @@ class MarvelRecyclerView @JvmOverloads constructor(
     private fun onItemClicked(
         newValue: OnItemClick?,
         comicsBook: ComicsBookViewModel,
-        image: ImageView
+        image: Int
     ) {
         val currentTime = System.currentTimeMillis()
         if ((currentTime - time) > DELAY_IN_MILLS) {
@@ -57,6 +58,9 @@ class MarvelRecyclerView @JvmOverloads constructor(
         time = currentTime
     }
 
+    fun getImageViewAtPostiion(position: Int) =
+        layoutManager?.findViewByPosition(position)?.findViewById<ImageView>(R.id.image)
+
     companion object {
         private const val MANY_ROWS = 5
         private const val FEW_ROWS = 3
@@ -64,4 +68,4 @@ class MarvelRecyclerView @JvmOverloads constructor(
     }
 }
 
-typealias OnItemClick = (ComicsBookViewModel, ImageView) -> Unit
+typealias OnItemClick = (ComicsBookViewModel, Int) -> Unit
