@@ -9,7 +9,7 @@ class ViewModelTransformer(private val mapper: ComicsBookMapper) :
 
     override fun invoke(state: State): ComicsViewModel {
         fun transformComics(state: SuccessGettingComics) =
-            (state.results ?: emptyList()).map { mapper.map(it) }
+            (state.comicsBooks ?: emptyList()).map { mapper.map(it) }
 
         return when (state) {
             Starting -> ComicsViewModel.Starting

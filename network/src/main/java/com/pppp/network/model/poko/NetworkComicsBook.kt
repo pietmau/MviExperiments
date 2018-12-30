@@ -4,9 +4,9 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.marvel.marvel.main.model.pojos.NetworkCreators
 import com.marvel.marvel.main.model.pojos.NetworkThumbnail
-import com.pppp.entities.Result
+import com.pppp.entities.ComicsBook
 
-data class NetworkResult(
+data class NetworkComicsBook(
     override val id: Int? = null,
 
     @SerializedName("title")
@@ -32,4 +32,4 @@ data class NetworkResult(
     @SerializedName("creators")
     @Expose
     override val creators: NetworkCreators? = null
-) : Result
+) : ComicsBook

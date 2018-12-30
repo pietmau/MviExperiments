@@ -8,12 +8,13 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .idea/sonarlint
+.idea/inspectionProfiles/
+.idea/markdown-navigator/
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 
-/build
 
 # Built application files
 *.apk

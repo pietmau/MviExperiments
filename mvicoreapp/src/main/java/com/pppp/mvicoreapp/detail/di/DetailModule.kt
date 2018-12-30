@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import com.jakewharton.rxrelay2.PublishRelay
 import com.pppp.mvicoreapp.detail.*
 import com.pppp.mvicoreapp.detail.view.DetailUiEvent
+import com.pppp.mvicoreapp.detail.view.DetailViewModelTransformerImpl
 import com.pppp.mvicoreapp.main.model.Repository
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 import dagger.Module

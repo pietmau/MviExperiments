@@ -16,7 +16,7 @@ fun reduce(
 ) =
     when (effect) {
         StartedGettingComics -> GettingComics
-        is ComicsRetrieved -> SuccessGettingComics(effect.results)
+        is ComicsRetrieved -> SuccessGettingComics(effect.comicsBooks)
         else -> state
     }
 

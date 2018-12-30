@@ -1,7 +1,7 @@
 package com.pppp.mvicoreapp.main.model
 
 import com.pppp.database.ComicsDatabase
-import com.pppp.entities.Result
+import com.pppp.entities.ComicsBook
 import com.pppp.network.model.ComicsApiClient
 import com.pppp.network.model.networkchecker.NetworkChecker
 import io.reactivex.Single
@@ -13,7 +13,7 @@ class RepositoryImpl(
 ) :
     Repository {
 
-    override fun getComics(): Single<List<Result>> {
+    override fun getComics(): Single<List<ComicsBook>> {
         val flatMap = Single.just(0).toObservable()
             .flatMap {
                 if (networkChecker.networkIsAvailable()) {
@@ -28,6 +28,6 @@ class RepositoryImpl(
         return flatMap.toList()
     }
 
-    override fun getComicById(id: Int): Single<Result> = db.getComicById(id)
+    override fun getComicById(id: Int): Single<ComicsBook> = db.getComicById(id)
 
 }

@@ -1,6 +1,7 @@
-package com.pppp.mvicoreapp.detail
+package com.pppp.mvicoreapp.detail.view
 
-import com.pppp.mvicoreapp.detail.view.DetailViewModel
+import com.pppp.mvicoreapp.detail.DetailFeature
+import com.pppp.mvicoreapp.detail.DetailViewModelTransformer
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 
 class DetailViewModelTransformerImpl(private val mapper: ComicsBookMapper) :
@@ -11,7 +12,7 @@ class DetailViewModelTransformerImpl(private val mapper: ComicsBookMapper) :
             DetailFeature.State.Starting -> DetailViewModel.Starting
             DetailFeature.State.GettingData -> DetailViewModel.GettingData
             is DetailFeature.State.GotData -> DetailViewModel.GotNewData(
-                mapper.map(state.result)
+                mapper.map(state.comicsBook)
             )
         }
     }

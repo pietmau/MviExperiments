@@ -20,7 +20,7 @@ typealias Reducer = (DetailFeature.State, DetailFeature.Effect) -> DetailFeature
 
 fun reduceState(state: DetailFeature.State, effect: DetailFeature.Effect): DetailFeature.State =
     when (effect) {
-        is DetailFeature.Effect.GotBookDetail -> DetailFeature.State.GotData(effect.result)
+        is DetailFeature.Effect.GotBookDetail -> DetailFeature.State.GotData(effect.comicsBook)
     }
 
 typealias Bootstrapper<Action> = () -> Observable<Action>

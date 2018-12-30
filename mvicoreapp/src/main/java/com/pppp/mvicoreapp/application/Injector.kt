@@ -5,14 +5,14 @@ import android.content.Context
 import com.pppp.mvicoreapp.detail.DetailActivity
 import com.pppp.mvicoreapp.detail.di.DetailModule
 import com.pppp.mvicoreapp.main.MainActivity
-import com.pppp.mvicoreapp.main.di.MainModule
+import com.pppp.mvicoreapp.main.di.ActivityModule
 import com.pppp.mvicoreapp.main.view.customview.MarvelRecyclerView
 
 object Injector {
 
     fun inject(mainActivity: MainActivity) {
         val component = getComponentFromActivity(mainActivity)
-        component?.with(MainModule(mainActivity))?.inject(mainActivity)
+        component?.with(ActivityModule(mainActivity))?.inject(mainActivity)
     }
 
     fun inject(recyclerView: MarvelRecyclerView) {

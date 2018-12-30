@@ -2,7 +2,7 @@ package com.pppp.mvicoreapp.main.view.customview
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModelImpl
+import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import kotlinx.android.synthetic.main.comics_item.view.*
 
 class ComicsHolder(
@@ -10,12 +10,13 @@ class ComicsHolder(
     private val imageLoader: ImageLoader
 ) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(model: ComicsBookViewModelImpl, onItemClick: OnItemClick?) {
+    fun bind(model: ComicsBookViewModel, onItemClick: OnItemClick?) {
         imageLoader.loadImage(itemView.image, model.imageUrl, {
             itemView.setOnClickListener {
                 onItemClick?.invoke(model, itemView.image)
             }
         })
+        itemView.item_title.text = model.title
     }
 
     fun unbind() {

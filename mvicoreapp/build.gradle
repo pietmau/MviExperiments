@@ -11,7 +11,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -29,11 +29,15 @@ android {
     androidExtensions {
         experimental = true
     }
+
+    testOptions {
+        animationsDisabled = true
+    }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'//TODO
     implementation 'com.github.badoo.mvicore:mvicore:1.1.4'
     implementation 'com.github.badoo.mvicore:mvicore-android:1.1.4'
     implementation 'io.reactivex.rxjava2:rxkotlin:2.3.0'
@@ -50,8 +54,19 @@ dependencies {
     implementation 'com.android.support:palette-v7:28.0.0'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
-    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.2'
-    testImplementation 'junit:junit:4.12'
     implementation project(path: ':database')
     implementation project(path: ':network')
+
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
+    androidTestImplementation "androidx.test.ext:junit:1.0.0"
+    // Optional -- Mockito framework
+    androidTestImplementation 'org.mockito:mockito-core:1.10.19'
+    kaptAndroidTest 'com.google.dagger:dagger-compiler:2.20'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.0'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
 }

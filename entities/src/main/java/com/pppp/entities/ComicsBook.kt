@@ -1,6 +1,6 @@
 package com.pppp.entities
 
-interface Result {
+interface ComicsBook {
     val id: Int?
     val title: String?
     val description: String?

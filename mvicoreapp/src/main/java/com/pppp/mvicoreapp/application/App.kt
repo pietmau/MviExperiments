@@ -3,7 +3,7 @@ package com.pppp.mvicoreapp.application
 import android.app.Application
 import com.pppp.mvicoreapp.application.di.AppComponent
 import com.pppp.mvicoreapp.application.di.AppModule
-import com.pppp.mvicoreapp.application.di.DaggerAppComponent
+import com.pppp.mvicoreapp.application.di.DaggerProdAppComponent
 import com.squareup.leakcanary.LeakCanary
 
 class App : Application() {
@@ -11,7 +11,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        component = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+        component = DaggerProdAppComponent.builder().appModule(AppModule(this)).build()
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }

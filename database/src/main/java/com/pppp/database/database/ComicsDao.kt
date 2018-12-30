@@ -7,20 +7,20 @@ import android.arch.persistence.room.Query
 import com.pppp.database.poko.*
 import com.pppp.entities.Item
 import com.pppp.entities.Price
-import com.pppp.entities.Result
+import com.pppp.entities.ComicsBook
 
 //TODO use translator
 @Dao
 abstract class ComicsDao {
 
     @Query("SELECT * from dbresult JOIN dbthumbnail ON (dbresult.id=dbthumbnail.thumb_id)")
-    abstract fun getAllComics(): List<DbResultWithPrices>
+    abstract fun getAllComics(): List<DbComicsBookWithPrices>
 
     @Query("SELECT * from dbresult JOIN dbthumbnail ON (dbresult.id=dbthumbnail.thumb_id) WHERE id=:id")
-    abstract fun getComicById(id: Int?): DbResultWithPrices?
+    abstract fun getComicById(id: Int?): DbComicsBookWithPrices?
 
-    fun insert(results: List<Result>) {
-        results.forEach { insert(it) }
+    fun insert(comicsBooks: List<ComicsBook>) {
+        comicsBooks.forEach { insert(it) }
     }
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -35,12 +35,12 @@ abstract class ComicsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertItem(it: DbItem)
 
-    private fun insert(result: Result) {
-        val dbResultWithPrices = DbResultWithPrices(getResult(result), getThumb(result))
+    private fun insert(comicsBook: ComicsBook) {
+        val dbResultWithPrices = DbComicsBookWithPrices(getResult(comicsBook), getThumb(comicsBook))
         insertResult(dbResultWithPrices.dbResult);
         insertThumbnail(dbResultWithPrices.thumbnail);
-        insertPrices(getPrices(result.prices, result.id))
-        insertItems(getItems(result.creators?.items, result.id))
+        insertPrices(getPrices(comicsBook.prices, comicsBook.id))
+        insertItems(getItems(comicsBook.creators?.items, comicsBook.id))
     }
 
     private fun insertPrices(prices: List<DbPrice>?) {
@@ -57,10 +57,10 @@ abstract class ComicsDao {
     private fun getPrices(prices: List<Price>?, id: Int?) =
         prices?.map { DbPrice(null, it.price, id) }
 
-    private fun getThumb(result: Result): DbThumbnail =
-        DbThumbnail(result.id, result.thumbnail?.path, result.thumbnail?.extension)
+    private fun getThumb(comicsBook: ComicsBook): DbThumbnail =
+        DbThumbnail(comicsBook.id, comicsBook.thumbnail?.path, comicsBook.thumbnail?.extension)
 
-    private fun getResult(result: Result): DbResult =
-        DbResult(result.id, result.title, result.description, result.pageCount)
+    private fun getResult(comicsBook: ComicsBook): DbResult =
+        DbResult(comicsBook.id, comicsBook.title, comicsBook.description, comicsBook.pageCount)
 
 }

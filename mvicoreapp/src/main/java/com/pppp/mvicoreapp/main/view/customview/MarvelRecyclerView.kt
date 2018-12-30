@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.widget.ImageView
 import com.pppp.mvicoreapp.application.Injector
-import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModelImpl
+import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import javax.inject.Inject
 import kotlin.properties.Delegates.observable
 import kotlin.reflect.KProperty
@@ -41,13 +41,13 @@ class MarvelRecyclerView @JvmOverloads constructor(
         adapter = MarvelAdapter(loader)
     }
 
-    fun onComicsAvailable(results: List<ComicsBookViewModelImpl>) {
+    fun onComicsAvailable(results: List<ComicsBookViewModel>) {
         marvelAdapter.setItems(results)
     }
 
     private fun onItemClicked(
         newValue: OnItemClick?,
-        comicsBook: ComicsBookViewModelImpl,
+        comicsBook: ComicsBookViewModel,
         image: ImageView
     ) {
         val currentTime = System.currentTimeMillis()
@@ -64,4 +64,4 @@ class MarvelRecyclerView @JvmOverloads constructor(
     }
 }
 
-typealias OnItemClick = (ComicsBookViewModelImpl, ImageView) -> Unit
+typealias OnItemClick = (ComicsBookViewModel, ImageView) -> Unit

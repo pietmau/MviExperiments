@@ -2,7 +2,7 @@ package com.pppp.mvicoreapp.detail
 
 import com.badoo.mvicore.element.Actor
 import com.badoo.mvicore.feature.ActorReducerFeature
-import com.pppp.entities.Result
+import com.pppp.entities.ComicsBook
 import com.pppp.mvicoreapp.detail.DetailFeature.*
 
 class DetailFeature(
@@ -19,7 +19,7 @@ class DetailFeature(
     sealed class State {
         object Starting : State()
         object GettingData : State()
-        data class GotData(val result: Result) : State()
+        data class GotData(val comicsBook: ComicsBook) : State()
     }
 
     sealed class Wish {
@@ -27,7 +27,7 @@ class DetailFeature(
     }
 
     sealed class Effect {
-        data class GotBookDetail(val result: Result) : Effect()
+        data class GotBookDetail(val comicsBook: ComicsBook) : Effect()
     }
 
     sealed class News

@@ -18,13 +18,13 @@ interface ComicsBookViewModel {
 
 @Parcelize
 data class ComicsBookViewModelImpl(
-    override val id: String,
-    override val title: String,
-    override val imageUrl: String,
-    override val description: String,
-    override val pageCount: Int,
-    override val price: String,
-    override val authors: String,
-    override val priceAsString: String,
-    override val numberOfPagesAsString: String
+    override val id: String = "",
+    override val title: String = "",
+    override val imageUrl: String = "",
+    override val description: String = "",
+    override val pageCount: Int = 0,
+    override val price: String = "",
+    override val authors: String = "",
+    override val priceAsString: String = "",
+    override val numberOfPagesAsString: String = ""
 ) : ComicsBookViewModel, Parcelable

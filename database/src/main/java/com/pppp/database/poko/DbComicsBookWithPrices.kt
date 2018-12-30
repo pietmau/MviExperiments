@@ -3,14 +3,14 @@ package com.pppp.database.poko
 import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.Relation
-import com.pppp.entities.Result
+import com.pppp.entities.ComicsBook
 
-data class DbResultWithPrices(
+data class DbComicsBookWithPrices(
     @Embedded
     val dbResult: DbResult,
     @Embedded
     override val thumbnail: DbThumbnail?
-) : Result {
+) : ComicsBook {
     @Relation(
         parentColumn = "id",
         entityColumn = "result_id"
