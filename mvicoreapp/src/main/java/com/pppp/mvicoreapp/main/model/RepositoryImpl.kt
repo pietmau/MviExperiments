@@ -14,9 +14,9 @@ class RepositoryImpl(
     Repository {
 
     override fun getComics(): Single<List<ComicsBook>> {
-        val flatMap = Single.just(0).toObservable()
-            .flatMap {
-                if (networkChecker.networkIsAvailable()) {
+        return networkChecker.isNetworkAvailable().toObservable()
+            .flatMap { networkAvailable ->
+                if (networkAvailable) {
                     api.comics.map { it.data?.results }
                         .map { it ?: emptyList() }
                         .doOnNext { comics -> db.saveComics(comics) }
@@ -24,8 +24,7 @@ class RepositoryImpl(
                 } else {
                     db.getAllComics()
                 }
-            }
-        return flatMap.toList()
+            }.toList()
     }
 
     override fun getComicById(id: Int): Single<ComicsBook> = db.getComicById(id)
