@@ -3,7 +3,6 @@ package com.pppp.network.model.client
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.marvel.marvel.main.model.Api
-import com.pppp.entities.ComicsBook
 import com.pppp.network.model.ComicsClient
 import io.reactivex.Observable
 import okhttp3.Cache
@@ -15,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-class RetrofitClient(cacheDir: File, PUBLIC_KEY: String, PRIVATE_KEY: String, MAIN_URL: String) :
+internal class RetrofitClient(cacheDir: File, PUBLIC_KEY: String, PRIVATE_KEY: String, MAIN_URL: String) :
     ComicsClient {
     private val api: Api
 
@@ -38,10 +37,10 @@ class RetrofitClient(cacheDir: File, PUBLIC_KEY: String, PRIVATE_KEY: String, MA
         api = retrofit.create(Api::class.java)
     }
 
-    override fun getComics(): Observable<List<ComicsBook>> = api.getComics()
+    override fun getComics(): Observable<List<com.pppp.lib.ComicsBook>> = api.getComics()
 
     private fun gsonConverterFactory(): GsonConverterFactory {
-        val type = object : TypeToken<MutableList<ComicsBook>>() {}.getType()
+        val type = object : TypeToken<MutableList<com.pppp.lib.ComicsBook>>() {}.getType()
         val gson =
             GsonBuilder().registerTypeAdapter(type, MarvelDeserializer()).create()
         return GsonConverterFactory.create(gson)

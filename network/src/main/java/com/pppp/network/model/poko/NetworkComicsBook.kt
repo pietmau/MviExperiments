@@ -2,7 +2,7 @@ package com.pppp.network.model.poko
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.pppp.entities.ComicsBook
+import com.pppp.lib.ComicsBook
 
 internal data class NetworkComicsBook(
     override val id: Int = 0,
@@ -24,4 +24,4 @@ internal data class NetworkComicsBook(
     @SerializedName("creators")
     @Expose
     override val creators: NetworkCreators? = null
-) : ComicsBook
+) : com.pppp.lib.ComicsBook

@@ -1,1 +1,1 @@
-include ':network', ':mvicoreapp', ':database', ':entities'
+include ':network', ':ui', ':data', ':usecases', ':entities'

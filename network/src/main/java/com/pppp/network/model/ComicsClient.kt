@@ -1,9 +1,9 @@
 package com.pppp.network.model
 
-import com.pppp.entities.ComicsBook
+import com.pppp.lib.ComicsBook
 import io.reactivex.Observable
 
 interface ComicsClient {
 
-    fun getComics(): Observable<List<ComicsBook>>
+    fun getComics(): Observable<List<com.pppp.lib.ComicsBook>>
 }

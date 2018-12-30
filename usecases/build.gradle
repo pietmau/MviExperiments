@@ -1,0 +1,11 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    api 'com.github.badoo.mvicore:mvicore:1.1.4'
+    api 'com.github.badoo.mvicore:mvicore-android:1.1.4'
+    api project(path: ':entities')
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
+}

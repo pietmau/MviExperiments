@@ -2,7 +2,7 @@ package com.pppp.network.model.poko
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.pppp.entities.Thumbnail
+import com.pppp.lib.Thumbnail
 
 internal data class NetworkThumbnail(
     @SerializedName("path")
@@ -11,4 +11,4 @@ internal data class NetworkThumbnail(
     @SerializedName("extension")
     @Expose
     override val extension: String? = null
-) : Thumbnail
+) : com.pppp.lib.Thumbnail
