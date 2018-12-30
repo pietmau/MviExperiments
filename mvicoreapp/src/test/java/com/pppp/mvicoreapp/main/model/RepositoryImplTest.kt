@@ -1,33 +1,71 @@
 package com.pppp.mvicoreapp.main.model
 
+import com.nhaarman.mockitokotlin2.never
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import com.pppp.database.ComicsDatabase
-import com.pppp.network.model.ComicsApiClient
+import com.pppp.entities.ComicsBook
+import com.pppp.network.model.ComicsClient
 import com.pppp.network.model.networkchecker.NetworkChecker
+import io.reactivex.Observable
+import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.InjectMocks
+import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import javax.inject.Inject
 
 @RunWith(MockitoJUnitRunner::class)
 class RepositoryImplTest {
-    @Inject
+    @Mock
     lateinit var db: ComicsDatabase
-    @Inject
-    lateinit var api: ComicsApiClient
-    @Inject
+    @Mock
+    lateinit var api: ComicsClient
+    @Mock
     lateinit var networkChecker: NetworkChecker
     @InjectMocks
-    lateinit var repos: RepositoryImpl
+    lateinit var repo: RepositoryImpl
+    @Mock
+    lateinit var book: ComicsBook
+    private lateinit var comics: List<ComicsBook>
 
     @Before
     fun setUp() {
-        //whenever(api.)
+        comics = listOf(book)
+        whenever(api.getComics()).thenReturn(Observable.just(comics))
+        whenever(networkChecker.isNetworkAvailable()).thenReturn(Single.just(true))
     }
 
     @Test
-    fun when_foo_then_bar() {
+    fun when_noNetwork_then_usesCache() {
+        //GIVEN
+        whenever(networkChecker.isNetworkAvailable()).thenReturn(Single.just(false))
+        //WHEN
+        test()
+        //THEN
+        verify(db).getAllComics()
+        verify(api, never()).getComics()
+    }
 
+    @Test
+    fun when_network_then_usesApi() {
+        //WHEN
+        test()
+        //THEN
+        verify(db, never()).getAllComics()
+        verify(api).getComics()
+    }
+
+    @Test
+    fun when_successful_then_savesResponse() {
+        //WHEN
+        test()
+        //THEN
+        verify(db).saveComics(comics)
+    }
+
+    private fun test() {
+        repo.getComics().test()
     }
 }

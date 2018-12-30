@@ -1,12 +1,9 @@
-package com.marvel.marvel.main.model
-
+package com.pppp.network.model
 
 import com.pppp.entities.ComicsBook
 import io.reactivex.Observable
-import retrofit2.http.GET
 
-interface Api {
+interface ComicsClient {
 
-    @GET("v1/public/comics")
     fun getComics(): Observable<List<ComicsBook>>
 }

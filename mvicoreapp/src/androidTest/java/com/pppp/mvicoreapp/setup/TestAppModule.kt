@@ -16,7 +16,7 @@ import com.pppp.mvicoreapp.main.view.uieventssource.UiEventTransformer
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapperImp
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
-import com.pppp.network.model.ComicsApiClient
+import com.pppp.network.model.ComicsClient
 import com.pppp.network.model.networkchecker.NetworkChecker
 import dagger.Module
 import dagger.Provides
@@ -39,7 +39,7 @@ class TestAppModule(
     fun provideImageLoader(): ImageLoader = PicassoImageLoader
 
     @Provides
-    fun provideApi(): ComicsApiClient = RetrofitClient(application.cacheDir)
+    fun provideApi(): ComicsClient = RetrofitClient(application.cacheDir)
 
     @Provides
     fun provideDatabase(): ComicsDatabase = ComicsDatabaseImpl(application)
@@ -47,7 +47,7 @@ class TestAppModule(
     @Provides
     fun provideRepository(
         db: ComicsDatabase,
-        client: ComicsApiClient
+        client: ComicsClient
     ): Repository =
         RepositoryImpl(db, client, NetworkChecker.checker(application))
 

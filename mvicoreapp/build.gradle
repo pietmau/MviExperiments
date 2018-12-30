@@ -18,6 +18,20 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "PUBLIC_KEY", PUBLIC_KEY
+            resValue 'string', "PUBLIC_KEY", PUBLIC_KEY
+            buildConfigField 'String', "PRIVATE_KEY", PRIVATE_KEY
+            resValue 'string', "PRIVATE_KEY", PRIVATE_KEY
+        }
+        debug {
+            buildConfigField 'String', "PUBLIC_KEY", PUBLIC_KEY
+            resValue 'string', "PUBLIC_KEY", PUBLIC_KEY
+
+            buildConfigField 'String', "PRIVATE_KEY", PRIVATE_KEY
+            resValue 'string', "PRIVATE_KEY", PRIVATE_KEY
+
+            buildConfigField 'String', "MAIN_URL", MAIN_URL
+            resValue 'string', "MAIN_URL", MAIN_URL
         }
     }
 

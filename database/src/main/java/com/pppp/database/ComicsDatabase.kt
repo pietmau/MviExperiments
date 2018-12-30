@@ -5,6 +5,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 
 interface ComicsDatabase {
+
     fun saveComics(comics: List<ComicsBook>)
 
     fun getComicById(id: Int?): Single<ComicsBook>
