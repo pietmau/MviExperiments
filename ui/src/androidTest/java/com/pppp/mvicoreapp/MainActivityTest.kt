@@ -3,16 +3,17 @@ package com.pppp.mvicoreapp
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.pppp.mvicoreapp.R.id
 import com.pppp.mvicoreapp.main.view.customview.ComicsHolder
+import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
 import com.pppp.mvicoreapp.setup.UiTest
+import junit.framework.TestCase.assertEquals
 import org.hamcrest.Matchers.not
-import org.junit.Assert.fail
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -25,7 +26,7 @@ class MainActivityTest : UiTest() {
         //GIVEN
         initiallyProgressDoesNotShow()
         // WHEN
-        viewModelsSource.viewModels.onNext(ComicsViewModel.Starting)
+        viewModes.viewModels.onNext(ComicsViewModel.Starting)
         decrementIdlingResource()
         // THEN
         onView(withId(id.progress)).check(matches(not(isDisplayed())))
@@ -36,7 +37,7 @@ class MainActivityTest : UiTest() {
         //GIVEN
         initiallyProgressDoesNotShow()
         // WHEN
-        viewModelsSource.viewModels.onNext(ComicsViewModel.GettingComics)
+        viewModes.viewModels.onNext(ComicsViewModel.GettingComics)
         decrementIdlingResource()
         // THEN
         onView(withId(id.progress)).check(matches(isDisplayed()))
@@ -47,7 +48,7 @@ class MainActivityTest : UiTest() {
         //GIVEN
         initiallyProgressDoesNotShow()
         // WHEN
-        viewModelsSource.viewModels.onNext(ComicsViewModel.SuccessGettingComics(emptyList()))
+        viewModes.viewModels.onNext(ComicsViewModel.SuccessGettingComics(emptyList()))
         decrementIdlingResource()
         // THEN
         onView(withId(id.progress)).check(matches(not(isDisplayed())))
@@ -57,7 +58,7 @@ class MainActivityTest : UiTest() {
     fun when_error_then_showsSnack() {
         // WHEN
         incrementIdlingResource()
-        viewModelsSource.viewModels.onNext(ComicsViewModel.Failure(ERROR))
+        viewModes.viewModels.onNext(ComicsViewModel.Failure(ERROR))
         decrementIdlingResource()
         // THEN
         onView(withText(ERROR)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
@@ -79,12 +80,14 @@ class MainActivityTest : UiTest() {
         onView(withId(id.recycler)).check(matches(hasDescendant(withText(TITLE))))
     }
 
-    @Test //TODO migrate to AndroidX and complete
-    fun when_clickOnItem_then_rigtNewsIsDelivered() {
+    @Test
+    fun when_clickOnItem_then_rigtNewsUiEventIsDelivered() {
         // WHEN
         successfullyGotData()
-        onView(withId(R.id.recycler)).perform(RecyclerViewActions.actionOnItemAtPosition<ComicsHolder>(0, click()))
-        // THEN
-        fail()
+        onView(withId(R.id.recycler)).perform(actionOnItemAtPosition<ComicsHolder>(0, click()))
+        //THEN
+        val comicBookSelected = consumerSpy.event as MainUiEvent.ComicBookSelected
+        assertEquals(comicBookSelected.bookId, ID)
+        assertEquals(comicBookSelected.position, 0)
     }
 }

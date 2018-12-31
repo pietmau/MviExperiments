@@ -2,9 +2,7 @@ package com.pppp.mvicoreapp.main.di
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.jakewharton.rxrelay2.PublishRelay
 import com.pppp.mvicoreapp.main.view.MainBinding
-import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 import com.pppp.usecases.main.MainActor
 import com.pppp.usecases.main.MainFeature
@@ -17,8 +15,6 @@ interface MainModule {
         mapper: ComicsBookMapper,
         activity: AppCompatActivity
     ): MainBinding
-
-    fun provideRelay(): PublishRelay<MainUiEvent>
 
     fun provideActor(repository: Repository): MainActor
 

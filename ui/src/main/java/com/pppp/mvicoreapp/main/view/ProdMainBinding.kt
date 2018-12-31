@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.badoo.mvicore.android.lifecycle.CreateDestroyBinderLifecycle
 import com.badoo.mvicore.binder.Binder
 import com.badoo.mvicore.binder.using
-import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEventTransformer
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
@@ -27,7 +27,7 @@ open class ProdMainBinding(
 
     override fun bind(
         viewModels: Consumer<ComicsViewModel>,
-        uiEvents: PublishRelay<MainUiEvent>,
+        uiEvents: Relay<MainUiEvent>,
         news: Consumer<MainFeature.News>
     ) {
         binder.bind(feature to viewModels using viewModelTransformer)
@@ -40,7 +40,7 @@ interface MainBinding {
 
     fun bind(
         viewModels: Consumer<ComicsViewModel>,
-        uiEvents: PublishRelay<MainUiEvent>,
+        uiEvents: Relay<MainUiEvent>,
         news: Consumer<MainFeature.News>
     )
 }

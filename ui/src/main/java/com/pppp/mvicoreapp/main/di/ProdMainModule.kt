@@ -5,8 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.main.view.MainBinding
 import com.pppp.mvicoreapp.main.view.ProdMainBinding
+import com.pppp.mvicoreapp.main.view.customview.Timer
+import com.pppp.mvicoreapp.main.view.customview.TimerImpl
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEventTransformer
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
@@ -36,7 +39,7 @@ open class ProdMainModule() : MainModule {
         )
 
     @Provides
-    override fun provideRelay(): PublishRelay<MainUiEvent> = PublishRelay.create()
+    fun provideRelay(): Relay<MainUiEvent> = PublishRelay.create()
 
     @Provides
     override fun provideActor(repository: Repository) =

@@ -1,7 +1,7 @@
 package com.pppp.mvicoreapp.setup
 
 import com.badoo.mvicore.binder.Binder
-import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.main.view.MainBinding
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
@@ -25,7 +25,7 @@ class TestMainBinding(
 
     override fun bind(
         viewModels: Consumer<ComicsViewModel>,
-        uiEvents: PublishRelay<MainUiEvent>,
+        uiEvents: Relay<MainUiEvent>,
         news: Consumer<MainFeature.News>
     ) {
         viewModelsSource?.let { binder.bind(it to viewModels) }
@@ -43,8 +43,13 @@ class MainThreadViewModelsSource : ObservableSource<ComicsViewModel> {
     }
 }
 
-class UiEventsConsumer : Consumer<MainUiEvent> {
+class UiEventsConsumer : Relay<MainUiEvent>() {
     private var uiEvent: MainUiEvent? = null
+
+    override fun hasObservers() = false
+
+    override fun subscribeActual(observer: Observer<in MainUiEvent>?) {
+    }
 
     override fun accept(uiEvent: MainUiEvent?) {
         this.uiEvent = uiEvent

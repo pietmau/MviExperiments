@@ -7,7 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
-import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.R
 import com.pppp.mvicoreapp.application.Injector
 import com.pppp.mvicoreapp.detail.view.DetailActivity
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
     @Inject
     lateinit var mainBinding: MainBinding
     @Inject
-    lateinit var uiEvents: PublishRelay<MainUiEvent>
+    lateinit var uiEvents: Relay<MainUiEvent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +46,10 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
 
     private fun renderComicsAvailable(viewModel: ComicsViewModel.SuccessGettingComics) {
         progress.visibility = View.GONE
+        recycler.onComicsAvailable(viewModel.results)
         recycler.onItemClick = { comicsBook, position ->
             uiEvents.accept(MainUiEvent.ComicBookSelected(comicsBook.id, position))
         }
-        recycler.onComicsAvailable(viewModel.results)
     }
 
     private fun renderGettingComics() {
@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
         progress.visibility = View.GONE
         Snackbar.make(activity_main, viewModel.message, LENGTH_LONG).show()
     }
-
 
     fun startDetailActivity(comicsViewModel: MainFeature.News.ShowDetail) {
         val intent = Intent(this@MainActivity, DetailActivity::class.java)

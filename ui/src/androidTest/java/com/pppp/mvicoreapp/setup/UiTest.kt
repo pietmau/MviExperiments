@@ -7,19 +7,23 @@ import androidx.test.espresso.idling.CountingIdlingResource
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
+import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.R
 import com.pppp.mvicoreapp.application.App
 import com.pppp.mvicoreapp.main.view.MainActivity
+import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
+import io.reactivex.Observer
 import org.hamcrest.Matchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 
-open class UiTest {
-    protected lateinit var viewModelsSource: MainThreadViewModelsSource
 
+open class UiTest {
+    protected lateinit var viewModes: MainThreadViewModelsSource
+    protected lateinit var consumerSpy: ConsumerSpy
     protected lateinit var idling: CountingIdlingResource
 
     @get:Rule
@@ -28,10 +32,11 @@ open class UiTest {
             val instrumentation = InstrumentationRegistry.getInstrumentation()
             val app = instrumentation.targetContext.applicationContext as App
             val builder = DaggerTestAppComponent.builder()
-            viewModelsSource = MainThreadViewModelsSource()
-            val testComponent =
-                builder.testAppModule(TestAppModule(app, viewModelsSource = viewModelsSource))
-                    .build()
+            consumerSpy = ConsumerSpy()
+            viewModes = MainThreadViewModelsSource()
+            val testAppModule =
+                TestAppModule(app, viewModelsSource = viewModes, uiEventsConsumer = consumerSpy)
+            val testComponent = builder.testAppModule(testAppModule).build()
             app.component = testComponent
         }
     }
@@ -67,16 +72,33 @@ open class UiTest {
 
     protected fun successfullyGotData() {
         incrementIdlingResource()
-        viewModelsSource.viewModels.onNext(ComicsViewModel.SuccessGettingComics(getList()))
+        viewModes.viewModels.onNext(ComicsViewModel.SuccessGettingComics(getList()))
         decrementIdlingResource()
     }
 
     private fun getList(): List<ComicsBookViewModel> =
-        listOf(ComicsBookViewModel(title = TITLE, imageUrl = URL))
+        listOf(ComicsBookViewModel(id = ID, title = TITLE, imageUrl = URL))
 
     companion object {
         const val ERROR = "this_is_an_error"
         const val TITLE = "this_is_a_title"
         const val URL = "this_is_a_url"
+        const val ID = "123456"
+    }
+
+    class ConsumerSpy : Relay<MainUiEvent>() {
+        var event: MainUiEvent? = null
+
+        override fun accept(mainUiEvent: MainUiEvent) {
+            event = mainUiEvent
+        }
+
+        override fun hasObservers() =false
+
+        override fun subscribeActual(observer: Observer<in MainUiEvent>?) {
+
+        }
+
+
     }
 }

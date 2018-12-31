@@ -1,6 +1,5 @@
 package com.pppp.mvicoreapp.main.view.customview
 
-
 import android.content.Context
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.util.AttributeSet
@@ -21,7 +20,8 @@ class MarvelRecyclerView @JvmOverloads constructor(
 ) : RecyclerView(context, attrs, defStyle) {
     @Inject
     lateinit var loader: ImageLoader
-    private var time = System.currentTimeMillis()
+    @Inject
+    lateinit var timer: Timer
 
     private val marvelAdapter
         get() = adapter as MarvelAdapter
@@ -29,7 +29,7 @@ class MarvelRecyclerView @JvmOverloads constructor(
     var onItemClick: OnItemClick? by observable(null)
     { _: KProperty<*>, _: OnItemClick?, newValue: OnItemClick? ->
         marvelAdapter.onItemClick = { comicsBook, position ->
-            onItemClicked(newValue, comicsBook, position)
+            onItemClicked(comicsBook, position)
         }
     }
 
@@ -47,15 +47,11 @@ class MarvelRecyclerView @JvmOverloads constructor(
     }
 
     private fun onItemClicked(
-        newValue: OnItemClick?,
         comicsBook: ComicsBookViewModel,
         image: Int
     ) {
-        val currentTime = System.currentTimeMillis()
-        if ((currentTime - time) > DELAY_IN_MILLS) {
-            newValue?.invoke(comicsBook, image)
-        }
-        time = currentTime
+        timer.waitOrExecute(comicsBook, image, onItemClick)
+
     }
 
     fun getImageViewAtPostiion(position: Int) =
@@ -64,8 +60,29 @@ class MarvelRecyclerView @JvmOverloads constructor(
     companion object {
         private const val MANY_ROWS = 5
         private const val FEW_ROWS = 3
+
+    }
+}
+
+class TimerImpl : Timer {
+    private var time = System.currentTimeMillis()
+
+    override fun waitOrExecute(comicsBook: ComicsBookViewModel, image: Int, onItemClick: OnItemClick?) {
+        val currentTime = System.currentTimeMillis()
+        if ((currentTime - time) > DELAY_IN_MILLS) {
+            onItemClick?.invoke(comicsBook, image)
+        }
+        time = currentTime
+    }
+
+    companion object {
         private const val DELAY_IN_MILLS = 500
     }
+}
+
+interface Timer {
+
+    fun waitOrExecute(comicsBook: ComicsBookViewModel, image: Int, onItemClick: OnItemClick?)
 }
 
 typealias OnItemClick = (ComicsBookViewModel, Int) -> Unit

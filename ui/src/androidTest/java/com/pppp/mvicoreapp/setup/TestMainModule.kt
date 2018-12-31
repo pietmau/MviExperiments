@@ -1,10 +1,10 @@
 package com.pppp.mvicoreapp.setup
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.app.AppCompatActivity
-import com.jakewharton.rxrelay2.PublishRelay
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.main.di.MainModule
 import com.pppp.mvicoreapp.main.view.MainBinding
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
@@ -16,7 +16,6 @@ import com.pppp.usecases.repository.Repository
 import dagger.Module
 import dagger.Provides
 import io.reactivex.ObservableSource
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 
 @Module
@@ -30,7 +29,7 @@ class TestMainModule : MainModule {
 
     @Provides
     fun mainBinding(
-        uiEventsConsumer: Consumer<MainUiEvent>?,
+        uiEventsConsumer: Relay<MainUiEvent>?,
         viewModelsObservableSource: ObservableSource<ComicsViewModel>?,
         newsObservableSource: ObservableSource<MainFeature.News>?
     ): MainBinding =
@@ -39,9 +38,6 @@ class TestMainModule : MainModule {
             viewModelsObservableSource,
             newsObservableSource
         )
-
-    @Provides
-    override fun provideRelay(): PublishRelay<MainUiEvent> = PublishRelay.create()
 
     @Provides
     override fun provideActor(repository: Repository) =
