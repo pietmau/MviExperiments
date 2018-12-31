@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pppp.mvicoreapp.R
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 
-
 internal class MarvelAdapter(private val loader: ImageLoader) :
     RecyclerView.Adapter<ComicsHolder>() {
     private val comicBooks: MutableList<ComicsBookViewModel> = mutableListOf()

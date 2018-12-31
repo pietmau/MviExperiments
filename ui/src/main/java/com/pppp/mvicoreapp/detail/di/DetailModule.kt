@@ -2,11 +2,13 @@ package com.pppp.mvicoreapp.detail.di
 
 import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.detail.view.DetailBinding
 import com.pppp.mvicoreapp.detail.view.DetailBindingImpl
 import com.pppp.mvicoreapp.detail.view.uievent.DetailUiEvent
 import com.pppp.mvicoreapp.detail.view.uievent.DetailUiEventTransformerImpl
 import com.pppp.mvicoreapp.detail.view.viewmodel.DetailViewModelTransformerImpl
+import com.pppp.mvicoreapp.main.di.ActivityModule.Companion.COMIC_ID
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 import com.pppp.usecases.detail.Boot
 import com.pppp.usecases.detail.DetailActor
@@ -16,14 +18,18 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Named
 
 @Module
-class DetailModule(private val activity: AppCompatActivity, private val comicBookId: Int) {
+open class DetailModule {
 
     @Provides
-    fun provideBindings(
+    open fun provideBindings(
         repository: Repository,
-        mapper: ComicsBookMapper
+        mapper: ComicsBookMapper,
+        activity: AppCompatActivity,
+        @Named(COMIC_ID)
+        comicBookId: Int
     ): DetailBinding =
         DetailBindingImpl(
             activity,
@@ -40,5 +46,5 @@ class DetailModule(private val activity: AppCompatActivity, private val comicBoo
         )
 
     @Provides
-    fun provideRelay(): PublishRelay<DetailUiEvent> = PublishRelay.create()
+    fun provideRelay(): Relay<DetailUiEvent> = PublishRelay.create()
 }

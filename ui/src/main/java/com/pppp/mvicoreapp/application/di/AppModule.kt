@@ -3,8 +3,8 @@ package com.pppp.mvicoreapp.application.di
 import android.app.Application
 import com.pppp.mvicoreapp.main.view.customview.ImageLoader
 import com.pppp.mvicoreapp.main.view.customview.PicassoImageLoader
-import com.pppp.mvicoreapp.main.view.customview.Timer
-import com.pppp.mvicoreapp.main.view.customview.TimerImpl
+import com.pppp.mvicoreapp.main.view.customview.ClickBlocker
+import com.pppp.mvicoreapp.main.view.customview.ClickBlockerImpl
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapperImp
 import dagger.Module
@@ -21,5 +21,5 @@ class AppModule(private val application: Application) {
     fun provideImageLoader(): ImageLoader = PicassoImageLoader
 
     @Provides
-    fun provideTimer(): Timer = TimerImpl()
+    fun provideTimer(): ClickBlocker = ClickBlockerImpl()
 }

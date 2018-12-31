@@ -12,8 +12,6 @@ class DetailActor(
 ) :
     Actor<DetailFeature.State, DetailFeature.Wish, DetailFeature.Effect> {
 
-    //TODO error, etc...
-    // TODO use function composition
     override fun invoke(
         state: DetailFeature.State,
         wish: DetailFeature.Wish
@@ -22,6 +20,7 @@ class DetailActor(
             .toObservable()
             .subscribeOn(workerScheduler)
             .observeOn(mainThreadScheduler)
-            .map { DetailFeature.Effect.GotBookDetail(it) }
+            .map { DetailFeature.Effect.GotBookDetail(it) as DetailFeature.Effect }
+            .onErrorReturn { DetailFeature.Effect.Error(it) }
     }
 }

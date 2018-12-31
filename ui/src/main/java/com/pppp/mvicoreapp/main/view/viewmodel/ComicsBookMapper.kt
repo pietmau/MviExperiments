@@ -1,7 +1,6 @@
 package com.pppp.mvicoreapp.main.view.viewmodel
 
 import android.content.Context
-import com.pppp.lib.ComicsBook
 import com.pppp.mvicoreapp.R
 
 interface ComicsBookMapper {
@@ -12,7 +11,7 @@ class ComicsBookMapperImp(private val context: Context) :
     ComicsBookMapper {
 
     override fun map(item: com.pppp.lib.ComicsBook): ComicsBookViewModel {
-        val id = item.id?.toString() ?: ""
+        val id = item.id.toString()
         val title = item.title ?: ""
         val imageUrl = parseImageUrl(item)
         val description = item.description ?: ""

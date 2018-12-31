@@ -2,7 +2,7 @@ package com.pppp.network.model.client
 
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import com.marvel.marvel.main.model.Api
+import com.pppp.network.model.Api
 import com.pppp.network.model.ComicsClient
 import io.reactivex.Observable
 import okhttp3.Cache
@@ -14,7 +14,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-internal class RetrofitClient(cacheDir: File, PUBLIC_KEY: String, PRIVATE_KEY: String, MAIN_URL: String) :
+internal class RetrofitClient(
+    cacheDir: File,
+    publicKey: String,
+    privateKey: String,
+    mainUrl: String
+) :
     ComicsClient {
     private val api: Api
 
@@ -27,10 +32,10 @@ internal class RetrofitClient(cacheDir: File, PUBLIC_KEY: String, PRIVATE_KEY: S
             .connectTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(QueryInterceptor(PUBLIC_KEY, PRIVATE_KEY))
+            .addInterceptor(QueryInterceptor(publicKey, privateKey))
             .build()
         val retrofit = Retrofit.Builder()
-            .baseUrl(MAIN_URL)
+            .baseUrl(mainUrl)
             .client(client)
             .addConverterFactory(gsonConverterFactory())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build()
@@ -40,7 +45,7 @@ internal class RetrofitClient(cacheDir: File, PUBLIC_KEY: String, PRIVATE_KEY: S
     override fun getComics(): Observable<List<com.pppp.lib.ComicsBook>> = api.getComics()
 
     private fun gsonConverterFactory(): GsonConverterFactory {
-        val type = object : TypeToken<MutableList<com.pppp.lib.ComicsBook>>() {}.getType()
+        val type = object : TypeToken<MutableList<com.pppp.lib.ComicsBook>>() {}.type
         val gson =
             GsonBuilder().registerTypeAdapter(type, MarvelDeserializer()).create()
         return GsonConverterFactory.create(gson)
@@ -49,5 +54,4 @@ internal class RetrofitClient(cacheDir: File, PUBLIC_KEY: String, PRIVATE_KEY: S
     companion object {
         private const val TIMEOUT_IN_SECONDS = 60L
     }
-
 }

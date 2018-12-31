@@ -1,10 +1,11 @@
-package com.pppp.mvicoreapp.setup
+package com.pppp.mvicoreapp.setup.main
 
-import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.idling.CountingIdlingResource
-import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.jakewharton.rxrelay2.Relay
@@ -14,12 +15,14 @@ import com.pppp.mvicoreapp.main.view.MainActivity
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
+import com.pppp.mvicoreapp.setup.app.DaggerTestAppComponent
+import com.pppp.mvicoreapp.setup.app.TestAppModule
+import com.pppp.mvicoreapp.setup.detail.MockLoader
 import io.reactivex.Observer
-import org.hamcrest.Matchers
+import org.hamcrest.CoreMatchers.not
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
-
 
 open class UiTest {
     protected lateinit var viewModes: MainThreadViewModelsSource
@@ -34,8 +37,7 @@ open class UiTest {
             val builder = DaggerTestAppComponent.builder()
             consumerSpy = ConsumerSpy()
             viewModes = MainThreadViewModelsSource()
-            val testAppModule =
-                TestAppModule(app, viewModelsSource = viewModes, uiEventsConsumer = consumerSpy)
+            val testAppModule = TestAppModule(consumerSpy, viewModes, imageLoader = MockLoader)
             val testComponent = builder.testAppModule(testAppModule).build()
             app.component = testComponent
         }
@@ -65,8 +67,8 @@ open class UiTest {
     }
 
     protected fun initiallyProgressDoesNotShow() {
-        Espresso.onView(ViewMatchers.withId(R.id.progress))
-            .check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())))
+        onView(withId(R.id.progress))
+            .check(matches(not(isDisplayed())))
         incrementIdlingResource()
     }
 
@@ -93,12 +95,10 @@ open class UiTest {
             event = mainUiEvent
         }
 
-        override fun hasObservers() =false
+        override fun hasObservers() = false
 
         override fun subscribeActual(observer: Observer<in MainUiEvent>?) {
-
+            /* NoOp */
         }
-
-
     }
 }

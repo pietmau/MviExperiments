@@ -4,8 +4,10 @@ import com.pppp.usecases.main.MainFeature
 import com.pppp.usecases.main.MainFeature.Effect.ShowDetail
 import com.pppp.usecases.main.MainFeature.State.Starting
 import com.pppp.usecases.main.publishNews
+import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertNull
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsInstanceOf.instanceOf
-import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
@@ -27,7 +29,7 @@ class FunctionsTest {
     fun when_exception_then_emitsError() {
         val news = publishNews(
             MainFeature.Wish.GetComics,
-            ShowDetail("Error",0),
+            ShowDetail("Error", 0),
             Starting
         )
         assertThat(news, instanceOf(MainFeature.News.Error::class.java))

@@ -3,13 +3,12 @@ package com.pppp.usecases.detail
 import com.badoo.mvicore.element.Actor
 import com.badoo.mvicore.feature.ActorReducerFeature
 import com.pppp.lib.ComicsBook
-import com.pppp.usecases.detail.DetailFeature.*
 
 class DetailFeature(
     actor: Actor<State, Wish, Effect>,
     bootstrapper: Bootstrapper<Wish>
 ) :
-    ActorReducerFeature<Wish, Effect, State, News>(
+    ActorReducerFeature<DetailFeature.Wish, DetailFeature.Effect, DetailFeature.State, DetailFeature.News>(
         initialState = State.Starting,
         bootstrapper = bootstrapper,
         actor = actor,
@@ -19,7 +18,10 @@ class DetailFeature(
     sealed class State {
         object Starting : State()
         object GettingData : State()
-        data class GotData(val comicsBook: com.pppp.lib.ComicsBook) : State()
+        data class GotData(val comicsBook: ComicsBook) : State()
+        data class Error(val throwable: Throwable) : State() {
+            val errorMessage: String? = throwable.localizedMessage
+        }
     }
 
     sealed class Wish {
@@ -27,7 +29,8 @@ class DetailFeature(
     }
 
     sealed class Effect {
-        data class GotBookDetail(val comicsBook: com.pppp.lib.ComicsBook) : Effect()
+        data class GotBookDetail(val comicsBook: ComicsBook) : Effect()
+        data class Error(val exception: Throwable) : Effect()
     }
 
     sealed class News

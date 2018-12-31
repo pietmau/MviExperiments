@@ -28,5 +28,4 @@ internal class RepositoryImpl(
     }
 
     override fun getComicById(id: Int): Single<com.pppp.lib.ComicsBook> = db.getComicById(id)
-
 }

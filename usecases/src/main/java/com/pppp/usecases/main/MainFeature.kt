@@ -2,11 +2,9 @@ package com.pppp.usecases.main
 
 import com.badoo.mvicore.element.Actor
 import com.badoo.mvicore.feature.ActorReducerFeature
-import com.pppp.lib.ComicsBook
-import com.pppp.usecases.main.MainFeature.*
 
-class MainFeature(val actor: Actor<State, Wish, Effect>) :
-    ActorReducerFeature<Wish, Effect, State, News>(
+class MainFeature(actor: Actor<State, Wish, Effect>) :
+    ActorReducerFeature<MainFeature.Wish, MainFeature.Effect, MainFeature.State, MainFeature.News>(
         initialState = State.Starting,
         bootstrapper = ::bootstrap,
         actor = actor,
@@ -22,7 +20,7 @@ class MainFeature(val actor: Actor<State, Wish, Effect>) :
     }
 
     sealed class Wish {
-        data class ShowDetail(val id: String, val position: Int) : Wish()//TODO should be a Int
+        data class ShowDetail(val id: String, val position: Int) : Wish()
         object GetComics : Wish()
     }
 

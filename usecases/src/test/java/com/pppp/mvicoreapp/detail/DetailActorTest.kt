@@ -2,7 +2,6 @@ package com.pppp.mvicoreapp.detail
 
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import com.pppp.lib.ComicsBook
 import com.pppp.usecases.detail.DetailActor
 import com.pppp.usecases.detail.DetailFeature
 import com.pppp.usecases.repository.Repository
@@ -29,26 +28,22 @@ class DetailActorTest {
 
     @Before
     fun setUp() {
-        detailActor = DetailActor(
-            repository,
-            workerScheduler,
-            mainThreadScheduler
-        )
+        detailActor = DetailActor(repository, workerScheduler, mainThreadScheduler)
         whenever(repository.getComicById(anyInt())).thenReturn(Single.just(book))
     }
 
     @Test
     fun when_called_then_queriesTheDb() {
-        //WHEN
-        detailActor.invoke(starting, DetailFeature.Wish.GetBookDetail(ID))
+        // WHEN
+        detailActor(starting, DetailFeature.Wish.GetBookDetail(ID))
             .test()
-        //THEN
+        // THEN
         verify(repository).getComicById(ID)
     }
 
     @Test
     fun when_called_then_returnsTheRightEffect() {
-        detailActor.invoke(starting, DetailFeature.Wish.GetBookDetail(ID))
+        detailActor(starting, DetailFeature.Wish.GetBookDetail(ID))
             .test().assertValueAt(0) { effect ->
                 (effect as DetailFeature.Effect.GotBookDetail).comicsBook == book
             }

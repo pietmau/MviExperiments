@@ -2,13 +2,10 @@ package com.pppp.usecases.detail
 
 import io.reactivex.Observable
 
-typealias Reducer = (DetailFeature.State, DetailFeature.Effect) -> DetailFeature.State
-
 fun reduceState(state: DetailFeature.State, effect: DetailFeature.Effect): DetailFeature.State =
     when (effect) {
-        is DetailFeature.Effect.GotBookDetail -> DetailFeature.State.GotData(
-            effect.comicsBook
-        )
+        is DetailFeature.Effect.GotBookDetail -> DetailFeature.State.GotData(effect.comicsBook)
+        is DetailFeature.Effect.Error -> DetailFeature.State.Error(effect.exception)
     }
 
 typealias Bootstrapper<Action> = () -> Observable<Action>

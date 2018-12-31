@@ -21,8 +21,8 @@ class App : Application() {
 
         component = appComponentBuilder.build()
         if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
+            return
         }
-        LeakCanary.install(this);
+        LeakCanary.install(this)
     }
 }

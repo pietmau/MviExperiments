@@ -1,15 +1,12 @@
 package com.pppp.mvicoreapp.main.di
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.main.view.MainBinding
 import com.pppp.mvicoreapp.main.view.ProdMainBinding
-import com.pppp.mvicoreapp.main.view.customview.Timer
-import com.pppp.mvicoreapp.main.view.customview.TimerImpl
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEventTransformer
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
@@ -23,10 +20,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 @Module
-open class ProdMainModule() : MainModule {
+open class ProdMainModule {
 
     @Provides
-    override fun provideBindings(
+    fun provideBindings(
         feature: MainFeature,
         mapper: ComicsBookMapper,
         activity: AppCompatActivity
@@ -42,7 +39,7 @@ open class ProdMainModule() : MainModule {
     fun provideRelay(): Relay<MainUiEvent> = PublishRelay.create()
 
     @Provides
-    override fun provideActor(repository: Repository) =
+    fun provideActor(repository: Repository) =
         MainActor(
             repository,
             Schedulers.io(),
@@ -50,27 +47,13 @@ open class ProdMainModule() : MainModule {
         )
 
     @Provides
-    override fun provideFeature(
+    fun provideFeature(
         factory: ViewModelProvider.Factory,
         activity: AppCompatActivity
     ): MainFeature =
         ViewModelProviders.of(activity, factory).get(MviViewModel::class.java).mainFeature
 
     @Provides
-    override fun provideFactory(actor: MainActor): ViewModelProvider.Factory = Factory(actor)
-
-    class MviViewModel(mainActor: MainActor) : ViewModel() {
-        val mainFeature: MainFeature by lazy {
-            MainFeature(
-                mainActor
-            )
-        }
-    }
-
-    class Factory(private val mainActor: MainActor) : ViewModelProvider.Factory {
-
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MviViewModel(mainActor) as T
-        }
-    }
+    fun provideFactory(actor: MainActor): ViewModelProvider.Factory =
+        MviViewModel.Factory(actor)
 }

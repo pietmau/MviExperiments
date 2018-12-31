@@ -1,7 +1,5 @@
-package com.marvel.marvel.main.model
+package com.pppp.network.model
 
-
-import com.pppp.lib.ComicsBook
 import io.reactivex.Observable
 import retrofit2.http.GET
 

@@ -21,13 +21,12 @@ class MarvelRecyclerView @JvmOverloads constructor(
     @Inject
     lateinit var loader: ImageLoader
     @Inject
-    lateinit var timer: Timer
+    lateinit var clickBlocker: ClickBlocker
 
     private val marvelAdapter
         get() = adapter as MarvelAdapter
 
-    var onItemClick: OnItemClick? by observable(null)
-    { _: KProperty<*>, _: OnItemClick?, newValue: OnItemClick? ->
+    var onItemClick: OnItemClick? by observable(null) { _: KProperty<*>, _: OnItemClick?, _: OnItemClick? ->
         marvelAdapter.onItemClick = { comicsBook, position ->
             onItemClicked(comicsBook, position)
         }
@@ -46,12 +45,10 @@ class MarvelRecyclerView @JvmOverloads constructor(
         marvelAdapter.setItems(results)
     }
 
-    private fun onItemClicked(
-        comicsBook: ComicsBookViewModel,
-        image: Int
-    ) {
-        timer.waitOrExecute(comicsBook, image, onItemClick)
-
+    private fun onItemClicked(comicsBook: ComicsBookViewModel, position: Int) {
+        clickBlocker.executeIfAppropriate(this, position) {
+            onItemClick?.invoke(comicsBook, position)
+        }
     }
 
     fun getImageViewAtPostiion(position: Int) =
@@ -60,29 +57,7 @@ class MarvelRecyclerView @JvmOverloads constructor(
     companion object {
         private const val MANY_ROWS = 5
         private const val FEW_ROWS = 3
-
     }
-}
-
-class TimerImpl : Timer {
-    private var time = System.currentTimeMillis()
-
-    override fun waitOrExecute(comicsBook: ComicsBookViewModel, image: Int, onItemClick: OnItemClick?) {
-        val currentTime = System.currentTimeMillis()
-        if ((currentTime - time) > DELAY_IN_MILLS) {
-            onItemClick?.invoke(comicsBook, image)
-        }
-        time = currentTime
-    }
-
-    companion object {
-        private const val DELAY_IN_MILLS = 500
-    }
-}
-
-interface Timer {
-
-    fun waitOrExecute(comicsBook: ComicsBookViewModel, image: Int, onItemClick: OnItemClick?)
 }
 
 typealias OnItemClick = (ComicsBookViewModel, Int) -> Unit

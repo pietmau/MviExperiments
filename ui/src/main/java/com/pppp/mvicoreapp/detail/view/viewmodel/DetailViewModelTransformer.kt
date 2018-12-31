@@ -11,6 +11,7 @@ class DetailViewModelTransformerImpl(private val mapper: ComicsBookMapper) :
             DetailFeature.State.Starting -> DetailViewModel.Starting
             DetailFeature.State.GettingData -> DetailViewModel.GettingData
             is DetailFeature.State.GotData -> DetailViewModel.GotNewData(mapper.map(state.comicsBook))
+            is DetailFeature.State.Error -> DetailViewModel.Error(state.errorMessage)
         }
     }
 }

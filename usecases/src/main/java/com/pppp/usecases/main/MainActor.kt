@@ -31,5 +31,4 @@ class MainActor(
         .observeOn(mainThreadSheduler)
         .startWith(MainFeature.Effect.StartedGettingComics)
         .onErrorReturn { MainFeature.Effect.FailureRetrievingComics(it) }
-
 }

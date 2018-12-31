@@ -4,7 +4,11 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.pppp.database.poko.*
+import com.pppp.database.poko.DbComicsBook
+import com.pppp.database.poko.DbCreators
+import com.pppp.database.poko.DbItem
+import com.pppp.database.poko.DbPrice
+import com.pppp.database.poko.DbThumbnail
 
 @Dao
 internal abstract class ComicsDao {
@@ -19,22 +23,22 @@ internal abstract class ComicsDao {
             thumbnail = getThumbByIdInternal(id)
         }
 
-    @Query("SELECT * from dbthumbnail WHERE comic_id=:id")
+    @Query("SELECT * from dbthumbnail WHERE comics_id=:id")
     abstract fun getThumbByIdInternal(id: Int): DbThumbnail?
 
-    @Query("SELECT * from dbprice WHERE comic_id=:id")
+    @Query("SELECT * from dbprice WHERE comics_id=:id")
     abstract fun getPrices(id: Int): List<DbPrice>?
 
     private fun getCreators(id: Int) = DbCreators(getItems(id))
 
-    @Query("SELECT * from dbitem WHERE comic_id=:id")
+    @Query("SELECT * from dbitem WHERE comics_id=:id")
     abstract fun getItems(id: Int): List<DbItem>
 
     @Query("SELECT * from dbcomicsbook")
     abstract fun getAllBooksInternal(): List<DbComicsBook>
 
     fun getAllBooks(): List<com.pppp.lib.ComicsBook> =
-        getAllBooksInternal().filterNotNull().map { book ->
+        getAllBooksInternal().map { book ->
             book.apply {
                 prices = getPrices(this.id) ?: emptyList()
                 creators = getCreators(this.id)
@@ -88,5 +92,4 @@ internal abstract class ComicsDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertPrice(dbPrice: DbPrice)
-
 }

@@ -1,11 +1,10 @@
 package com.pppp.mvicoreapp.detail.view
 
-
 import androidx.appcompat.app.AppCompatActivity
 import com.badoo.mvicore.android.lifecycle.CreateDestroyBinderLifecycle
 import com.badoo.mvicore.binder.Binder
 import com.badoo.mvicore.binder.using
-import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.detail.view.uievent.DetailUiEvent
 import com.pppp.mvicoreapp.detail.view.uievent.DetailUiEventTransformer
 import com.pppp.mvicoreapp.detail.view.viewmodel.DetailViewModel
@@ -17,7 +16,7 @@ interface DetailBinding {
 
     fun bind(
         viewModels: Consumer<DetailViewModel>,
-        detailUiEvents: PublishRelay<DetailUiEvent>
+        detailUiEvents: Relay<DetailUiEvent>
     )
 }
 
@@ -36,7 +35,7 @@ class DetailBindingImpl(
 
     override fun bind(
         viewModels: Consumer<DetailViewModel>,
-        detailUiEvents: PublishRelay<DetailUiEvent>
+        detailUiEvents: Relay<DetailUiEvent>
     ) {
         binder.bind(feature to viewModels using viewModelTransformer)
         binder.bind(detailUiEvents to feature using uiEventFransformer)

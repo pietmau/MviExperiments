@@ -8,7 +8,6 @@ class DetailUiEventTransformerImpl : DetailUiEventTransformer {
             is DetailUiEvent.GetComicData -> DetailFeature.Wish.GetBookDetail(
                 eventDetail.id
             )
-            else -> TODO()
         }
     }
 }

@@ -5,11 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <ProgressBar
-        android:layout_width="@dimen/small_progress_size"
-        android:layout_height="@dimen/small_progress_size"
-        android:layout_centerInParent="true" />
-
     <com.pppp.mvicoreapp.main.view.customview.SquareImageView
         android:id="@+id/image"
         android:transitionName="@string/transition"

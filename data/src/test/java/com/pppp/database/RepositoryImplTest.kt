@@ -38,29 +38,29 @@ class RepositoryImplTest {
 
     @Test
     fun when_noNetwork_then_usesCache() {
-        //GIVEN
+        // GIVEN
         whenever(networkChecker.isNetworkAvailable()).thenReturn(Single.just(false))
-        //WHEN
+        // WHEN
         test()
-        //THEN
+        // THEN
         verify(db).getAllComics()
         verify(api, never()).getComics()
     }
 
     @Test
     fun when_network_then_usesApi() {
-        //WHEN
+        // WHEN
         test()
-        //THEN
+        // THEN
         verify(db, never()).getAllComics()
         verify(api).getComics()
     }
 
     @Test
     fun when_successful_then_savesResponse() {
-        //WHEN
+        // WHEN
         test()
-        //THEN
+        // THEN
         verify(db).saveComics(comics)
     }
 

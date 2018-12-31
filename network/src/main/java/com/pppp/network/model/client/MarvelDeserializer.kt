@@ -1,13 +1,17 @@
 package com.pppp.network.model.client
 
-import android.util.Log
-import com.google.gson.*
+import com.google.gson.Gson
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
+import com.google.gson.JsonSyntaxException
 import com.pppp.lib.ComicsBook
 import com.pppp.network.model.poko.Comics
 import com.pppp.network.model.poko.NetworkComicsBook
 import java.lang.reflect.Type
 
-internal class MarvelDeserializer : JsonDeserializer<List<com.pppp.lib.ComicsBook>> {
+internal class MarvelDeserializer(private val logger: Logger = AndroidLogger()) :
+    JsonDeserializer<List<ComicsBook>> {
     private var gson = Gson()
     private val TAG = MarvelDeserializer::class.simpleName
 
@@ -15,11 +19,11 @@ internal class MarvelDeserializer : JsonDeserializer<List<com.pppp.lib.ComicsBoo
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
-    ): List<com.pppp.lib.ComicsBook> {
+    ): List<ComicsBook> {
         return try {
             gson.fromJson(json, Comics::class.java).data?.results ?: emptyList<NetworkComicsBook>()
         } catch (ex: JsonSyntaxException) {
-            Log.e(TAG, ex.localizedMessage)
+            logger.e(TAG, ex.localizedMessage)
             emptyList<NetworkComicsBook>()
         }
     }

@@ -19,4 +19,5 @@ sealed class DetailViewModel {
         val imageUrl: String
             get() = result.imageUrl
     }
+    data class Error(val errorMessage: String?) : DetailViewModel()
 }

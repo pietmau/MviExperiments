@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import io.reactivex.Single
 
-
 internal class NetworkCheckerImpl(private val context: Context) : NetworkChecker {
 
     override fun isNetworkAvailable(): Single<Boolean> = Single.fromCallable { getNetworkState() }

@@ -29,4 +29,3 @@ fun publishNews(
         }
         else -> null
     }
-

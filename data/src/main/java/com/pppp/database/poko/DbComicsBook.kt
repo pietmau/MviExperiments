@@ -3,6 +3,7 @@ package com.pppp.database.poko
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.pppp.lib.ComicsBook
 
 @Entity
 internal data class DbComicsBook(
@@ -11,7 +12,7 @@ internal data class DbComicsBook(
     override val title: String?,
     override val description: String?,
     override val pageCount: Int
-    ) : com.pppp.lib.ComicsBook {
+) : ComicsBook {
     @Ignore
     override var prices: List<DbPrice> = emptyList()
     @Ignore

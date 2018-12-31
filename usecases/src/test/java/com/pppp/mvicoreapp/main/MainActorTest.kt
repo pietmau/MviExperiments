@@ -1,10 +1,8 @@
 package com.pppp.mvicoreapp.main
 
 import com.nhaarman.mockitokotlin2.whenever
-import com.pppp.lib.ComicsBook
 import com.pppp.usecases.main.MainActor
 import com.pppp.usecases.main.MainFeature
-import com.pppp.usecases.main.MainFeature.Effect.*
 import com.pppp.usecases.main.MainFeature.Wish.ShowDetail
 import com.pppp.usecases.repository.Repository
 import io.reactivex.Scheduler
@@ -35,40 +33,40 @@ class MainActorTest {
 
     @Test
     fun when_starts_then_emitsStarting() {
-        // WHEN
+        //  WHEN
         emit { emptyList() }
-        // THEN
+        //  THEN
         invokeActor().assertValueAt(0) { effect ->
-            effect is StartedGettingComics
+            effect is MainFeature.Effect.StartedGettingComics
         }
     }
 
     @Test
     fun when_getsResult_then_emitsRetrieved() {
-        // WHEN
+        //  WHEN
         emit { comics }
-        // THEN
+        //  THEN
         invokeActor().assertValueAt(1) { effect ->
-            (effect as ComicsRetrieved).comicsBooks == comics
+            (effect as MainFeature.Effect.ComicsRetrieved).comicsBooks == comics
         }
     }
 
     @Test
     fun when_error_then_emitsFailure() {
-        // WHEN
+        //  WHEN
         val exception = Exception(MESSAGE)
         emit { throw exception }
-        // THEN
+        //  THEN
         invokeActor().assertValueAt(1) { effect ->
-            (effect as FailureRetrievingComics).error == exception
+            (effect as MainFeature.Effect.FailureRetrievingComics).error == exception
         }
     }
 
     @Test
     fun when_ShowDetail_then_emitsShowDetail() {
-        // WHEN
+        //  WHEN
         val observable = actor.invoke(starting, ShowDetail(ID, 0))
-        // THEN
+        //  THEN
         observable.test().assertValueAt(0) { effect ->
             (effect as MainFeature.Effect.ShowDetail).id.equals(ID, true)
         }

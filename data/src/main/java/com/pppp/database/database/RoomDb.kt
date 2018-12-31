@@ -10,12 +10,7 @@ import com.pppp.database.poko.DbPrice
 import com.pppp.database.poko.DbThumbnail
 
 @Database(
-    entities = arrayOf(
-        DbComicsBook::class,
-        DbItem::class,
-        DbPrice::class,
-        DbThumbnail::class
-    ), version = 1
+    entities = [DbComicsBook::class, DbItem::class, DbPrice::class, DbThumbnail::class], version = 1
 )
 internal abstract class RoomDb : RoomDatabase() {
     abstract fun dao(): ComicsDao

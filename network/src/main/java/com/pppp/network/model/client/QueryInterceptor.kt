@@ -6,7 +6,7 @@ import okhttp3.Response
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
-internal class QueryInterceptor(private val PUBLIC_KEY: String, private val PRIVATE_KEY: String) :
+internal class QueryInterceptor(private val publicKey: String, private val privateKey: String) :
     Interceptor {
     private val TAG = QueryInterceptor::class.simpleName
 
@@ -18,7 +18,7 @@ internal class QueryInterceptor(private val PUBLIC_KEY: String, private val PRIV
         val url = originalHttpUrl.newBuilder()
             .addQueryParameter(LIMIT_KEY, LIMIT)
             .addQueryParameter(TIMESTAMP_KEY, timestamp)
-            .addQueryParameter(API_KEY, PUBLIC_KEY)
+            .addQueryParameter(API_KEY, publicKey)
             .addQueryParameter(HASH_KEY, createAsh)
             .addQueryParameter(DATE_DESCRIPTOR_KEY, DATE_DESCRIPTOR_VALUE)
             .build()
@@ -27,16 +27,16 @@ internal class QueryInterceptor(private val PUBLIC_KEY: String, private val PRIV
         return chain.proceed(request)
     }
 
-    private fun createAsh(timestamp: String) = md5(timestamp + PRIVATE_KEY + PUBLIC_KEY)
+    private fun createAsh(timestamp: String) = md5(timestamp + privateKey + publicKey)
 
     private fun md5(string: String): String {
         val md5 = "md5"
         try {
-            // Create md5 Hash
+            //  Create md5 Hash
             val digest = MessageDigest.getInstance(md5)
             digest.update(string.toByteArray())
             val messageDigest = digest.digest()
-            // Create Hex String
+            //  Create Hex String
             val hexString = StringBuilder()
             for (aMessageDigest in messageDigest) {
                 var hex = Integer.toHexString(0xFF and aMessageDigest.toInt())
@@ -45,7 +45,6 @@ internal class QueryInterceptor(private val PUBLIC_KEY: String, private val PRIV
                 hexString.append(hex)
             }
             return hexString.toString()
-
         } catch (e: NoSuchAlgorithmException) {
             Log.d(TAG, e.toString())
         }

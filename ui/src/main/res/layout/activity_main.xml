@@ -1,29 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:indeterminateOnly="true"
+        android:visibility="gone" />
 
-        <ProgressBar
-            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-            android:indeterminateOnly="true"
-            android:visibility="gone"
-            android:id="@+id/progress"
-            android:layout_alignParentTop="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <com.pppp.mvicoreapp.main.view.customview.MarvelRecyclerView
-            android:id="@+id/recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </com.pppp.mvicoreapp.main.view.customview.MarvelRecyclerView>
-    </RelativeLayout>
+    <com.pppp.mvicoreapp.main.view.customview.MarvelRecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.pppp.mvicoreapp.main.view.customview.MarvelRecyclerView>
 </RelativeLayout>

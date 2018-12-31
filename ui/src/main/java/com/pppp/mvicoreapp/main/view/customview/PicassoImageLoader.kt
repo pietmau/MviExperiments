@@ -11,7 +11,10 @@ object PicassoImageLoader : ImageLoader {
         url ?: return
         Picasso.get()
             .load(url)
-            .error(R.drawable.marvel_small)
+            .placeholder(R.drawable.marvel)
+            .error(R.drawable.crash_small)
+            .resize(400, 400)
+            .centerCrop()
             .into(view, object : Callback {
                 override fun onSuccess() {
                     success?.invoke()
@@ -26,5 +29,4 @@ object PicassoImageLoader : ImageLoader {
     override fun cancelTask(image: ImageView) {
         Picasso.get().cancelRequest(image)
     }
-
 }

@@ -2,7 +2,6 @@ package com.pppp.network.model.poko
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.pppp.lib.ComicsBook
 
 internal data class NetworkComicsBook(
     override val id: Int = 0,

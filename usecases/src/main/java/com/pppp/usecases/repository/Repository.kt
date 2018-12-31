@@ -1,6 +1,5 @@
 package com.pppp.usecases.repository
 
-import com.pppp.lib.ComicsBook
 import io.reactivex.Single
 
 interface Repository {

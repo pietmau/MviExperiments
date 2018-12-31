@@ -15,7 +15,7 @@ import java.io.File
 class RepositoryModule(private val context: Context) {
 
     @Provides
-    fun provideContext() = context.applicationContext
+    fun provideContext(): Context = context.applicationContext
 
     @Provides
     fun provideRepo(
@@ -26,7 +26,6 @@ class RepositoryModule(private val context: Context) {
 
     @Provides
     fun provideDb(): ComicsDatabase = RoomComicsDatabase(context)
-
 
     @Provides
     fun provideCacheDir(): File = context.cacheDir

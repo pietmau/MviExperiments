@@ -5,8 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.snackbar.Snackbar.LENGTH_LONG
 import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.R
 import com.pppp.mvicoreapp.application.Injector
@@ -20,7 +18,7 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
     @Inject
-    lateinit var mainBinding: MainBinding
+    lateinit var binding: MainBinding
     @Inject
     lateinit var uiEvents: Relay<MainUiEvent>
 
@@ -28,7 +26,7 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Injector.inject(this)
-        mainBinding.bind(this, uiEvents, Consumer<MainFeature.News> { news ->
+        binding.bind(this, uiEvents, Consumer { news ->
             when (news) {
                 is MainFeature.News.ShowDetail -> startDetailActivity(news)
             }
@@ -58,10 +56,10 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
 
     private fun renderError(viewModel: ComicsViewModel.Failure) {
         progress.visibility = View.GONE
-        Snackbar.make(activity_main, viewModel.message, LENGTH_LONG).show()
+        showError(viewModel.message)
     }
 
-    fun startDetailActivity(comicsViewModel: MainFeature.News.ShowDetail) {
+    private fun startDetailActivity(comicsViewModel: MainFeature.News.ShowDetail) {
         val intent = Intent(this@MainActivity, DetailActivity::class.java)
         intent.putExtra(DetailActivity.COMICS_ID_EXTRA, comicsViewModel.id)
         val imageView = recycler.getImageViewAtPostiion(comicsViewModel.position)
@@ -70,5 +68,4 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
         )
         startActivity(intent, options.toBundle())
     }
-
 }
