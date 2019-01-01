@@ -1,16 +1,17 @@
 package com.pppp.mvicoreapp.main.view.viewmodel
 
 import android.content.Context
+import com.pppp.lib.ComicsBook
 import com.pppp.mvicoreapp.R
 
 interface ComicsBookMapper {
-    fun map(item: com.pppp.lib.ComicsBook): ComicsBookViewModel
+    fun map(item: ComicsBook): ComicsBookViewModel
 }
 
 class ComicsBookMapperImp(private val context: Context) :
     ComicsBookMapper {
 
-    override fun map(item: com.pppp.lib.ComicsBook): ComicsBookViewModel {
+    override fun map(item: ComicsBook): ComicsBookViewModel {
         val id = item.id.toString()
         val title = item.title ?: ""
         val imageUrl = parseImageUrl(item)
@@ -34,21 +35,15 @@ class ComicsBookMapperImp(private val context: Context) :
         )
     }
 
-    private fun getAuthors(item: com.pppp.lib.ComicsBook): String {
-        val authorList = parseAuthors(item)
-        val stringBuilder = StringBuilder()
-        authorList.forEach { stringBuilder.append(it).append("\n") }
-        return stringBuilder.toString()
-    }
+    private fun getAuthors(item: ComicsBook) = parseAuthors(item).joinToString(separator = "\n")
 
-    private fun parseAuthors(comicsBook: com.pppp.lib.ComicsBook) =
-        comicsBook.creators?.items?.mapNotNull { it.name } ?: emptyList()
+    private fun parseAuthors(comicsBook: ComicsBook) = comicsBook.creators?.items?.mapNotNull { it.name } ?: emptyList()
 
-    private fun parseImageUrl(item: com.pppp.lib.ComicsBook): String {
+    private fun parseImageUrl(item: ComicsBook): String {
         val thumbnail = item.thumbnail
         thumbnail ?: return ""
         return thumbnail.path + "." + thumbnail.extension
     }
 
-    private fun parsePrice(item: com.pppp.lib.ComicsBook) = item.prices?.firstOrNull()?.price ?: "0.0"
+    private fun parsePrice(item: ComicsBook) = item.prices?.firstOrNull()?.price ?: "0.0"
 }

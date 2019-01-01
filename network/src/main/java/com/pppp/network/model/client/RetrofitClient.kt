@@ -2,6 +2,7 @@ package com.pppp.network.model.client
 
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import com.pppp.lib.ComicsBook
 import com.pppp.network.model.Api
 import com.pppp.network.model.ComicsClient
 import io.reactivex.Observable
@@ -42,10 +43,10 @@ internal class RetrofitClient(
         api = retrofit.create(Api::class.java)
     }
 
-    override fun getComics(): Observable<List<com.pppp.lib.ComicsBook>> = api.getComics()
+    override fun getComics(): Observable<List<ComicsBook>> = api.getComics()
 
     private fun gsonConverterFactory(): GsonConverterFactory {
-        val type = object : TypeToken<MutableList<com.pppp.lib.ComicsBook>>() {}.type
+        val type = object : TypeToken<MutableList<ComicsBook>>() {}.type
         val gson =
             GsonBuilder().registerTypeAdapter(type, MarvelDeserializer()).create()
         return GsonConverterFactory.create(gson)

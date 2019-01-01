@@ -1,6 +1,7 @@
 package com.pppp.usecases.main
 
 import com.nhaarman.mockitokotlin2.whenever
+import com.pppp.lib.ComicsBook
 import com.pppp.usecases.main.MainFeature.Wish.ShowDetail
 import com.pppp.usecases.repository.Repository
 import io.reactivex.Scheduler
@@ -20,8 +21,8 @@ class MainActorTest {
     private val mainThreadSheduler: Scheduler = Schedulers.trampoline()
     private lateinit var actor: MainActor
     @Mock
-    lateinit var comicsBook: com.pppp.lib.ComicsBook
-    lateinit var comics: List<com.pppp.lib.ComicsBook>
+    lateinit var comicsBook: ComicsBook
+    lateinit var comics: List<ComicsBook>
 
     @Before
     fun setUp() {
@@ -74,7 +75,7 @@ class MainActorTest {
 
     private fun invokeActor() = actor.invoke(starting, getComics).test()
 
-    private fun emit(function: () -> List<com.pppp.lib.ComicsBook>) {
+    private fun emit(function: () -> List<ComicsBook>) {
         val single = Single.fromCallable(function)
         whenever(repository.getComics()).thenReturn(single)
     }

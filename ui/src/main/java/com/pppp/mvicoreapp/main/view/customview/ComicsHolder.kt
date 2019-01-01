@@ -5,10 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import kotlinx.android.synthetic.main.comics_item.view.*
 
-class ComicsHolder(
-    itemView: View,
-    private val imageLoader: ImageLoader
-) : RecyclerView.ViewHolder(itemView) {
+class ComicsHolder(itemView: View, private val imageLoader: ImageLoader) :
+    RecyclerView.ViewHolder(itemView) {
 
     fun bind(model: ComicsBookViewModel, onItemClick: OnItemClick?) {
         imageLoader.loadImage(itemView.image, model.imageUrl, {
