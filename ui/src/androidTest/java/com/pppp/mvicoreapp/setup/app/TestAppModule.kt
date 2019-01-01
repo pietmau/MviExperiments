@@ -16,7 +16,7 @@ import com.pppp.mvicoreapp.setup.detail.DetailSource
 import com.pppp.mvicoreapp.setup.main.MainThreadViewModelsSource
 import com.pppp.mvicoreapp.setup.main.NewsSource
 import com.pppp.mvicoreapp.setup.main.UiEventsConsumer
-import com.pppp.usecases.main.MainFeature
+import com.pppp.features.main.MainFeature
 import dagger.Module
 import dagger.Provides
 import io.reactivex.ObservableSource

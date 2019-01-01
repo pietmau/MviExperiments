@@ -1,7 +1,7 @@
-package com.pppp.usecases.main
+package com.pppp.features.main
 
 import com.badoo.mvicore.element.Actor
-import com.pppp.usecases.repository.Repository
+import com.pppp.features.repository.Repository
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 

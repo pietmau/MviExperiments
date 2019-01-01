@@ -1,4 +1,4 @@
-package com.pppp.usecases.detail
+package com.pppp.features.detail
 
 import io.reactivex.Observable
 

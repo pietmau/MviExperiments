@@ -10,10 +10,10 @@ import com.pppp.mvicoreapp.detail.view.uievent.DetailUiEventTransformerImpl
 import com.pppp.mvicoreapp.detail.view.viewmodel.DetailViewModelTransformerImpl
 import com.pppp.mvicoreapp.main.di.ActivityModule.Companion.COMIC_ID
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
-import com.pppp.usecases.detail.Boot
-import com.pppp.usecases.detail.DetailActor
-import com.pppp.usecases.detail.DetailFeature
-import com.pppp.usecases.repository.Repository
+import com.pppp.features.detail.Boot
+import com.pppp.features.detail.DetailActor
+import com.pppp.features.detail.DetailFeature
+import com.pppp.features.repository.Repository
 import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -1,6 +1,6 @@
 package com.pppp.database
 
-import com.pppp.usecases.repository.Repository
+import com.pppp.features.repository.Repository
 import dagger.Component
 
 @Component(modules = [RepositoryModule::class])

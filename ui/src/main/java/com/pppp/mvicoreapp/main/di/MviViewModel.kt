@@ -2,8 +2,8 @@ package com.pppp.mvicoreapp.main.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.pppp.usecases.main.MainActor
-import com.pppp.usecases.main.MainFeature
+import com.pppp.features.main.MainActor
+import com.pppp.features.main.MainFeature
 
 class MviViewModel(mainActor: MainActor) : ViewModel() {
     val mainFeature: MainFeature by lazy {

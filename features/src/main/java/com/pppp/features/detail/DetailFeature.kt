@@ -1,4 +1,4 @@
-package com.pppp.usecases.detail
+package com.pppp.features.detail
 
 import com.badoo.mvicore.element.Actor
 import com.badoo.mvicore.feature.ActorReducerFeature

@@ -1,7 +1,7 @@
 package com.pppp.mvicoreapp.detail.view.viewmodel
 
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
-import com.pppp.usecases.detail.DetailFeature
+import com.pppp.features.detail.DetailFeature
 
 class DetailViewModelTransformerImpl(private val mapper: ComicsBookMapper) :
     DetailViewModelTransformer {

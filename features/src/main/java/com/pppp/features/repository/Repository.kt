@@ -1,4 +1,4 @@
-package com.pppp.usecases.repository
+package com.pppp.features.repository
 
 import com.pppp.lib.ComicsBook
 import io.reactivex.Single

@@ -37,7 +37,7 @@ android {
 
 dependencies {
     implementation project(path: ':network')
-    implementation project(path: ':usecases')
+    implementation project(path: ':features')
 
     def room_version = '2.0.0'
 

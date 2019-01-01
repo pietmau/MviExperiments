@@ -1,9 +1,9 @@
-package com.pppp.usecases.main
+package com.pppp.features.main
 
 import com.nhaarman.mockitokotlin2.whenever
 import com.pppp.lib.ComicsBook
-import com.pppp.usecases.main.MainFeature.Wish.ShowDetail
-import com.pppp.usecases.repository.Repository
+import com.pppp.features.main.MainFeature.Wish.ShowDetail
+import com.pppp.features.repository.Repository
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers

@@ -9,7 +9,7 @@ import com.pppp.mvicoreapp.detail.view.uievent.DetailUiEvent
 import com.pppp.mvicoreapp.detail.view.uievent.DetailUiEventTransformer
 import com.pppp.mvicoreapp.detail.view.viewmodel.DetailViewModel
 import com.pppp.mvicoreapp.detail.view.viewmodel.DetailViewModelTransformer
-import com.pppp.usecases.detail.DetailFeature
+import com.pppp.features.detail.DetailFeature
 import io.reactivex.functions.Consumer
 
 interface DetailBinding {

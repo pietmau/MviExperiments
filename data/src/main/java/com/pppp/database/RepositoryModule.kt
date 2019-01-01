@@ -7,7 +7,7 @@ import com.pppp.database.room.RoomComicsDatabase
 import com.pppp.network.model.ComicsClient
 import com.pppp.network.model.NetworkModule
 import com.pppp.network.model.networkchecker.NetworkChecker
-import com.pppp.usecases.repository.Repository
+import com.pppp.features.repository.Repository
 import dagger.Module
 import dagger.Provides
 import java.io.File

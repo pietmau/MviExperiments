@@ -5,7 +5,7 @@ import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.main.view.MainBinding
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
-import com.pppp.usecases.main.MainFeature
+import com.pppp.features.main.MainFeature
 import io.reactivex.ObservableSource
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers

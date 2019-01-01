@@ -11,9 +11,9 @@ import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEventTransformer
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 import com.pppp.mvicoreapp.main.view.viewmodel.ViewModelTransformer
-import com.pppp.usecases.main.MainActor
-import com.pppp.usecases.main.MainFeature
-import com.pppp.usecases.repository.Repository
+import com.pppp.features.main.MainActor
+import com.pppp.features.main.MainFeature
+import com.pppp.features.repository.Repository
 import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers

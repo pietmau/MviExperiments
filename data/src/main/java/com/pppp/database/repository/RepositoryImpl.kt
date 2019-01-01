@@ -4,7 +4,7 @@ import com.pppp.database.ComicsDatabase
 import com.pppp.lib.ComicsBook
 import com.pppp.network.model.ComicsClient
 import com.pppp.network.model.networkchecker.NetworkChecker
-import com.pppp.usecases.repository.Repository
+import com.pppp.features.repository.Repository
 import io.reactivex.Single
 
 internal class RepositoryImpl(

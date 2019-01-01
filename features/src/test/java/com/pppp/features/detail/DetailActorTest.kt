@@ -1,9 +1,9 @@
-package com.pppp.usecases.detail
+package com.pppp.features.detail
 
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.pppp.lib.ComicsBook
-import com.pppp.usecases.repository.Repository
+import com.pppp.features.repository.Repository
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers

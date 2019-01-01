@@ -6,7 +6,7 @@ import com.pppp.mvicoreapp.main.di.MainComponent
 import com.pppp.mvicoreapp.main.view.MainBinding
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
-import com.pppp.usecases.main.MainFeature
+import com.pppp.features.main.MainFeature
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent

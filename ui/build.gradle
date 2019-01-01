@@ -84,6 +84,6 @@ dependencies {
         exclude module: 'recyclerview'
     }
 
-    implementation project(path: ':usecases')
+    implementation project(path: ':features')
     implementation project(path: ':data')
 }

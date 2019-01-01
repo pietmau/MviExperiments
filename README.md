@@ -26,7 +26,7 @@ Other libraries follow very similar approaches and provide equivalent capabiliti
 ## Tests
 
 ### Unit tests
-Unit tests can be found in the [**usecases**](usecases/src/test/java/com/pppp/usecases/) and [**data**]( data/src/test/java/com/pppp/database/) modules.
+Unit tests can be found in the [**features**](features/src/test/java/com/pppp/features/) and [**data**]( data/src/test/java/com/pppp/database/) modules.
 
 ### Espresso tests
 Espresso tests can be found in the [**ui**](ui/src/androidTest/java/com/pppp/mvicoreapp/) module.

@@ -1,6 +1,6 @@
 package com.pppp.mvicoreapp.detail.view.uievent
 
-import com.pppp.usecases.detail.DetailFeature
+import com.pppp.features.detail.DetailFeature
 
 class DetailUiEventTransformerImpl : DetailUiEventTransformer {
     override fun invoke(eventDetail: DetailUiEvent): DetailFeature.Wish {

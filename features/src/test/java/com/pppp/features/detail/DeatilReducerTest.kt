@@ -1,4 +1,4 @@
-package com.pppp.usecases.detail
+package com.pppp.features.detail
 
 import com.nhaarman.mockitokotlin2.whenever
 import com.pppp.lib.ComicsBook

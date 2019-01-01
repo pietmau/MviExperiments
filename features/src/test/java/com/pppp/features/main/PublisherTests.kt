@@ -1,7 +1,7 @@
-package com.pppp.usecases.main
+package com.pppp.features.main
 
-import com.pppp.usecases.main.MainFeature.Effect.ShowDetail
-import com.pppp.usecases.main.MainFeature.State.Starting
+import com.pppp.features.main.MainFeature.Effect.ShowDetail
+import com.pppp.features.main.MainFeature.State.Starting
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNull
 import org.hamcrest.MatcherAssert.assertThat

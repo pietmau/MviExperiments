@@ -1,1 +1,1 @@
-include ':network', ':ui', ':data', ':usecases', ':entities'
+include ':network', ':ui', ':data', ':features', ':entities'

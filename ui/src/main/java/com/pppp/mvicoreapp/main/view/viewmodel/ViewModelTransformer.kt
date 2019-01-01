@@ -1,6 +1,6 @@
 package com.pppp.mvicoreapp.main.view.viewmodel
 
-import com.pppp.usecases.main.MainFeature
+import com.pppp.features.main.MainFeature
 
 class ViewModelTransformer(private val mapper: ComicsBookMapper) :
         (MainFeature.State) -> ComicsViewModel {
