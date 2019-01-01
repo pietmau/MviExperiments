@@ -32,5 +32,7 @@ Unit tests can be found in the [**usecases**](usecases/src/test/java/com/pppp/us
 Espresso tests can be found in the [**ui**](ui/src/androidTest/java/com/pppp/mvicoreapp/) module.
 
 ## Persistence and offline mode
-Uses Room (Room does not support relationships).
+Via Room.
 
+## In case Marvel is down
+the *mock* build type points to a mock AWS server.

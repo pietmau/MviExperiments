@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.pppp.lib.Price
 
 @Entity(
     foreignKeys = [ForeignKey(
@@ -18,4 +19,4 @@ internal data class DbPrice(
     val id: Int?,
     override val price: String?,
     val comics_id: Int?
-) : com.pppp.lib.Price
+) : Price

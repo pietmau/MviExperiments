@@ -37,6 +37,14 @@ android {
             buildConfigField 'String', "MAIN_URL", MAIN_URL
             resValue 'string', "MAIN_URL", MAIN_URL
         }
+        mock {
+            buildConfigField 'String', "PUBLIC_KEY", PUBLIC_KEY
+            resValue 'string', "PUBLIC_KEY", PUBLIC_KEY
+            buildConfigField 'String', "PRIVATE_KEY", PRIVATE_KEY
+            resValue 'string', "PRIVATE_KEY", PRIVATE_KEY
+            buildConfigField 'String', "MAIN_URL", MOCK_URL
+            resValue 'string', "MAIN_URL", MOCK_URL
+        }
     }
 
     androidExtensions {

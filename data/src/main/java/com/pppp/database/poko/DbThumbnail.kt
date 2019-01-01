@@ -5,6 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.pppp.lib.Thumbnail
 
 @Entity(
     foreignKeys = [ForeignKey(
@@ -20,4 +21,4 @@ internal data class DbThumbnail(
     override val path: String?,
     override val extension: String?,
     val comics_id: Int?
-) : com.pppp.lib.Thumbnail
+) : Thumbnail

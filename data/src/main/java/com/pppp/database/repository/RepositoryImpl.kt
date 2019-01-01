@@ -1,6 +1,7 @@
 package com.pppp.database.repository
 
 import com.pppp.database.ComicsDatabase
+import com.pppp.lib.ComicsBook
 import com.pppp.network.model.ComicsClient
 import com.pppp.network.model.networkchecker.NetworkChecker
 import com.pppp.usecases.repository.Repository
@@ -13,7 +14,7 @@ internal class RepositoryImpl(
 ) :
     Repository {
 
-    override fun getComics(): Single<List<com.pppp.lib.ComicsBook>> {
+    override fun getComics(): Single<List<ComicsBook>> {
         return networkChecker.isNetworkAvailable()
             .toObservable()
             .flatMap { networkAvailable ->
@@ -27,5 +28,5 @@ internal class RepositoryImpl(
             }.toList()
     }
 
-    override fun getComicById(id: Int): Single<com.pppp.lib.ComicsBook> = db.getComicById(id)
+    override fun getComicById(id: Int): Single<ComicsBook> = db.getComicById(id)
 }

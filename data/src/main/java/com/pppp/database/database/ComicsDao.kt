@@ -9,6 +9,11 @@ import com.pppp.database.poko.DbCreators
 import com.pppp.database.poko.DbItem
 import com.pppp.database.poko.DbPrice
 import com.pppp.database.poko.DbThumbnail
+import com.pppp.lib.ComicsBook
+import com.pppp.lib.Creators
+import com.pppp.lib.Price
+import com.pppp.lib.Thumbnail
+
 
 @Dao
 internal abstract class ComicsDao {
@@ -16,7 +21,8 @@ internal abstract class ComicsDao {
     @Query("SELECT * from dbcomicsbook WHERE id=:id")
     protected abstract fun getBookByIdInternal(id: Int): DbComicsBook?
 
-    fun getBookById(id: Int): com.pppp.lib.ComicsBook? =
+    /** Unfortunately Room does not support relationships. */
+    fun getBookById(id: Int): ComicsBook? =
         getBookByIdInternal(id)?.apply {
             prices = getPrices(id) ?: emptyList()
             creators = getCreators(id)
@@ -37,7 +43,8 @@ internal abstract class ComicsDao {
     @Query("SELECT * from dbcomicsbook")
     abstract fun getAllBooksInternal(): List<DbComicsBook>
 
-    fun getAllBooks(): List<com.pppp.lib.ComicsBook> =
+    /** no relationships.... */
+    fun getAllBooks(): List<ComicsBook> =
         getAllBooksInternal().map { book ->
             book.apply {
                 prices = getPrices(this.id) ?: emptyList()
@@ -46,11 +53,12 @@ internal abstract class ComicsDao {
             }
         }
 
-    fun insertAll(books: List<com.pppp.lib.ComicsBook>) {
+    fun insertAll(books: List<ComicsBook>) {
         books.forEach { insertBookInternal(it) }
     }
 
-    private fun insertBookInternal(comicsBook: com.pppp.lib.ComicsBook) {
+    /** no relationships.... */
+    private fun insertBookInternal(comicsBook: ComicsBook) {
         val success = insertBook(
             DbComicsBook(
                 comicsBook.id,
@@ -69,7 +77,7 @@ internal abstract class ComicsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertBook(book: DbComicsBook): Long?
 
-    private fun insertThumbInternal(thumbnail: com.pppp.lib.Thumbnail?, id: Int) {
+    private fun insertThumbInternal(thumbnail: Thumbnail?, id: Int) {
         val thumb = DbThumbnail(null, thumbnail?.path, thumbnail?.extension, id)
         insertThumb(thumb)
     }
@@ -77,14 +85,14 @@ internal abstract class ComicsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertThumb(thumb: DbThumbnail)
 
-    private fun insertCreatorsInternal(creators: com.pppp.lib.Creators?, comicId: Int) {
+    private fun insertCreatorsInternal(creators: Creators?, comicId: Int) {
         creators?.items?.forEach { insertItem(DbItem(null, it.name, comicId)) }
     }
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertItem(dbItem: DbItem)
 
-    private fun insertPricesInternal(prices: List<com.pppp.lib.Price>?, comicId: Int) {
+    private fun insertPricesInternal(prices: List<Price>?, comicId: Int) {
         prices?.forEach { price ->
             insertPrice(DbPrice(null, price.price, comicId))
         }
