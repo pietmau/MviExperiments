@@ -8,9 +8,8 @@ fun reduce(
 ) =
     when (effect) {
         MainFeature.Effect.StartedGettingComics -> MainFeature.State.GettingComics
-        is MainFeature.Effect.ComicsRetrieved -> MainFeature.State.SuccessGettingComics(
-            effect.comicsBooks
-        )
+        is MainFeature.Effect.ComicsRetrieved -> MainFeature.State.SuccessGettingComics(effect.comicsBooks)
+        is MainFeature.Effect.FailureRetrievingComics -> MainFeature.State.FailureGettingComics(effect.error)
         else -> state
     }
 

@@ -1,6 +1,7 @@
 package com.pppp.database
 
 import android.content.Context
+import com.pppp.database.database.RoomDb
 import com.pppp.database.repository.RepositoryImpl
 import com.pppp.database.room.RoomComicsDatabase
 import com.pppp.network.model.ComicsClient
@@ -25,7 +26,7 @@ class RepositoryModule(private val context: Context) {
     ): Repository = RepositoryImpl(db, api, networkChecker)
 
     @Provides
-    fun provideDb(): ComicsDatabase = RoomComicsDatabase(context)
+    fun provideDb(): ComicsDatabase = RoomComicsDatabase(RoomDb.db(context).dao())
 
     @Provides
     fun provideCacheDir(): File = context.cacheDir

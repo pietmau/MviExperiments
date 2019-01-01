@@ -1,8 +1,6 @@
-package com.pppp.mvicoreapp.main
+package com.pppp.usecases.main
 
 import com.nhaarman.mockitokotlin2.whenever
-import com.pppp.usecases.main.MainActor
-import com.pppp.usecases.main.MainFeature
 import com.pppp.usecases.main.MainFeature.Wish.ShowDetail
 import com.pppp.usecases.repository.Repository
 import io.reactivex.Scheduler
@@ -65,7 +63,9 @@ class MainActorTest {
     @Test
     fun when_ShowDetail_then_emitsShowDetail() {
         //  WHEN
-        val observable = actor.invoke(starting, ShowDetail(ID, 0))
+        val observable = actor.invoke(
+            starting, ShowDetail(
+                ID, 0))
         //  THEN
         observable.test().assertValueAt(0) { effect ->
             (effect as MainFeature.Effect.ShowDetail).id.equals(ID, true)

@@ -64,7 +64,19 @@ class RepositoryImplTest {
         verify(db).saveComics(comics)
     }
 
+    @Test
+    fun when_getComicsById_then_queriesDb() {
+        // WHEN
+        repo.getComicById(ID)
+        // THEN
+        verify(db).getComicById(ID)
+    }
+
     private fun test() {
         repo.getComics().test()
+    }
+
+    companion object {
+        private const val ID = 123456
     }
 }

@@ -1,9 +1,7 @@
-package com.pppp.mvicoreapp.detail
+package com.pppp.usecases.detail
 
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import com.pppp.usecases.detail.DetailActor
-import com.pppp.usecases.detail.DetailFeature
 import com.pppp.usecases.repository.Repository
 import io.reactivex.Scheduler
 import io.reactivex.Single
@@ -22,7 +20,8 @@ class DetailActorTest {
     private val workerScheduler: Scheduler = Schedulers.trampoline()
     private val mainThreadScheduler: Scheduler = Schedulers.trampoline()
     lateinit var detailActor: DetailActor
-    private val starting = DetailFeature.State.Starting
+    @Mock
+    lateinit var starting: DetailFeature.State
     @Mock
     lateinit var book: com.pppp.lib.ComicsBook
 
