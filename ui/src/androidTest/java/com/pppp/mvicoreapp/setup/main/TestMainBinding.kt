@@ -2,10 +2,10 @@ package com.pppp.mvicoreapp.setup.main
 
 import com.badoo.mvicore.binder.Binder
 import com.jakewharton.rxrelay2.Relay
+import com.pppp.features.main.MainFeature
 import com.pppp.mvicoreapp.main.view.MainBinding
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
-import com.pppp.features.main.MainFeature
 import io.reactivex.ObservableSource
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,11 +17,8 @@ class TestMainBinding(
     private val viewModelsSource: ObservableSource<ComicsViewModel>? = null,
     private val newsSource: ObservableSource<MainFeature.News>? = null
 ) : MainBinding {
-    private val binder: Binder
+    private val binder = Binder()
 
-    init {
-        binder = Binder()
-    }
 
     override fun bind(
         viewModels: Consumer<ComicsViewModel>,

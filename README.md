@@ -19,7 +19,7 @@ Other libraries follow very similar approaches and provide equivalent capabiliti
    * Room
    * ViewModel
 * Picasso
-* Leak Canary
+* LeakCanary
 * Mokito/Mokito-Kotlin
 * Espresso
 
@@ -34,5 +34,6 @@ Espresso tests can be found in the [**ui**](ui/src/androidTest/java/com/pppp/mvi
 ## Persistence and offline mode
 Via Room.
 
-## In case Marvel is down
-the *mock* build type points to a mock AWS server.
+## Build types
+   * The *mock* type points to a mock AWS backend.
+   * LeakCanary is disabled in *leakCanaryOff*.

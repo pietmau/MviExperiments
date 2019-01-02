@@ -24,15 +24,10 @@ android {
             initWith debug
             matchingFallbacks = ['debug']
         }
-    }
 
-    flavorDimensions "leakcanary"
-    productFlavors {
-        leakCanaryOn {
-            dimension "leakcanary"
-        }
         leakCanaryOff {
-            dimension "leakcanary"
+            initWith debug
+            matchingFallbacks = ['debug']
         }
     }
 
@@ -65,8 +60,10 @@ dependencies {
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.palette:palette:1.0.0'
-    leakCanaryOnImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.2'
+    mockImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
     leakCanaryOffImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.2'
 
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
