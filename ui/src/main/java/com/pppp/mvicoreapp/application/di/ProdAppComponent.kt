@@ -7,7 +7,8 @@ import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 
 @Component(
-    modules = [AppModule::class, MainActivityModule::class, AndroidSupportInjectionModule::class, DetailActivityModule::class],
+    modules = [AppModule::class, MainActivityModule::class, AndroidSupportInjectionModule::class,
+        DetailActivityModule::class],
     dependencies = [RepositoryComponent::class]
 )
 abstract class ProdAppComponent : AppComponent

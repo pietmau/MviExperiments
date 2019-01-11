@@ -40,6 +40,7 @@ open class UiTest {
             val testAppModule = TestAppModule(consumerSpy, viewModes, imageLoader = MockLoader)
             val testComponent = builder.testAppModule(testAppModule).build()
             app.component = testComponent
+            app.component.inject(app)
         }
     }
 

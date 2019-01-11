@@ -37,6 +37,7 @@ open class DetailActivityTest {
             val appModule = TestAppModule(detailModelSource = modelSource, imageLoader = MockLoader)
             val component = builder.testAppModule(appModule).build()
             app.component = component
+            app.component.inject(app)
         }
     }
 
