@@ -1,19 +1,19 @@
 package com.pppp.mvicoreapp.main.di
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
+import com.pppp.features.main.MainActor
+import com.pppp.features.main.MainFeature
+import com.pppp.features.repository.Repository
+import com.pppp.mvicoreapp.main.view.MainActivity
 import com.pppp.mvicoreapp.main.view.MainBinding
 import com.pppp.mvicoreapp.main.view.ProdMainBinding
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEventTransformer
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 import com.pppp.mvicoreapp.main.view.viewmodel.ViewModelTransformer
-import com.pppp.features.main.MainActor
-import com.pppp.features.main.MainFeature
-import com.pppp.features.repository.Repository
 import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,7 +26,7 @@ open class ProdMainModule {
     fun provideBindings(
         feature: MainFeature,
         mapper: ComicsBookMapper,
-        activity: AppCompatActivity
+        activity: MainActivity
     ): MainBinding =
         ProdMainBinding(
             activity,
@@ -49,7 +49,7 @@ open class ProdMainModule {
     @Provides
     fun provideFeature(
         factory: ViewModelProvider.Factory,
-        activity: AppCompatActivity
+        activity: MainActivity
     ): MainFeature =
         ViewModelProviders.of(activity, factory).get(MviViewModel::class.java).mainFeature
 

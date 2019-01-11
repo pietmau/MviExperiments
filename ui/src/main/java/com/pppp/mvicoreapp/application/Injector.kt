@@ -7,16 +7,17 @@ import com.pppp.mvicoreapp.main.di.ActivityModule
 import com.pppp.mvicoreapp.main.view.MainActivity
 import com.pppp.mvicoreapp.main.view.customview.MarvelRecyclerView
 
+// TODO throw away
 object Injector {
 
     fun inject(mainActivity: MainActivity) {
         val component = getComponentFromActivity(mainActivity)
-        component?.withMainComponent(ActivityModule(mainActivity))?.inject(mainActivity)
+        //component?.withMainComponent(ActivityModule(mainActivity))?.inject(mainActivity)
     }
 
     fun inject(detailActivity: DetailActivity, comicId: Int) {
         val activityModule = ActivityModule(detailActivity, comicId)
-        getComponentFromActivity(detailActivity)?.withDetailComponent(activityModule)?.inject(detailActivity)
+        //getComponentFromActivity(detailActivity)?.withDetailComponent(activityModule)?.inject(detailActivity)
     }
 
     fun inject(recyclerView: MarvelRecyclerView) {
