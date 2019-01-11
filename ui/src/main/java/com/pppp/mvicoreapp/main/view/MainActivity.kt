@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.rxrelay2.Relay
+import com.pppp.features.main.MainFeature
 import com.pppp.mvicoreapp.R
-import com.pppp.mvicoreapp.application.Injector
 import com.pppp.mvicoreapp.detail.view.DetailActivity
 import com.pppp.mvicoreapp.main.view.uievent.MainUiEvent
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsViewModel
-import com.pppp.features.main.MainFeature
+import dagger.android.AndroidInjection
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), Consumer<ComicsViewModel> {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Injector.inject(this)
+        AndroidInjection.inject(this);
         binding.bind(this, uiEvents, Consumer { news ->
             when (news) {
                 is MainFeature.News.ShowDetail -> startDetailActivity(news)
