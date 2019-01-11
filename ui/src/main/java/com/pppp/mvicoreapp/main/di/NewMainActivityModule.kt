@@ -8,10 +8,10 @@ import dagger.android.AndroidInjector
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 
-@Module(subcomponents = arrayOf(YourActivitySubcomponent::class))
-internal abstract class YourActivityModule {
+@Module(subcomponents = [NewMainActivitySubcomponent::class])
+internal abstract class NewMainActivityModule {
     @Binds
     @IntoMap
     @ClassKey(MainActivity::class)
-    internal abstract fun bindYourActivityInjectorFactory(builder: YourActivitySubcomponent.Builder): AndroidInjector.Factory<*>
+    internal abstract fun bindYourActivityInjectorFactory(builder: NewMainActivitySubcomponent.Builder): AndroidInjector.Factory<*>
 }

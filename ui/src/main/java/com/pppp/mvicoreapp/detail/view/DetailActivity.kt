@@ -9,11 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.palette.graphics.Palette
 import com.jakewharton.rxrelay2.Relay
 import com.pppp.mvicoreapp.R
-import com.pppp.mvicoreapp.application.Injector
 import com.pppp.mvicoreapp.detail.view.uievent.DetailUiEvent
 import com.pppp.mvicoreapp.detail.view.viewmodel.DetailViewModel
 import com.pppp.mvicoreapp.main.view.customview.ImageLoader
 import com.pppp.mvicoreapp.main.view.showError
+import dagger.android.AndroidInjection
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.detail_activity.*
 import javax.inject.Inject
@@ -31,11 +31,13 @@ class DetailActivity : AppCompatActivity() {
     }
     private val handler = Handler()
 
+    private var comicId: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_activity)
-        val comicId = intent.getIntExtra(COMICS_ID_EXTRA, -1)
-        Injector.inject(this, comicId)
+        comicId = intent.getIntExtra(COMICS_ID_EXTRA, -1)
+        AndroidInjection.inject(this)
         binding.bind(viewModels, uiEvents)
         scroller.addOnGlobalLayoutListener {
             scroller.translationY = window.decorView.bottom.toFloat() - scroller.top
@@ -44,6 +46,11 @@ class DetailActivity : AppCompatActivity() {
                 { container.setBackgroundColor((scroller.background as ColorDrawable).color) }, 500
             )
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        uiEvents.accept(DetailUiEvent.GetComicData(comicId))
     }
 
     private fun render(viewModel: DetailViewModel) =

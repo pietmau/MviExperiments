@@ -5,12 +5,10 @@ import com.badoo.mvicore.feature.ActorReducerFeature
 import com.pppp.lib.ComicsBook
 
 class DetailFeature(
-    actor: Actor<State, Wish, Effect>,
-    bootstrapper: Bootstrapper<Wish>
+    actor: Actor<State, Wish, Effect>
 ) :
     ActorReducerFeature<DetailFeature.Wish, DetailFeature.Effect, DetailFeature.State, DetailFeature.News>(
         initialState = State.Starting,
-        bootstrapper = bootstrapper,
         actor = actor,
         reducer = ::reduceState
     ) {
