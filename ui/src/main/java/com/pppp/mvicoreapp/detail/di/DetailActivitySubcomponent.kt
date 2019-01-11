@@ -6,7 +6,7 @@ import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
 @Subcomponent(modules = [DetailModule::class])
-interface NewDetailActivitySubcomponent : AndroidInjector<DetailActivity> {
+interface DetailActivitySubcomponent : AndroidInjector<DetailActivity> {
 
     @Subcomponent.Builder
     abstract class Builder : AndroidInjector.Builder<DetailActivity>()

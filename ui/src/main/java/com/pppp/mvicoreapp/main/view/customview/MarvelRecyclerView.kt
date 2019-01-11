@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pppp.mvicoreapp.R
-import com.pppp.mvicoreapp.application.Injector
+import com.pppp.mvicoreapp.application.App
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookViewModel
 import javax.inject.Inject
 import kotlin.properties.Delegates.observable
@@ -36,7 +36,7 @@ class MarvelRecyclerView @JvmOverloads constructor(
         get() = if (resources.configuration.orientation == ORIENTATION_LANDSCAPE) MANY_ROWS else FEW_ROWS
 
     init {
-        Injector.inject(this)
+        (context.applicationContext as App)?.component.inject(this)
         layoutManager = GridLayoutManager(this.context, span)
         adapter = MarvelAdapter(loader)
     }
