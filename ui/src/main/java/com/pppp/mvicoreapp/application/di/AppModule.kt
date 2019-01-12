@@ -1,10 +1,11 @@
 package com.pppp.mvicoreapp.application.di
 
 import android.app.Application
-import com.pppp.mvicoreapp.main.view.customview.ImageLoader
-import com.pppp.mvicoreapp.main.view.customview.PicassoImageLoader
+import android.content.Context
 import com.pppp.mvicoreapp.main.view.customview.ClickBlocker
 import com.pppp.mvicoreapp.main.view.customview.ClickBlockerImpl
+import com.pppp.mvicoreapp.main.view.customview.ImageLoader
+import com.pppp.mvicoreapp.main.view.customview.PicassoImageLoader
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapper
 import com.pppp.mvicoreapp.main.view.viewmodel.ComicsBookMapperImp
 import dagger.Module
@@ -22,4 +23,7 @@ class AppModule(private val application: Application) {
 
     @Provides
     fun provideTimer(): ClickBlocker = ClickBlockerImpl()
+
+    @Provides
+    fun provideContext(): Context = application.applicationContext
 }
